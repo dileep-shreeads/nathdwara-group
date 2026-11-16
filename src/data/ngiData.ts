@@ -172,6 +172,127 @@ export const NGI_INSTITUTIONS: Institution[] = [
   }
 ];
 
+export interface InstitutionSiteContent {
+  tagline: string;
+  heroImage: string;
+  welcome: string[];
+  highlights: string[];
+  /** Keywords matched against Course.institution to list this institution's courses */
+  courseMatch: string[];
+  phone?: string;
+}
+
+export const INSTITUTION_SITES: Record<string, InstitutionSiteContent> = {
+  niet: {
+    tagline: "Engineering a future-ready workforce",
+    heroImage: "/institutions/niet.jpg",
+    welcome: [
+      "Nathdwara Institute of Engineering and Technology (NIET) is the engineering wing of the Nathdwara Group of Institutions, located on the lush green Aravali campus at Upali Oden, Nathdwara. The institute prepares students for careers in core engineering and modern software disciplines through a blend of classroom learning and intensive practical training.",
+      "With fully equipped workshops, digital computer labs, and an active Training & Placement cell, NIET students follow the RTU Kota academic calendar and graduate ready for industry, government engineering services, and higher studies.",
+    ],
+    highlights: [
+      "B.Tech and Polytechnic programs with lateral-entry options",
+      "Machine shop, surveying, fluid mechanics and electronics labs",
+      "Training & Placement cell with 120+ recruiting partners",
+      "Wi-Fi enabled campus with hostels and daily bus fleet",
+    ],
+    courseMatch: ["NIET"],
+  },
+  nibm: {
+    tagline: "Value-based education for all-round development",
+    heroImage: "/institutions/nibm.jpg",
+    welcome: [
+      "Nathdwara Institute of Biotechnology & Management (NIBM) offers career-oriented programs across biotechnology, computer applications, basic sciences and management on the Nathdwara Group campus at Upali Oden.",
+      "The institute's vision is to provide value education leading to the all-round development of students through need-based, career-oriented education with an emphasis on personality and social concerns.",
+    ],
+    highlights: [
+      "BCA, B.Sc Biotechnology and M.Sc programs under MLSU curriculum",
+      "Tissue culture, microbiology and molecular biology laboratories",
+      "Industry projects that build real-world portfolios before graduation",
+      "Central digital library with 35,000+ volumes and NPTEL chapter",
+    ],
+    courseMatch: ["NIBM"],
+    phone: "9829234138",
+  },
+  nlc: {
+    tagline: "Step up towards justice",
+    heroImage: "/institutions/nlc.jpg",
+    welcome: [
+      "Nathdwara Law College (NLC) is the law wing of the Nathdwara Group of Institutions, serving aspiring advocates and legal professionals from the Mewar region.",
+      "The college combines a university-affiliated law curriculum with moot court practice and guidance from experienced faculty. Contact the college office for the current programs, eligibility and admission schedule.",
+    ],
+    highlights: [
+      "University-affiliated law programs",
+      "Moot court sessions and legal-aid awareness activities",
+      "Experienced faculty with courtroom exposure",
+      "Shared NGI campus library, hostels and transport",
+    ],
+    courseMatch: ["Law College", "NLC"],
+    phone: "7014810591",
+  },
+  npiti: {
+    tagline: "Skilled trades, real careers",
+    heroImage: "/institutions/npiti.jpg",
+    welcome: [
+      "Nathdwara Private Industrial Training Institute (NPITI) delivers hands-on vocational training that leads directly to employment in railways, discoms, cement, marble and manufacturing industries across Rajasthan.",
+      "Training follows a workshop-first approach: students spend most of their time on machines and live electrical boards, supported by the group's engineering faculty.",
+    ],
+    highlights: [
+      "ITI trades including Electrician and Fitter",
+      "Workshop-first training on industry-grade equipment",
+      "Pathways to Polytechnic lateral entry within NGI",
+      "Placement support with regional industrial recruiters",
+    ],
+    courseMatch: ["Industrial Training", "ITI"],
+  },
+  vdsms: {
+    tagline: "Compassionate care, scientific excellence",
+    heroImage: "/institutions/vdsms.jpg",
+    welcome: [
+      "Vallabh Darshan Society for Medical Science (VDSMS) is the medical sciences wing of the Nathdwara Group of Institutions at Upali Oden, Nathdwara.",
+      "The institution focuses on health-science education for the Mewar region. Contact VDSMS directly for current programs, eligibility and admission information.",
+    ],
+    highlights: [
+      "Medical sciences education within the NGI campus",
+      "Guidance-driven admissions with personal counselling",
+      "Access to shared NGI labs, library and hostels",
+      "Scholarship support under state and NGI schemes",
+    ],
+    courseMatch: ["VDSMS", "Medical Science"],
+  },
+  "ayurved-nursing": {
+    tagline: "Nursing rooted in Ayurveda",
+    heroImage: "/institutions/ayurved-nursing.jpg",
+    welcome: [
+      "Nathdwara College of B.Sc. Ayurveda Nursing (NCAN) trains compassionate nursing professionals who combine modern patient care with the Ayurvedic tradition.",
+      "The college operates from the Nathdwara Group campus at Upali Oden. Contact the college to confirm current course availability, eligibility and admission requirements.",
+    ],
+    highlights: [
+      "B.Sc. Ayurveda Nursing program",
+      "Clinical skill labs and supervised patient-care practice",
+      "Separate hostels with 24/7 security for women students",
+      "Scholarships including the Beti Padhao girl-child incentive",
+    ],
+    courseMatch: ["Ayurveda Nursing", "NCAN"],
+  },
+};
+
+/** Old WordPress-style paths that should land on the same institution site */
+export const INSTITUTION_SLUG_ALIASES: Record<string, string> = {
+  vdsms1: "vdsms",
+  ncan: "ayurved-nursing",
+};
+
+export function getInstitutionCourses(institutionId: string): Course[] {
+  const site = INSTITUTION_SITES[institutionId];
+  if (!site) return [];
+  return FEATURED_COURSES.filter((course) =>
+    site.courseMatch.some((keyword) =>
+      course.institution.toLowerCase().includes(keyword.toLowerCase()),
+    ),
+  );
+}
+
 export const FEATURED_COURSES: Course[] = [
   {
     id: "c-btech-cse",

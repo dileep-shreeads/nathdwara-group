@@ -77,9 +77,9 @@ export default function InstitutionsGrid() {
               className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <Link
-                href={`/institutions/${institution.id}`}
+                href={`/${institution.id}`}
                 className="relative block aspect-[16/9] overflow-hidden bg-slate-100"
-                aria-label={`Learn about ${institution.name}`}
+                aria-label={`Visit the ${institution.name} website`}
               >
                 <img
                   src={institution.bannerImage}
@@ -98,7 +98,7 @@ export default function InstitutionsGrid() {
 
               <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <div>
-                  <Link href={`/institutions/${institution.id}`}>
+                  <Link href={`/${institution.id}`}>
                     <h3 className="text-base font-bold text-blue-950 transition-colors group-hover:text-blue-700">
                       {institution.name}
                     </h3>
@@ -131,10 +131,10 @@ export default function InstitutionsGrid() {
 
                 <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-3">
                   <Link
-                    href={`/institutions/${institution.id}`}
+                    href={`/${institution.id}`}
                     className="inline-flex items-center gap-1 text-xs font-bold text-blue-900 transition-colors hover:text-amber-600"
                   >
-                    Institution details <ArrowUpRight className="h-4 w-4" />
+                    Visit website <ArrowUpRight className="h-4 w-4" />
                   </Link>
                   <Link
                     href="/admissions"
