@@ -32,7 +32,7 @@ export default function StatsCounter() {
   };
 
   return (
-    <section className="relative -mt-6 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative z-20 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <div className="bg-white rounded-2xl shadow-xl border border-slate-200/80 p-6 lg:p-8">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
           {NGI_STATS.map((stat, idx) => (

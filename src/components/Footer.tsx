@@ -1,200 +1,82 @@
-"use client";
+import Link from "next/link";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 
-import React from "react";
-import {
-  MapPin,
-  Phone,
-  Mail,
-} from "lucide-react";
+const links = [
+  { href: "/about", label: "About NGI" },
+  { href: "/institutions", label: "Our institutions" },
+  { href: "/programs", label: "Courses & programs" },
+  { href: "/admissions", label: "Admissions" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
-          {/* Brand Info */}
-          <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-950 flex items-center justify-center text-white shadow-md border-2 border-amber-400">
-                <span className="font-extrabold text-lg text-amber-300">NGI</span>
-              </div>
-              <div>
-                <span className="font-black text-xl text-white tracking-tight">NATHDWARA </span>
-                <span className="font-bold text-xl text-amber-400 tracking-tight">GROUP</span>
-                <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-                  OF INSTITUTIONS &bull; RAJASTHAN
-                </div>
-              </div>
-            </div>
-
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Nathdwara Group of Institutions (NGI) is a leading educational hub in Mewar, Rajasthan offering RTU Kota and MLSU Udaipur affiliated degree programs in Engineering, Biotechnology, Computer Applications, Teacher Education, Pharmacy, and Management.
-            </p>
-
-            <div className="flex items-center gap-3 pt-2">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-900 hover:bg-amber-400 hover:text-slate-950 text-slate-300 flex items-center justify-center transition-colors text-xs font-bold"
-                aria-label="Facebook"
-              >
-                FB
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-900 hover:bg-amber-400 hover:text-slate-950 text-slate-300 flex items-center justify-center transition-colors text-xs font-bold"
-                aria-label="Instagram"
-              >
-                IG
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-900 hover:bg-amber-400 hover:text-slate-950 text-slate-300 flex items-center justify-center transition-colors text-xs font-bold"
-                aria-label="YouTube"
-              >
-                YT
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-900 hover:bg-amber-400 hover:text-slate-950 text-slate-300 flex items-center justify-center transition-colors text-xs font-bold"
-                aria-label="LinkedIn"
-              >
-                IN
-              </a>
-            </div>
-
-            <div className="p-3 bg-slate-900/80 rounded-xl border border-slate-800 text-[11px] text-amber-300">
-              Affiliated to RTU Kota &amp; MLSU Udaipur &bull; Approved by AICTE, NCTE &amp; PCI
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider">
-              Quick Links
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li>
-                <a href="#about-section" className="hover:text-amber-400 transition-colors">
-                  About NGI &amp; Vision
-                </a>
-              </li>
-              <li>
-                <a href="#institutions" className="hover:text-amber-400 transition-colors">
-                  Constituent Institutes
-                </a>
-              </li>
-              <li>
-                <a href="#courses" className="hover:text-amber-400 transition-colors">
-                  Courses &amp; Eligibility
-                </a>
-              </li>
-              <li>
-                <a href="#placements" className="hover:text-amber-400 transition-colors">
-                  Training &amp; Placements
-                </a>
-              </li>
-              <li>
-                <a href="#campus-facilities" className="hover:text-amber-400 transition-colors">
-                  Campus Facilities &amp; Labs
-                </a>
-              </li>
-              <li>
-                <a href="#scholarships" className="hover:text-amber-400 transition-colors">
-                  Govt. Scholarships
-                </a>
-              </li>
-              <li>
-                <a href="#apply-section" className="hover:text-amber-400 transition-colors">
-                  Admissions 2026-27
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Constituent Institutions */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider">
-              Our Institutes
-            </h4>
-            <ul className="space-y-1.5 text-xs text-slate-400">
-              <li>&bull; Nathdwara Institute of Engg &amp; Tech (NIET)</li>
-              <li>&bull; Nathdwara Institute of Biotech &amp; Mgmt (NIBM)</li>
-              <li>&bull; Shrinathji Institute of Tech &amp; Engg (SITE)</li>
-              <li>&bull; Nathdwara College of Education (B.Ed)</li>
-              <li>&bull; Nathdwara Institute of Pharmacy (NIP)</li>
-              <li>&bull; Shrinathji Institute of Mgmt Studies (SIMS)</li>
-              <li>&bull; NGI Industrial Training Institute (ITI)</li>
-            </ul>
-          </div>
-
-          {/* Campus Location & Contacts */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-amber-400" />
-              <span>Campus Contact</span>
-            </h4>
-            <div className="text-xs text-slate-400 space-y-2 leading-relaxed">
-              <p className="font-semibold text-slate-300">
-                Main Campus Address:
-              </p>
-              <p>
-                Bhansol Gadwada Road, Upali Oden, Nathdwara, Dist. Rajsamand, Rajasthan &ndash; 313301, India (Near Udaipur).
-              </p>
-              <div className="pt-1 space-y-1.5">
-                <a
-                  href="tel:+919571345444"
-                  className="flex items-center gap-1.5 text-amber-400 hover:underline"
-                >
-                  <Phone className="w-3.5 h-3.5" />
-                  <span>+91 95713 45444 / 02953-230077</span>
-                </a>
-                <a
-                  href="mailto:info@ngi.edu.in"
-                  className="flex items-center gap-1.5 text-amber-400 hover:underline"
-                >
-                  <Mail className="w-3.5 h-3.5" />
-                  <span>info@ngi.edu.in</span>
-                </a>
-                <p className="text-[11px] text-slate-500">
-                  Official Portal: <span className="text-slate-300">ngi.edu.in</span>
-                </p>
-              </div>
-            </div>
-          </div>
+    <footer className="bg-[#0d2341] text-slate-300">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+        <div className="md:col-span-2 lg:col-span-2">
+          <Link href="/" className="inline-flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-[#fbf8dc]">
+              <img src="/ngi-logo.png" alt="" className="h-full w-full object-contain" />
+            </span>
+            <span>
+              <span className="block font-extrabold tracking-tight text-white">
+                NATHDWARA <span className="text-amber-300">GROUP</span>
+              </span>
+              <span className="mt-1 block text-[10px] uppercase tracking-[0.14em] text-slate-400">
+                Group of Institutions
+              </span>
+            </span>
+          </Link>
+          <p className="mt-5 max-w-md text-sm leading-7 text-slate-400">
+            A community of institutions in Nathdwara, Rajasthan, spanning medical
+            sciences, Ayurveda nursing, biotechnology and management, industrial
+            training, law, and engineering.
+          </p>
+          <Link
+            href="/admissions"
+            className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-amber-300 transition hover:text-amber-200"
+          >
+            Find your program <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>
-            &copy; 2026 Nathdwara Group of Institutions (NGI). All Rights Reserved. Built with Next.js 16 &amp; TypeScript.
-          </p>
+        <div>
+          <h2 className="text-sm font-bold text-white">Explore NGI</h2>
+          <ul className="mt-4 space-y-3 text-sm">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link className="transition hover:text-amber-300" href={link.href}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          <div className="flex flex-wrap items-center gap-4 text-slate-400">
-            <a href="#" className="hover:text-amber-400 transition-colors">
-              Mandatory Disclosure
-            </a>
-            <span>&bull;</span>
-            <a href="#" className="hover:text-amber-400 transition-colors">
-              Anti-Ragging Cell
-            </a>
-            <span>&bull;</span>
-            <a href="#" className="hover:text-amber-400 transition-colors">
-              RTU Affiliation
-            </a>
-            <span>&bull;</span>
-            <a href="#" className="hover:text-amber-400 transition-colors">
-              Privacy Policy
-            </a>
-          </div>
+        <div>
+          <h2 className="text-sm font-bold text-white">Get in touch</h2>
+          <ul className="mt-4 space-y-4 text-sm leading-6 text-slate-400">
+            <li className="flex items-start gap-3">
+              <MapPin className="mt-1 h-4 w-4 shrink-0 text-amber-300" />
+              Bhansol Gadwada Road, Upali Oden, Nathdwara, Rajasthan 313301
+            </li>
+            <li>
+              <a className="inline-flex items-center gap-3 transition hover:text-amber-300" href="tel:+919571345444">
+                <Phone className="h-4 w-4 text-amber-300" /> +91 95713 45444
+              </a>
+            </li>
+            <li>
+              <a className="inline-flex items-center gap-3 transition hover:text-amber-300" href="mailto:info@ngi.edu.in">
+                <Mail className="h-4 w-4 text-amber-300" /> info@ngi.edu.in
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-slate-500 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+          <p>© 2026 Nathdwara Group of Institutions. All rights reserved.</p>
+          <p>Affiliated with RTU Kota and MLSU Udaipur.</p>
         </div>
       </div>
     </footer>

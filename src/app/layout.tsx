@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Footer from "@/components/Footer";
+import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Nathdwara Group of Institutions (NGI) | Nathdwara, Rajasthan",
   description:
-    "Official portal of Nathdwara Group of Institutions (NGI), Upali Oden, Nathdwara, Rajasthan. Affiliated to RTU Kota & MLSU Udaipur. Offering B.Tech, BCA, B.Sc, B.Pharm, Integrated B.Ed, MBA & Polytechnic.",
+    "Explore the six institutions in the Nathdwara Group, Rajasthan, including medical sciences, Ayurveda nursing, biotechnology and management, industrial training, law, and engineering.",
   keywords: [
     "Nathdwara Group of Institutions",
     "NGI",
@@ -27,8 +29,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen bg-slate-50 text-slate-800 antialiased selection:bg-amber-400 selection:text-blue-950">
-        {children}
+      <body className="min-h-screen bg-white text-slate-800 antialiased selection:bg-amber-300 selection:text-[#102c52]">
+        <SiteHeader />
+        <main id="main-content">{children}</main>
+        <Footer />
       </body>
     </html>
   );

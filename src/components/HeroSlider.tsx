@@ -72,7 +72,7 @@ const SLIDES: HeroSlide[] = [
     primaryLink: "#courses",
     secondaryLink: "#institutions",
     bgGradient: "from-blue-950/95 via-teal-950/85 to-slate-950/90",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80",
+    image: "/institutions/nibm-card.jpg",
   },
   {
     id: 4,
@@ -361,21 +361,6 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Accreditations Strip along Bottom */}
-      <div className="absolute bottom-0 inset-x-0 bg-slate-900/90 border-t border-white/10 py-2.5 backdrop-blur-md hidden sm:block">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between text-[11px] text-slate-300 overflow-x-auto gap-4">
-          <span className="font-bold text-amber-400 uppercase tracking-wider whitespace-nowrap">
-            Key Approvals &amp; Affiliations:
-          </span>
-          <span className="whitespace-nowrap font-medium">&bull; Rajasthan Technical University (RTU), Kota</span>
-          <span className="whitespace-nowrap font-medium">&bull; Mohanlal Sukhadia University (MLSU), Udaipur</span>
-          <span className="whitespace-nowrap font-medium">&bull; AICTE, New Delhi Approved</span>
-          <span className="whitespace-nowrap font-medium">&bull; NCTE Approved Teacher Education</span>
-          <span className="whitespace-nowrap font-medium">&bull; Pharmacy Council of India (PCI)</span>
-          <span className="whitespace-nowrap font-medium">&bull; Board of Technical Education Rajasthan (BTER)</span>
-          <span className="whitespace-nowrap font-medium">&bull; NCVT / DGT Govt. of India</span>
-        </div>
-      </div>
     </div>
   );
 }

@@ -2,16 +2,30 @@ export interface Institution {
   id: string;
   name: string;
   shortName: string;
-  category: 'engineering' | 'biotech_mgmt' | 'pharmacy' | 'education' | 'iti' | 'management';
+  category:
+    | "medical_sciences"
+    | "ayurveda_nursing"
+    | "biotechnology_management"
+    | "industrial_training"
+    | "law"
+    | "engineering";
   location: string;
   district: string;
   state: string;
-  approval: string;
   affiliation: string;
   description: string;
   featuredCourses: string[];
   bannerImage: string;
 }
+
+export const INSTITUTION_CATEGORIES: Record<Institution["category"], string> = {
+  medical_sciences: "Medical Sciences",
+  ayurveda_nursing: "Ayurveda Nursing",
+  biotechnology_management: "Biotechnology & Management",
+  industrial_training: "Industrial Training",
+  law: "Law",
+  engineering: "Engineering & Technology",
+};
 
 export interface Course {
   id: string;
@@ -73,102 +87,88 @@ export const NGI_STATS: StatItem[] = [
 
 export const NGI_INSTITUTIONS: Institution[] = [
   {
-    id: "niet",
-    name: "Nathdwara Institute of Engineering & Technology",
-    shortName: "NIET",
-    category: "engineering",
+    id: "vdsms",
+    name: "Vallabh Darshan Society for Medical Science",
+    shortName: "VDSMS",
+    category: "medical_sciences",
     location: "Upali Oden, Nathdwara",
     district: "Rajsamand",
     state: "Rajasthan",
-    approval: "AICTE, New Delhi & Govt. of Rajasthan",
-    affiliation: "Rajasthan Technical University (RTU), Kota",
-    description: "Premier technical institute in Mewar region offering B.Tech and Polytechnic programs with advanced computing, IoT, robotics, and engineering workshop centers.",
-    featuredCourses: ["B.Tech Computer Science & Engg", "B.Tech Civil Engineering", "B.Tech Mechanical Engineering", "Diploma Polytechnic"],
-    bannerImage: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80",
+    affiliation: "Nathdwara Group of Institutions",
+    description:
+      "A specialist medical sciences institution within the Nathdwara Group. Contact the institution for current program, eligibility and admission information.",
+    featuredCourses: ["Medical sciences", "Program details on enquiry"],
+    bannerImage: "/institutions/vdsms-card.jpg",
+  },
+  {
+    id: "ayurved-nursing",
+    name: "Nathdwara College of B.Sc. Ayurveda Nursing",
+    shortName: "NCAN",
+    category: "ayurveda_nursing",
+    location: "Upali Oden, Nathdwara",
+    district: "Rajsamand",
+    state: "Rajasthan",
+    affiliation: "Nathdwara Group of Institutions",
+    description:
+      "A specialist nursing college in Nathdwara. Contact the institution to confirm current course availability, eligibility and admission requirements.",
+    featuredCourses: ["B.Sc. Ayurveda Nursing", "Nursing education"],
+    bannerImage: "/institutions/ayurved-nursing-card.jpg",
   },
   {
     id: "nibm",
     name: "Nathdwara Institute of Biotechnology & Management",
     shortName: "NIBM",
-    category: "biotech_mgmt",
+    category: "biotechnology_management",
     location: "Upali Oden, Nathdwara",
     district: "Rajsamand",
     state: "Rajasthan",
-    approval: "Govt. of Rajasthan & NCTE Approved",
-    affiliation: "Mohanlal Sukhadia University (MLSU), Udaipur",
-    description: "Center of excellence for computational sciences, life sciences, commerce, and fundamental science research with molecular laboratories and computer centers.",
-    featuredCourses: ["BCA (Bachelor of Computer Applications)", "B.Sc (Biotechnology / PCM / CBZ)", "BBA", "M.Sc (Chemistry, Zoology, Physics, Maths)"],
-    bannerImage: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80",
+    affiliation: "Nathdwara Group of Institutions",
+    description:
+      "A specialist institution focused on biotechnology and management. Contact NIBM for current programs, eligibility and admissions.",
+    featuredCourses: ["Biotechnology", "Management"],
+    bannerImage: "/institutions/nibm-card.jpg",
   },
   {
-    id: "site",
-    name: "Shrinathji Institute of Technology & Engineering",
-    shortName: "SITE",
+    id: "npiti",
+    name: "Nathdwara Private Industrial Training Institute",
+    shortName: "NPITI",
+    category: "industrial_training",
+    location: "Upali Oden, Nathdwara",
+    district: "Rajsamand",
+    state: "Rajasthan",
+    affiliation: "Nathdwara Group of Institutions",
+    description:
+      "A private industrial training institute in Nathdwara. Contact NPITI for details about available trades, eligibility and admissions.",
+    featuredCourses: ["Industrial training", "Trade details on enquiry"],
+    bannerImage: "/institutions/npiti-card.jpg",
+  },
+  {
+    id: "nlc",
+    name: "Nathdwara Law College",
+    shortName: "NLC",
+    category: "law",
+    location: "Upali Oden, Nathdwara",
+    district: "Rajsamand",
+    state: "Rajasthan",
+    affiliation: "Nathdwara Group of Institutions",
+    description:
+      "A law college within the Nathdwara Group. Contact the college to confirm current law programs, eligibility and admission details.",
+    featuredCourses: ["Law programs", "Program details on enquiry"],
+    bannerImage: "/institutions/nlc-card.jpg",
+  },
+  {
+    id: "niet",
+    name: "Nathdwara Institute of Engineering and Technology",
+    shortName: "NIET",
     category: "engineering",
-    location: "Bhansol Gadwada Road, Nathdwara",
-    district: "Rajsamand",
-    state: "Rajasthan",
-    approval: "AICTE Approved, New Delhi",
-    affiliation: "RTU Kota",
-    description: "Industry-aligned engineering institution fostering technical innovation, smart prototyping, and competitive software engineering skills.",
-    featuredCourses: ["B.Tech Artificial Intelligence", "B.Tech Electrical Engineering", "M.Tech Digital Communications"],
-    bannerImage: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "ncoe",
-    name: "Nathdwara College of Education (Teacher Training)",
-    shortName: "NCOE",
-    category: "education",
     location: "Upali Oden, Nathdwara",
     district: "Rajsamand",
     state: "Rajasthan",
-    approval: "NCTE (National Council for Teacher Education)",
-    affiliation: "MLSU Udaipur & Govt. of Rajasthan",
-    description: "Pioneering teacher education institution offering 4-year integrated dual degree programs and B.Ed. shaping progressive school educators.",
-    featuredCourses: ["BA-B.Ed (4-Year Integrated)", "B.Sc-B.Ed (4-Year Integrated)", "B.Ed (2-Year Degree)"],
-    bannerImage: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "nip",
-    name: "Nathdwara Institute of Pharmacy",
-    shortName: "NIP",
-    category: "pharmacy",
-    location: "Upali Oden, Nathdwara",
-    district: "Rajsamand",
-    state: "Rajasthan",
-    approval: "Pharmacy Council of India (PCI) & AICTE",
-    affiliation: "RUHS Jaipur",
-    description: "Equipped with state-of-the-art pharmacognosy, pharmaceutical chemistry, machine room, and drug testing laboratories.",
-    featuredCourses: ["B.Pharm (Bachelor of Pharmacy)", "D.Pharm (Diploma in Pharmacy)"],
-    bannerImage: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "sims",
-    name: "Shrinathji Institute of Management Studies",
-    shortName: "SIMS",
-    category: "management",
-    location: "Bhansol Road, Nathdwara",
-    district: "Rajsamand",
-    state: "Rajasthan",
-    approval: "AICTE Approved",
-    affiliation: "RTU Kota",
-    description: "Developing modern corporate leaders, marketing analysts, financial consultants, and young entrepreneurs through practical case studies.",
-    featuredCourses: ["MBA (Dual Specialization)", "Executive Management Workshops"],
-    bannerImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "ngi-iti",
-    name: "NGI Industrial Training Institute",
-    shortName: "NGI ITI",
-    category: "iti",
-    location: "Upali Oden, Nathdwara",
-    district: "Rajsamand",
-    state: "Rajasthan",
-    approval: "NCVT & DGT, Govt. of India",
-    affiliation: "BTER Jodhpur",
-    description: "Practical vocational technical training with modern workshops for skill certification and immediate industrial employability.",
-    featuredCourses: ["ITI Electrician (2 Years)", "ITI Fitter (2 Years)", "COPA (Computer Operator)"],
-    bannerImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    affiliation: "Nathdwara Group of Institutions",
+    description:
+      "A specialist engineering and technology institution in Nathdwara. Contact NIET for current courses, eligibility and admission requirements.",
+    featuredCourses: ["Engineering", "Technology"],
+    bannerImage: "/institutions/niet-card.jpg",
   }
 ];
 

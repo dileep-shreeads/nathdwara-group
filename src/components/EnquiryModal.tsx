@@ -14,8 +14,8 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
     name: "",
     phone: "",
     email: "",
-    state: "Tamil Nadu",
-    course: "Aeronautical / Aerospace",
+    state: "Rajasthan (Nathdwara / Udaipur / Rajsamand)",
+    course: "B.Tech Computer Science & Engg",
   });
 
   if (!isOpen) return null;
@@ -27,7 +27,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative">
+      <div className="max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl sm:p-8">
         <button
           onClick={onClose}
           className="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-800 transition-colors"
