@@ -11,8 +11,11 @@ import {
   Clock,
   GraduationCap,
   Landmark,
+  Mail,
   MapPin,
   Phone,
+  Quote,
+  Target,
 } from "lucide-react";
 import {
   INSTITUTION_CATEGORIES,
@@ -182,6 +185,90 @@ export default async function InstitutionSitePage({
         </div>
       </section>
 
+      {/* Vision & Mission */}
+      {site.vision || site.mission ? (
+        <section className="border-t border-slate-200 bg-slate-50 py-14 sm:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto mb-10 max-w-3xl text-center">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue-900">
+                <Target className="h-3.5 w-3.5 text-blue-700" />
+                Our purpose
+              </div>
+              <h2 className="text-3xl font-black tracking-tight text-blue-950 sm:text-4xl">
+                Vision &amp; Mission
+              </h2>
+              {site.vision ? (
+                <p className="mt-4 text-base leading-7 text-slate-600">
+                  {site.vision}
+                </p>
+              ) : null}
+            </div>
+            {site.mission ? (
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {site.mission.map((pillar) => (
+                  <div
+                    key={pillar.title}
+                    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                  >
+                    <h3 className="text-base font-bold text-blue-950">
+                      {pillar.title}
+                    </h3>
+                    <p className="mt-2.5 text-sm leading-6 text-slate-600">
+                      {pillar.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
+      {/* Leadership messages */}
+      {site.messages ? (
+        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+          <div className="mx-auto mb-10 max-w-3xl text-center">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue-900">
+              <Quote className="h-3.5 w-3.5 text-blue-700" />
+              From the desk
+            </div>
+            <h2 className="text-3xl font-black tracking-tight text-blue-950 sm:text-4xl">
+              Leadership messages
+            </h2>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-2">
+            {site.messages.map((message) => (
+              <div
+                key={message.role}
+                className="flex flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+              >
+                {message.quote ? (
+                  <p className="text-lg font-bold italic leading-7 text-blue-950">
+                    &ldquo;{message.quote}&rdquo;
+                  </p>
+                ) : null}
+                {message.text.map((paragraph) => (
+                  <p
+                    key={paragraph.slice(0, 40)}
+                    className="mt-4 text-sm leading-7 text-slate-600"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+                <div className="mt-6 border-t border-slate-100 pt-4">
+                  <p className="text-sm font-bold text-blue-950">
+                    {message.name}
+                  </p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                    {message.role}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       {/* Courses */}
       <section className="bg-[#102c52] py-14 text-white sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -285,8 +372,8 @@ export default async function InstitutionSitePage({
                 <div className="flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-wider">
                   <span
                     className={`rounded px-2 py-0.5 ${item.urgent
-                        ? "bg-rose-100 text-rose-700"
-                        : "bg-slate-100 text-slate-600"
+                      ? "bg-rose-100 text-rose-700"
+                      : "bg-slate-100 text-slate-600"
                       }`}
                   >
                     {item.category}
@@ -334,6 +421,46 @@ export default async function InstitutionSitePage({
 
       {/* Contact CTA */}
       <section className="border-t border-slate-200 bg-slate-50">
+        {site.contacts ? (
+          <div className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-black tracking-tight text-blue-950">
+              Contact persons
+            </h2>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              {site.contacts.map((person) => (
+                <div
+                  key={person.name}
+                  className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                >
+                  <p className="text-sm font-bold text-blue-950">
+                    {person.name}
+                  </p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                    {person.role}
+                  </p>
+                  {person.phone ? (
+                    <a
+                      href={`tel:${person.phone.replace(/[^+\d]/g, "")}`}
+                      className="mt-3 flex items-center gap-2 text-sm font-semibold text-slate-700 transition-colors hover:text-blue-900"
+                    >
+                      <Phone className="h-4 w-4 text-amber-600" />
+                      {person.phone}
+                    </a>
+                  ) : null}
+                  {person.email ? (
+                    <a
+                      href={`mailto:${person.email}`}
+                      className="mt-1.5 flex items-center gap-2 text-sm font-semibold text-slate-700 transition-colors hover:text-blue-900"
+                    >
+                      <Mail className="h-4 w-4 text-amber-600" />
+                      {person.email}
+                    </a>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-12 sm:px-6 lg:flex-row lg:items-center lg:px-8">
           <div>
             <h2 className="text-2xl font-black tracking-tight text-blue-950">

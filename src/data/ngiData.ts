@@ -172,6 +172,20 @@ export const NGI_INSTITUTIONS: Institution[] = [
   }
 ];
 
+export interface InstitutionLeaderMessage {
+  name: string;
+  role: string;
+  quote?: string;
+  text: string[];
+}
+
+export interface InstitutionContactPerson {
+  name: string;
+  role: string;
+  phone?: string;
+  email?: string;
+}
+
 export interface InstitutionSiteContent {
   tagline: string;
   heroImage: string;
@@ -180,6 +194,10 @@ export interface InstitutionSiteContent {
   /** Keywords matched against Course.institution to list this institution's courses */
   courseMatch: string[];
   phone?: string;
+  vision?: string;
+  mission?: { title: string; description: string }[];
+  messages?: InstitutionLeaderMessage[];
+  contacts?: InstitutionContactPerson[];
 }
 
 export const INSTITUTION_SITES: Record<string, InstitutionSiteContent> = {
@@ -249,16 +267,69 @@ export const INSTITUTION_SITES: Record<string, InstitutionSiteContent> = {
     tagline: "Compassionate care, scientific excellence",
     heroImage: "/institutions/vdsms.jpg",
     welcome: [
-      "Vallabh Darshan Society for Medical Science (VDSMS) is the medical sciences wing of the Nathdwara Group of Institutions at Upali Oden, Nathdwara.",
-      "The institution focuses on health-science education for the Mewar region. Contact VDSMS directly for current programs, eligibility and admission information.",
+      "Vallabh Darshan Society for Medical Science (VDSMS) is the medical sciences wing of the Nathdwara Group of Institutions at Upali Oden, Nathdwara. The institution is committed to imparting quality, ethical and professional education that gives direction, purpose and values to life.",
+      "VDSMS aims to equip students with a positive attitude, professional skills and social responsibility so they can build successful careers and contribute to the nation as responsible citizens. The institute also runs skill-development programs under the PMKVY and RSLDC schemes.",
     ],
     highlights: [
       "Medical sciences education within the NGI campus",
-      "Guidance-driven admissions with personal counselling",
+      "Skill-development programs under PMKVY & RSLDC",
       "Access to shared NGI labs, library and hostels",
       "Scholarship support under state and NGI schemes",
     ],
     courseMatch: ["VDSMS", "Medical Science"],
+    phone: "9636815142",
+    vision:
+      "We offer our students numerous curricular and co-curricular opportunities that empower them to become conscientious and responsible citizens of the community.",
+    mission: [
+      {
+        title: "Academic Excellence",
+        description:
+          "To impart quality, affordable education in medical, engineering and academic fields with a focus on innovation and ethical practice.",
+      },
+      {
+        title: "Research & Innovation",
+        description:
+          "To promote research that responds to regional and global healthcare challenges.",
+      },
+      {
+        title: "Skill Development",
+        description:
+          "To equip students with practical skills, leadership qualities, and a human-centric approach.",
+      },
+    ],
+    messages: [
+      {
+        name: "Chairman",
+        role: "Chairman's Message",
+        quote: "The power of the future is the power of the mind.",
+        text: [
+          "If mass production characterized the industrial revolution, individual creativity and brilliance marks the youth's revolution of this century. Development is no longer symbolized by imposing plants and machinery; instead knowledge is now universally recognized as the true strength of a nation.",
+          "It is important to be led by a set of agreed shared beliefs. To achieve this we need to enter into learning conversations to define and articulate such a philosophy. As it is said: \"If you stand for nothing you will fall for anything.\"",
+        ],
+      },
+      {
+        name: "Mr. Deepesh Parikh",
+        role: "Managing Director",
+        text: [
+          "Education is not limited to bookish knowledge but it is a tool that gives direction, purpose and values to life. Our institution, Vallabh Darshan Society for Medical Sciences, is committed to imparting quality, ethical and professional education keeping this core principle in mind.",
+          "Our aim is to equip the students with a positive attitude, professional skills and social responsibility so that they can not only build a successful career but also contribute to the development of the nation as a responsible citizen. Let us join together and take this sacred endeavor of education to new heights.",
+        ],
+      },
+    ],
+    contacts: [
+      {
+        name: "Dr. Pankaj Rathi",
+        role: "Manager",
+        phone: "+91-9636815142",
+        email: "infopankajrathi@gmail.com",
+      },
+      {
+        name: "Deepesh Parikh",
+        role: "Secretary",
+        phone: "+91-9829234138",
+        email: "md@nathdwarainstitute.com",
+      },
+    ],
   },
   "ayurved-nursing": {
     tagline: "Nursing rooted in Ayurveda",
