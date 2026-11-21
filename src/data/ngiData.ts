@@ -94,10 +94,10 @@ export const NGI_INSTITUTIONS: Institution[] = [
     location: "Upali Oden, Nathdwara",
     district: "Rajsamand",
     state: "Rajasthan",
-    affiliation: "Nathdwara Group of Institutions",
+    affiliation: "Affiliated to Rajasthan Paramedical Council & Govt Schemes",
     description:
-      "A specialist medical sciences institution within the Nathdwara Group. Contact the institution for current program, eligibility and admission information.",
-    featuredCourses: ["Medical sciences", "Program details on enquiry"],
+      "Premier medical sciences & paramedical training institution offering DMLT, Community Medical Services, and PMKVY healthcare certifications in Nathdwara.",
+    featuredCourses: ["DMLT Pathology", "CMS & ED", "Healthcare Skilling"],
     bannerImage: "/institutions/vdsms-card.jpg",
   },
   {
@@ -108,10 +108,10 @@ export const NGI_INSTITUTIONS: Institution[] = [
     location: "Upali Oden, Nathdwara",
     district: "Rajsamand",
     state: "Rajasthan",
-    affiliation: "Nathdwara Group of Institutions",
+    affiliation: "Affiliated to DSRRAU Jodhpur & Govt of Rajasthan",
     description:
-      "A specialist nursing college in Nathdwara. Contact the institution to confirm current course availability, eligibility and admission requirements.",
-    featuredCourses: ["B.Sc. Ayurveda Nursing", "Nursing education"],
+      "Specialized Ayurveda nursing college integrating modern clinical nursing practices with ancient holistic Ayurvedic patient care and Panchakarma therapies.",
+    featuredCourses: ["B.Sc. Ayurveda Nursing", "Diploma Ayush Nursing (DAN&P)"],
     bannerImage: "/institutions/ayurved-nursing-card.jpg",
   },
   {
@@ -122,10 +122,10 @@ export const NGI_INSTITUTIONS: Institution[] = [
     location: "Upali Oden, Nathdwara",
     district: "Rajsamand",
     state: "Rajasthan",
-    affiliation: "Nathdwara Group of Institutions",
+    affiliation: "Affiliated to Mohanlal Sukhadia University (MLSU), Udaipur",
     description:
-      "A specialist institution focused on biotechnology and management. Contact NIBM for current programs, eligibility and admissions.",
-    featuredCourses: ["Biotechnology", "Management"],
+      "Reputed institution offering BCA, B.Sc Biotechnology, B.Sc Science and M.Sc programs equipped with tissue culture and 500+ computing workstation labs.",
+    featuredCourses: ["BCA (Computer Apps)", "B.Sc Biotechnology", "M.Sc Chemistry/Zoology"],
     bannerImage: "/institutions/nibm-card.jpg",
   },
   {
@@ -136,10 +136,10 @@ export const NGI_INSTITUTIONS: Institution[] = [
     location: "Upali Oden, Nathdwara",
     district: "Rajsamand",
     state: "Rajasthan",
-    affiliation: "Nathdwara Group of Institutions",
+    affiliation: "Approved by NCVT / DGT, Govt of India",
     description:
-      "A private industrial training institute in Nathdwara. Contact NPITI for details about available trades, eligibility and admissions.",
-    featuredCourses: ["Industrial training", "Trade details on enquiry"],
+      "Hands-on vocational training institute delivering certified NCVT trades in Electrician and Fitter with high placement in Railways, DISCOMs, and manufacturing.",
+    featuredCourses: ["ITI Electrician (2 Yrs)", "ITI Fitter (2 Yrs)", "Polytechnic Lateral Entry"],
     bannerImage: "/institutions/npiti-card.jpg",
   },
   {
@@ -150,10 +150,10 @@ export const NGI_INSTITUTIONS: Institution[] = [
     location: "Upali Oden, Nathdwara",
     district: "Rajsamand",
     state: "Rajasthan",
-    affiliation: "Nathdwara Group of Institutions",
+    affiliation: "Approved by Bar Council of India (BCI) & MLSU Udaipur",
     description:
-      "A law college within the Nathdwara Group. Contact the college to confirm current law programs, eligibility and admission details.",
-    featuredCourses: ["Law programs", "Program details on enquiry"],
+      "Leading law college in Mewar providing LL.B. (3 Years) and B.A. LL.B. (5 Years) with active Moot Court, legal aid clinics, and judiciary coaching.",
+    featuredCourses: ["LL.B. (3 Years)", "B.A. LL.B. Integrated (5 Years)", "Moot Court & RJS Prep"],
     bannerImage: "/institutions/nlc-card.jpg",
   },
   {
@@ -164,10 +164,10 @@ export const NGI_INSTITUTIONS: Institution[] = [
     location: "Upali Oden, Nathdwara",
     district: "Rajsamand",
     state: "Rajasthan",
-    affiliation: "Nathdwara Group of Institutions",
+    affiliation: "Approved by AICTE New Delhi & Affiliated to RTU Kota",
     description:
-      "A specialist engineering and technology institution in Nathdwara. Contact NIET for current courses, eligibility and admission requirements.",
-    featuredCourses: ["Engineering", "Technology"],
+      "Leading engineering college featuring B.Tech in CSE, Civil, Mechanical & Electrical Engineering and Polytechnic Diploma with 120+ corporate recruiters.",
+    featuredCourses: ["B.Tech Computer Science", "B.Tech Civil Engineering", "Polytechnic Diploma"],
     bannerImage: "/institutions/niet-card.jpg",
   }
 ];
@@ -205,106 +205,288 @@ export const INSTITUTION_SITES: Record<string, InstitutionSiteContent> = {
     tagline: "Engineering a future-ready workforce",
     heroImage: "/institutions/niet.jpg",
     welcome: [
-      "Nathdwara Institute of Engineering and Technology (NIET) is the engineering wing of the Nathdwara Group of Institutions, located on the lush green Aravali campus at Upali Oden, Nathdwara. The institute prepares students for careers in core engineering and modern software disciplines through a blend of classroom learning and intensive practical training.",
-      "With fully equipped workshops, digital computer labs, and an active Training & Placement cell, NIET students follow the RTU Kota academic calendar and graduate ready for industry, government engineering services, and higher studies.",
+      "Nathdwara Institute of Engineering and Technology (NIET) is the premier engineering wing of the Nathdwara Group of Institutions, situated on the scenic Aravali campus at Upali Oden, Nathdwara near Udaipur. Approved by AICTE, New Delhi and affiliated with Rajasthan Technical University (RTU), Kota, NIET delivers industry-aligned engineering and polytechnic education.",
+      "With high-end computer clusters, mechanical workshops, robotics setups, surveying and civil testing labs, and an active Training & Placement cell with 120+ corporate recruiters, NIET equips aspiring engineers with technical rigor and practical mastery.",
     ],
     highlights: [
-      "B.Tech and Polytechnic programs with lateral-entry options",
-      "Machine shop, surveying, fluid mechanics and electronics labs",
+      "B.Tech in Computer Science, Civil, Mechanical & Electrical",
+      "Polytechnic 3-year diploma & lateral entry options",
+      "Advanced machine shop, fluid mechanics, CAD/CAM and IoT labs",
       "Training & Placement cell with 120+ recruiting partners",
-      "Wi-Fi enabled campus with hostels and daily bus fleet",
+      "Active NPTEL Local Chapter and technical clubs",
+      "Dedicated transport fleet connecting Udaipur, Rajsamand and Mavli",
     ],
-    courseMatch: ["NIET"],
+    courseMatch: ["NIET", "Engineering"],
+    phone: "+91 95713 45444",
+    vision:
+      "To be recognized as a leading technical institute in Rajasthan fostering technological innovation, ethical engineering practice, and entrepreneurship.",
+    mission: [
+      {
+        title: "Hands-on Technical Mastery",
+        description:
+          "Provide intensive laboratory, workshop and project-based training aligned with contemporary engineering demands.",
+      },
+      {
+        title: "Industry Collaboration",
+        description:
+          "Build strong corporate alliances for internships, live projects, industrial visits and campus placements.",
+      },
+      {
+        title: "Ethical Engineering",
+        description:
+          "Cultivate problem solvers dedicated to sustainable technological solutions for society and regional infrastructure.",
+      },
+    ],
+    messages: [
+      {
+        name: "Director Academics",
+        role: "Head of Engineering",
+        quote: "True engineering transforms challenges into community solutions.",
+        text: [
+          "At NIET, our focus extends beyond textbooks into practical application. Through our extensive labs and industry interactions, we ensure our students graduate with the technical confidence to thrive in multinational tech companies and core infrastructure firms.",
+          "We welcome ambitious students to join a campus where innovation, discipline, and career readiness go hand in hand.",
+        ],
+      },
+    ],
+    contacts: [
+      {
+        name: "Admission Coordinator (NIET)",
+        role: "Engineering Admissions",
+        phone: "+91 95713 45444",
+        email: "admissions.niet@ngi.edu.in",
+      },
+      {
+        name: "Training & Placement Officer",
+        role: "T&P Cell",
+        phone: "+91 98292 34138",
+        email: "placements@ngi.edu.in",
+      },
+    ],
   },
   nibm: {
     tagline: "Value-based education for all-round development",
     heroImage: "/institutions/nibm.jpg",
     welcome: [
-      "Nathdwara Institute of Biotechnology & Management (NIBM) offers career-oriented programs across biotechnology, computer applications, basic sciences and management on the Nathdwara Group campus at Upali Oden.",
-      "The institute's vision is to provide value education leading to the all-round development of students through need-based, career-oriented education with an emphasis on personality and social concerns.",
+      "Nathdwara Institute of Biotechnology & Management (NIBM) offers career-oriented programs across computer applications, biotechnology, life sciences, basic sciences and management on the Nathdwara Group campus at Upali Oden, affiliated with Mohanlal Sukhadia University (MLSU), Udaipur.",
+      "The institute provides students with tissue culture rooms, molecular biology labs, software development labs with 500+ computing terminals, and faculty guidance that nurtures research and professional leadership.",
     ],
     highlights: [
-      "BCA, B.Sc Biotechnology and M.Sc programs under MLSU curriculum",
-      "Tissue culture, microbiology and molecular biology laboratories",
-      "Industry projects that build real-world portfolios before graduation",
-      "Central digital library with 35,000+ volumes and NPTEL chapter",
+      "BCA, B.Sc Biotechnology, B.Sc Science & M.Sc programs under MLSU",
+      "Sophisticated tissue culture, microbiology and analytical chemistry labs",
+      "Full-stack software development projects and industry internships",
+      "Central digital library with 35,000+ volumes and DELNET access",
+      "Regular guest lectures by IT and biotechnology researchers",
+      "Merit and government scholarship facilitation",
     ],
-    courseMatch: ["NIBM"],
-    phone: "9829234138",
+    courseMatch: ["NIBM", "Biotechnology", "Computer Applications"],
+    phone: "+91 98292 34138",
+    vision:
+      "To provide value-based education leading to the all-round development of students through need-based, career-oriented education with an emphasis on personality and social concerns.",
+    mission: [
+      {
+        title: "Academic Rigor",
+        description:
+          "Deliver university-affiliated curricula with interactive pedagogy, digital resources, and regular assessments.",
+      },
+      {
+        title: "Scientific Inquiry",
+        description:
+          "Promote research in biotechnology, microbial technologies, and modern computer science applications.",
+      },
+      {
+        title: "Employability & Ethics",
+        description:
+          "Prepare graduates for competitive examinations, IT multinational careers, and higher post-graduate education.",
+      },
+    ],
+    messages: [
+      {
+        name: "Principal, NIBM",
+        role: "Principal's Message",
+        quote: "Knowledge transforms curiosity into career capability.",
+        text: [
+          "NIBM bridges the gap between scientific curiosity and industry requirements. Our computer application labs and biotechnology facilities allow students to explore modern technology first-hand.",
+          "We take pride in our alumni who are excelling in software companies, pharmaceutical organizations, and academic institutions across India.",
+        ],
+      },
+    ],
+    contacts: [
+      {
+        name: "Dr. Pankaj Rathi",
+        role: "Academic Head, NIBM",
+        phone: "+91 96368 15142",
+        email: "nibm@ngi.edu.in",
+      },
+      {
+        name: "Department of Computer Applications",
+        role: "BCA Admissions Desk",
+        phone: "+91 95713 45444",
+        email: "info@ngi.edu.in",
+      },
+    ],
   },
   nlc: {
-    tagline: "Step up towards justice",
+    tagline: "Step up towards justice and legal excellence",
     heroImage: "/institutions/nlc.jpg",
     welcome: [
-      "Nathdwara Law College (NLC) is the law wing of the Nathdwara Group of Institutions, serving aspiring advocates and legal professionals from the Mewar region.",
-      "The college combines a university-affiliated law curriculum with moot court practice and guidance from experienced faculty. Contact the college office for the current programs, eligibility and admission schedule.",
+      "Nathdwara Law College (NLC) is the legal education wing of the Nathdwara Group of Institutions, serving aspiring advocates, corporate legal advisors, and judicial service aspirants from the Mewar and Southern Rajasthan region.",
+      "Approved by the Bar Council of India (BCI) and affiliated with Mohanlal Sukhadia University (MLSU), Udaipur, NLC blends comprehensive classroom teaching with moot courts, legal aid camps, and interaction with experienced legal luminaries.",
     ],
     highlights: [
-      "University-affiliated law programs",
-      "Moot court sessions and legal-aid awareness activities",
-      "Experienced faculty with courtroom exposure",
-      "Shared NGI campus library, hostels and transport",
+      "Bar Council of India (BCI) approved LL.B. degree programs",
+      "Dedicated Moot Court hall for mock trials and appellate advocacy",
+      "Legal Aid Clinic providing real-world pro-bono community exposure",
+      "Rich law library with Supreme Court cases, AIR journals & legal databases",
+      "Regular court visits to District & Sessions Courts and High Court",
+      "Preparation assistance for Rajasthan Judicial Services (RJS) & competitive exams",
     ],
-    courseMatch: ["Law College", "NLC"],
-    phone: "7014810591",
+    courseMatch: ["Law College", "NLC", "Law"],
+    phone: "+91 70148 10591",
+    vision:
+      "To produce ethical, socially conscious, and competent legal professionals who uphold the Constitution, justice, and the rule of law.",
+    mission: [
+      {
+        title: "Doctrinal & Practical Mastery",
+        description:
+          "Provide a rigorous grounding in civil, criminal, constitutional, and corporate laws supplemented with courtroom training.",
+      },
+      {
+        title: "Social Justice Advocacy",
+        description:
+          "Engage students in legal aid awareness for rural and underprivileged communities across Rajsamand and Mewar.",
+      },
+      {
+        title: "Judicial Career Readiness",
+        description:
+          "Guide students toward successful judicial service careers, civil services, and corporate legal counsel.",
+      },
+    ],
+    messages: [
+      {
+        name: "Principal, Nathdwara Law College",
+        role: "Principal's Desk",
+        quote: "Law is the cornerstone of a just and progressive society.",
+        text: [
+          "At Nathdwara Law College, we do not merely teach statutes; we nurture analytical minds capable of advocating for justice, equity, and good governance.",
+          "Our moot court simulations, guest lectures by senior advocates, and active legal aid clinic offer our law students real-world practical experience.",
+        ],
+      },
+    ],
+    contacts: [
+      {
+        name: "Law Admissions Cell",
+        role: "Admissions Coordinator",
+        phone: "+91 70148 10591",
+        email: "law@ngi.edu.in",
+      },
+      {
+        name: "Campus Office",
+        role: "General Enquiries",
+        phone: "+91 95713 45444",
+        email: "info@ngi.edu.in",
+      },
+    ],
   },
   npiti: {
-    tagline: "Skilled trades, real careers",
+    tagline: "Skilled trades, certified hands, real careers",
     heroImage: "/institutions/npiti.jpg",
     welcome: [
-      "Nathdwara Private Industrial Training Institute (NPITI) delivers hands-on vocational training that leads directly to employment in railways, discoms, cement, marble and manufacturing industries across Rajasthan.",
-      "Training follows a workshop-first approach: students spend most of their time on machines and live electrical boards, supported by the group's engineering faculty.",
+      "Nathdwara Private Industrial Training Institute (NPITI) delivers hands-on vocational training that leads directly to employment in Indian Railways, state electricity boards (DISCOMs), cement plants, marble processing, and manufacturing industries across Rajasthan.",
+      "Approved by NCVT / DGT (Government of India), NPITI follows a workshop-first approach: trainees spend over 70% of their curriculum on operational machinery, wiring boards, lathe machines, and diagnostic instruments under seasoned technical instructors.",
     ],
     highlights: [
-      "ITI trades including Electrician and Fitter",
-      "Workshop-first training on industry-grade equipment",
-      "Pathways to Polytechnic lateral entry within NGI",
-      "Placement support with regional industrial recruiters",
+      "NCVT / DGT approved trades: Electrician and Fitter",
+      "Extensive workshops equipped with industry-grade machinery and test benches",
+      "Direct pathway for ITI graduates to Polytechnic lateral entry (2nd year)",
+      "Apprenticeship tie-ups with regional manufacturing & mining corporations",
+      "Specialized training for Railway Assistant Loco Pilot & Technician tests",
+      "Safe campus with hostel facilities, mess, and daily transport bus routes",
     ],
-    courseMatch: ["Industrial Training", "ITI"],
+    courseMatch: ["Industrial Training", "ITI", "Trades"],
+    phone: "+91 95713 45444",
+    vision:
+      "To empower the youth of Rajasthan with certified technical skills and vocational mastery that enable self-reliance and industrial employment.",
+    mission: [
+      {
+        title: "Workshop-First Training",
+        description:
+          "Prioritize practical benchwork, machine operations, electrical wiring, and safety standards.",
+      },
+      {
+        title: "Industrial Apprenticeship",
+        description:
+          "Connect trainees with public and private sector apprenticeship programs for immediate job placement.",
+      },
+      {
+        title: "Career Progression",
+        description:
+          "Facilitate seamless lateral entry into engineering diploma courses within the NGI network.",
+      },
+    ],
+    messages: [
+      {
+        name: "Superintendent, NPITI",
+        role: "Technical Head",
+        quote: "Skill in the hands builds the backbone of modern industry.",
+        text: [
+          "Skilled technicians are in high demand across Indian manufacturing, power infrastructure, and railway departments. At NPITI, we ensure every trainee masters both safety and craftsmanship.",
+          "Our graduates consistently secure government apprenticeships and private industrial employment across Rajasthan and Gujarat.",
+        ],
+      },
+    ],
+    contacts: [
+      {
+        name: "ITI Office & Admissions",
+        role: "Trade Enquiries",
+        phone: "+91 95713 45444",
+        email: "iti@ngi.edu.in",
+      },
+    ],
   },
   vdsms: {
     tagline: "Compassionate care, scientific excellence",
     heroImage: "/institutions/vdsms.jpg",
     welcome: [
-      "Vallabh Darshan Society for Medical Science (VDSMS) is the medical sciences wing of the Nathdwara Group of Institutions at Upali Oden, Nathdwara. The institution is committed to imparting quality, ethical and professional education that gives direction, purpose and values to life.",
-      "VDSMS aims to equip students with a positive attitude, professional skills and social responsibility so they can build successful careers and contribute to the nation as responsible citizens. The institute also runs skill-development programs under the PMKVY and RSLDC schemes.",
+      "Vallabh Darshan Society for Medical Science (VDSMS) is the dedicated medical and allied health sciences wing of the Nathdwara Group of Institutions at Upali Oden, Nathdwara. The institution is committed to imparting quality, ethical, and professional education that gives direction, purpose, and values to life.",
+      "VDSMS aims to equip students with a positive attitude, professional diagnostic skills, and social responsibility so they can build successful healthcare careers and contribute to national wellness. The institute also runs government-recognized skill development programs under the PMKVY and RSLDC schemes.",
     ],
     highlights: [
-      "Medical sciences education within the NGI campus",
-      "Skill-development programs under PMKVY & RSLDC",
-      "Access to shared NGI labs, library and hostels",
-      "Scholarship support under state and NGI schemes",
+      "Medical sciences and diagnostic laboratory programs",
+      "Skill-development programs under PMKVY & RSLDC healthcare schemes",
+      "Fully functional pathology, hematology and biochemistry student labs",
+      "Access to shared NGI 30-acre campus, central library and hostel amenities",
+      "State government scholarship and fee concession support for eligible students",
+      "Hospital training partnerships with regional medical centers",
     ],
-    courseMatch: ["VDSMS", "Medical Science"],
-    phone: "9636815142",
+    courseMatch: ["VDSMS", "Medical Science", "Health", "DMLT"],
+    phone: "+91 96368 15142",
     vision:
-      "We offer our students numerous curricular and co-curricular opportunities that empower them to become conscientious and responsible citizens of the community.",
+      "We offer our students numerous curricular and co-curricular opportunities that empower them to become conscientious, competent, and responsible healthcare leaders of the community.",
     mission: [
       {
-        title: "Academic Excellence",
+        title: "Academic & Clinical Excellence",
         description:
-          "To impart quality, affordable education in medical, engineering and academic fields with a focus on innovation and ethical practice.",
+          "To impart quality, affordable education in medical and allied health fields with a focus on precision, hygiene, and ethical practice.",
       },
       {
-        title: "Research & Innovation",
+        title: "Healthcare Training",
         description:
-          "To promote research that responds to regional and global healthcare challenges.",
+          "To promote practical laboratory training that responds to regional and rural healthcare diagnostic challenges.",
       },
       {
         title: "Skill Development",
         description:
-          "To equip students with practical skills, leadership qualities, and a human-centric approach.",
+          "To equip healthcare trainees with compassionate patient care, diagnostic leadership, and community service values.",
       },
     ],
     messages: [
       {
         name: "Chairman",
         role: "Chairman's Message",
-        quote: "The power of the future is the power of the mind.",
+        quote: "The power of the future is the power of the mind and compassionate service.",
         text: [
-          "If mass production characterized the industrial revolution, individual creativity and brilliance marks the youth's revolution of this century. Development is no longer symbolized by imposing plants and machinery; instead knowledge is now universally recognized as the true strength of a nation.",
-          "It is important to be led by a set of agreed shared beliefs. To achieve this we need to enter into learning conversations to define and articulate such a philosophy. As it is said: \"If you stand for nothing you will fall for anything.\"",
+          "If mass production characterized the industrial revolution, individual creativity and brilliance marks the youth's revolution of this century. Development is no longer symbolized by imposing plants and machinery; instead knowledge and compassionate service are now recognized as the true strength of a nation.",
+          "It is important to be led by a set of agreed shared beliefs. At VDSMS, we prepare healthcare professionals whose technical skill is matched by their commitment to healing.",
         ],
       },
       {
@@ -312,7 +494,7 @@ export const INSTITUTION_SITES: Record<string, InstitutionSiteContent> = {
         role: "Managing Director",
         text: [
           "Education is not limited to bookish knowledge but it is a tool that gives direction, purpose and values to life. Our institution, Vallabh Darshan Society for Medical Sciences, is committed to imparting quality, ethical and professional education keeping this core principle in mind.",
-          "Our aim is to equip the students with a positive attitude, professional skills and social responsibility so that they can not only build a successful career but also contribute to the development of the nation as a responsible citizen. Let us join together and take this sacred endeavor of education to new heights.",
+          "Our aim is to equip the students with a positive attitude, professional skills and social responsibility so that they can not only build a successful career but also contribute to the development of the nation as a responsible citizen.",
         ],
       },
     ],
@@ -320,31 +502,72 @@ export const INSTITUTION_SITES: Record<string, InstitutionSiteContent> = {
       {
         name: "Dr. Pankaj Rathi",
         role: "Manager",
-        phone: "+91-9636815142",
+        phone: "+91 96368 15142",
         email: "infopankajrathi@gmail.com",
       },
       {
         name: "Deepesh Parikh",
         role: "Secretary",
-        phone: "+91-9829234138",
+        phone: "+91 98292 34138",
         email: "md@nathdwarainstitute.com",
       },
     ],
   },
   "ayurved-nursing": {
-    tagline: "Nursing rooted in Ayurveda",
+    tagline: "Holistic healing, modern nursing care",
     heroImage: "/institutions/ayurved-nursing.jpg",
     welcome: [
-      "Nathdwara College of B.Sc. Ayurveda Nursing (NCAN) trains compassionate nursing professionals who combine modern patient care with the Ayurvedic tradition.",
-      "The college operates from the Nathdwara Group campus at Upali Oden. Contact the college to confirm current course availability, eligibility and admission requirements.",
+      "Nathdwara College of B.Sc. Ayurveda Nursing (NCAN) trains dedicated nursing professionals who combine modern patient care fundamentals with centuries-old Ayurvedic holistic healing traditions.",
+      "Operating from the serene Nathdwara Group campus at Upali Oden, the college features clinical simulation laboratories, herbal pharmacology displays, anatomy models, and practical clinical rotations at affiliated hospitals.",
     ],
     highlights: [
-      "B.Sc. Ayurveda Nursing program",
-      "Clinical skill labs and supervised patient-care practice",
-      "Separate hostels with 24/7 security for women students",
-      "Scholarships including the Beti Padhao girl-child incentive",
+      "B.Sc. Ayurveda Nursing 4-year degree program",
+      "Diploma in Ayush Nursing & Pharmacy (DAN&P) courses",
+      "Hands-on clinical skill labs, Panchakarma therapy demonstrations and patient care practice",
+      "Safe, well-maintained on-campus girls' and boys' hostels with 24/7 security",
+      "Scholarship incentives including Beti Padhao girl-child financial aid",
+      "Placement pathways in Ayurvedic hospitals, wellness retreats, and public health centers",
     ],
-    courseMatch: ["Ayurveda Nursing", "NCAN"],
+    courseMatch: ["Ayurveda Nursing", "NCAN", "Nursing"],
+    phone: "+91 95713 45444",
+    vision:
+      "To be a distinguished center of Ayurvedic nursing education that promotes holistic well-being, integrative healthcare, and compassionate patient service.",
+    mission: [
+      {
+        title: "Integrative Nursing Skills",
+        description:
+          "Harmonize conventional clinical nursing practices with Ayurvedic therapeutics, Panchakarma care, and herbal medicine.",
+      },
+      {
+        title: "Clinical Exposure",
+        description:
+          "Provide clinical rotations in multispecialty and Ayurvedic hospitals to instill confidence in patient management.",
+      },
+      {
+        title: "Humanitarian Care",
+        description:
+          "Nurture empathy, dedication, and patient-first ethics in every aspiring nurse.",
+      },
+    ],
+    messages: [
+      {
+        name: "Principal, NCAN",
+        role: "Principal's Desk",
+        quote: "Nursing is the noble bridge between ancient wisdom and compassionate care.",
+        text: [
+          "Ayurvedic nursing provides a unique career combining time-tested holistic health sciences with modern nursing protocols. Our students are trained to serve with skill, warmth, and dedication.",
+          "We offer modern clinical labs, seasoned nursing mentors, and hospital training tie-ups that make our students highly sought after.",
+        ],
+      },
+    ],
+    contacts: [
+      {
+        name: "Ayurveda Nursing Admissions",
+        role: "Admissions Desk",
+        phone: "+91 95713 45444",
+        email: "nursing@ngi.edu.in",
+      },
+    ],
   },
 };
 
@@ -377,6 +600,47 @@ export const FEATURED_COURSES: Course[] = [
     badge: "Most Popular",
   },
   {
+    id: "c-btech-civil",
+    name: "B.Tech Civil Engineering",
+    level: "UG",
+    stream: "Engineering",
+    duration: "4 Years",
+    institution: "Nathdwara Institute of Engineering & Technology (NIET)",
+    eligibility: "10+2 with Physics, Chemistry & Mathematics",
+    careerProspects: "Structural Engineer, Highway Construction, PWD, NHAI, Real Estate & Urban Planning",
+  },
+  {
+    id: "c-btech-mech",
+    name: "B.Tech Mechanical Engineering",
+    level: "UG",
+    stream: "Engineering",
+    duration: "4 Years",
+    institution: "Nathdwara Institute of Engineering & Technology (NIET)",
+    eligibility: "10+2 with PCM (REAP / JEE Main / Direct)",
+    careerProspects: "Design Engineer, Automobile Manufacturing, Thermal Power Plants, Industrial Automation",
+  },
+  {
+    id: "c-btech-ee",
+    name: "B.Tech Electrical Engineering",
+    level: "UG",
+    stream: "Engineering",
+    duration: "4 Years",
+    institution: "Nathdwara Institute of Engineering & Technology (NIET)",
+    eligibility: "10+2 with Physics & Mathematics",
+    careerProspects: "Power Grid Engineer, DISCOM Junior Engineer, Renewable Energy & Substation Specialist",
+  },
+  {
+    id: "c-polytechnic",
+    name: "Diploma in Engineering (Polytechnic)",
+    level: "Diploma",
+    stream: "Engineering",
+    duration: "3 Years (2 Yrs for ITI/12th)",
+    institution: "Nathdwara Institute of Engineering & Technology (NIET)",
+    eligibility: "10th Standard Pass (or 12th Science / ITI for Lateral Entry)",
+    careerProspects: "Junior Engineer (JE) in Govt. Departments, Railways, Mining & Manufacturing Industries",
+    badge: "Lateral Entry Open",
+  },
+  {
     id: "c-bca",
     name: "BCA (Bachelor of Computer Applications)",
     level: "UG",
@@ -386,6 +650,133 @@ export const FEATURED_COURSES: Course[] = [
     eligibility: "10+2 in any stream with minimum 48% marks",
     careerProspects: "App Developer, Database Administrator, Web Developer, System Analyst, MCA pathways",
     badge: "High Demand",
+  },
+  {
+    id: "c-bsc-biotech",
+    name: "B.Sc Biotechnology",
+    level: "UG",
+    stream: "Life Sciences",
+    duration: "3 Years",
+    institution: "Nathdwara Institute of Biotechnology & Management (NIBM)",
+    eligibility: "10+2 with Biology / Agriculture / Biotechnology",
+    careerProspects: "Biotech Research Assistant, Clinical Lab Specialist, Food Processing, Quality Analyst",
+  },
+  {
+    id: "c-bsc-sci",
+    name: "B.Sc. (Physics, Chemistry, Mathematics / Biology)",
+    level: "UG",
+    stream: "Basic Sciences",
+    duration: "3 Years",
+    institution: "Nathdwara Institute of Biotechnology & Management (NIBM)",
+    eligibility: "10+2 with Science stream (PCM / PCB)",
+    careerProspects: "Civil Services, School Lecturer, Laboratory Scientist, M.Sc. Higher Studies",
+  },
+  {
+    id: "c-msc-chem",
+    name: "M.Sc. Chemistry / Zoology / Physics",
+    level: "PG",
+    stream: "Basic Sciences",
+    duration: "2 Years",
+    institution: "Nathdwara Institute of Biotechnology & Management (NIBM)",
+    eligibility: "B.Sc. in relevant subject with min 50% marks",
+    careerProspects: "Lectureship (NET/SET), Chemical Industries, Research Laboratories, School Lecturer",
+  },
+  {
+    id: "c-llb",
+    name: "LL.B. (Bachelor of Laws)",
+    level: "UG",
+    stream: "Law",
+    duration: "3 Years",
+    institution: "Nathdwara Law College (NLC)",
+    eligibility: "Graduation in any discipline with min 45% (40% for SC/ST)",
+    careerProspects: "Advocate in High Court & District Courts, Judicial Magistrate (RJS), Corporate Legal Advisor, Public Prosecutor",
+    badge: "BCI Approved",
+  },
+  {
+    id: "c-ba-llb",
+    name: "B.A. LL.B. (5-Year Integrated Law Course)",
+    level: "Integrated",
+    stream: "Law",
+    duration: "5 Years",
+    institution: "Nathdwara Law College (NLC)",
+    eligibility: "10+2 in any stream with minimum 45% marks",
+    careerProspects: "Corporate Law Firms, Civil Litigation, Legal Officer in PSUs, Human Rights Counsel",
+    badge: "Dual Degree",
+  },
+  {
+    id: "c-bsc-ayurved-nursing",
+    name: "B.Sc. Ayurveda Nursing",
+    level: "UG",
+    stream: "Ayurveda Nursing",
+    duration: "4 Years",
+    institution: "Nathdwara College of B.Sc. Ayurveda Nursing (NCAN)",
+    eligibility: "10+2 with Physics, Chemistry & Biology (PCB) with min 45% marks",
+    careerProspects: "Ayurvedic Hospital Staff Nurse, Panchakarma Specialist Nurse, Ayush Medical Officer Assistant, Wellness Clinics",
+    badge: "Ayush Approved",
+  },
+  {
+    id: "c-dan-p",
+    name: "Diploma in Ayush Nursing & Pharmacy (DAN&P)",
+    level: "Diploma",
+    stream: "Ayurveda Nursing",
+    duration: "2.5 Years",
+    institution: "Nathdwara College of B.Sc. Ayurveda Nursing (NCAN)",
+    eligibility: "10+2 with Science (PCB) or recognized equivalent",
+    careerProspects: "Government Ayush Clinics, Ayurvedic Dispensaries, Herbal Pharmacy In-charge",
+  },
+  {
+    id: "c-dmlt",
+    name: "DMLT (Diploma in Medical Laboratory Technology)",
+    level: "Diploma",
+    stream: "Medical Sciences",
+    duration: "2 Years",
+    institution: "Vallabh Darshan Society for Medical Science (VDSMS)",
+    eligibility: "10+2 with Science (PCB / PCM)",
+    careerProspects: "Medical Lab Technician, Pathology Diagnostic Centers, Hospital Blood Bank Technician, Lab In-charge",
+    badge: "High Placement",
+  },
+  {
+    id: "c-cms-ed",
+    name: "CMS & ED (Community Medical Services & Essential Drugs)",
+    level: "Diploma",
+    stream: "Medical Sciences",
+    duration: "18 Months",
+    institution: "Vallabh Darshan Society for Medical Science (VDSMS)",
+    eligibility: "10+2 or equivalent pass",
+    careerProspects: "Rural Primary Health Worker, Community Health Center Assistant, First-Aid Care Provider",
+  },
+  {
+    id: "c-pmkvy-health",
+    name: "Allied Healthcare Skill Certification (PMKVY / RSLDC)",
+    level: "Vocational",
+    stream: "Medical Sciences",
+    duration: "6 - 12 Months",
+    institution: "Vallabh Darshan Society for Medical Science (VDSMS)",
+    eligibility: "10th or 12th Standard pass",
+    careerProspects: "General Duty Assistant (GDA), Emergency Medical Technician, Home Healthcare Aide",
+    badge: "Govt. Subsidized",
+  },
+  {
+    id: "c-iti-elec",
+    name: "ITI Electrician",
+    level: "Vocational",
+    stream: "Technical Trades",
+    duration: "2 Years",
+    institution: "Nathdwara Private Industrial Training Institute (NPITI)",
+    eligibility: "10th Pass with Science and Math from recognized board",
+    careerProspects: "Certified Electrician in Indian Railways, AVVNL/JVVNL DISCOMs, Thermal Power Stations, Industrial Plants",
+    badge: "NCVT Approved",
+  },
+  {
+    id: "c-iti-fitter",
+    name: "ITI Fitter",
+    level: "Vocational",
+    stream: "Technical Trades",
+    duration: "2 Years",
+    institution: "Nathdwara Private Industrial Training Institute (NPITI)",
+    eligibility: "10th Pass from recognized board",
+    careerProspects: "Loco Workshop Fitter in Railways, Plant Maintenance Technician in Cement & Marble industries, BHEL, DRDO",
+    badge: "NCVT Approved",
   },
   {
     id: "c-bsc-bed",
@@ -410,16 +801,6 @@ export const FEATURED_COURSES: Course[] = [
     badge: "Integrated Program",
   },
   {
-    id: "c-btech-civil",
-    name: "B.Tech Civil Engineering",
-    level: "UG",
-    stream: "Engineering",
-    duration: "4 Years",
-    institution: "NIET Nathdwara",
-    eligibility: "10+2 with Physics, Chemistry & Mathematics",
-    careerProspects: "Structural Engineer, Highway Construction, PWD, NHAI, Real Estate & Urban Planning",
-  },
-  {
     id: "c-bpharm",
     name: "B.Pharm (Bachelor of Pharmacy)",
     level: "UG",
@@ -441,26 +822,6 @@ export const FEATURED_COURSES: Course[] = [
     careerProspects: "Hospital Pharmacist, Retail Pharmacy Owner, Medical Representative",
   },
   {
-    id: "c-polytechnic",
-    name: "Diploma in Engineering (Polytechnic)",
-    level: "Diploma",
-    stream: "Engineering",
-    duration: "3 Years (2 Yrs for ITI/12th)",
-    institution: "NIET Nathdwara",
-    eligibility: "10th Standard Pass (or 12th Science / ITI for Lateral Entry)",
-    careerProspects: "Junior Engineer (JE) in Govt. Departments, Railways, Mining & Manufacturing Industries",
-  },
-  {
-    id: "c-bsc-biotech",
-    name: "B.Sc Biotechnology",
-    level: "UG",
-    stream: "Life Sciences",
-    duration: "3 Years",
-    institution: "Nathdwara Institute of Biotechnology & Management (NIBM)",
-    eligibility: "10+2 with Biology / Agriculture / Biotechnology",
-    careerProspects: "Biotech Research Assistant, Clinical Lab Specialist, Food Processing, Quality Analyst",
-  },
-  {
     id: "c-mba",
     name: "MBA (Master of Business Administration)",
     level: "PG",
@@ -470,26 +831,6 @@ export const FEATURED_COURSES: Course[] = [
     eligibility: "Graduation in any discipline with min 50% (RMAC / CMAT / Direct)",
     careerProspects: "Marketing Manager, Financial Analyst, HR Executive, Operations Manager, Business Banker",
     badge: "Dual Specialization",
-  },
-  {
-    id: "c-msc-chem",
-    name: "M.Sc. Chemistry / Zoology / Physics",
-    level: "PG",
-    stream: "Basic Sciences",
-    duration: "2 Years",
-    institution: "NIBM Nathdwara",
-    eligibility: "B.Sc. in relevant subject with min 50% marks",
-    careerProspects: "Lectureship (NET/SET), Chemical Industries, Research Laboratories, School Lecturer",
-  },
-  {
-    id: "c-iti-elec",
-    name: "ITI Electrician & Fitter",
-    level: "Vocational",
-    stream: "Technical Trades",
-    duration: "2 Years",
-    institution: "NGI Industrial Training Institute",
-    eligibility: "10th Pass from recognized board",
-    careerProspects: "Certified Electrician, Fitter in Indian Railways, Discoms, Cement & Marble Plants",
   }
 ];
 

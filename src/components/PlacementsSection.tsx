@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import {
   Briefcase,
   TrendingUp,
@@ -79,13 +80,13 @@ export default function PlacementsSection() {
                 Top Companies Hiring From NGI Nathdwara
               </h3>
             </div>
-            <a
-              href="#apply-section"
+            <Link
+              href="/admissions"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-blue-900 text-white hover:bg-blue-800 transition-colors shrink-0"
             >
               <span>Placement Assistance</span>
               <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            </Link>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 pt-6">

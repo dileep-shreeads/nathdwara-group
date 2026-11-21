@@ -1,4 +1,5 @@
 import HeroSlider from "@/components/HeroSlider";
+import NoticeTicker from "@/components/NoticeTicker";
 import StatsCounter from "@/components/StatsCounter";
 import AboutSection from "@/components/AboutSection";
 import InstitutionsGrid from "@/components/InstitutionsGrid";
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <>
       <HeroSlider />
+      <NoticeTicker />
       <StatsCounter />
       <AboutSection />
       <InstitutionsGrid />

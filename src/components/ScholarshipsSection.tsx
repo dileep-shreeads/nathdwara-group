@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   HeartHandshake,
   CheckCircle2,
@@ -141,12 +142,12 @@ export default function ScholarshipsSection() {
                 </div>
               </div>
 
-              <a
-                href="#apply-section"
+              <Link
+                href="/admissions"
                 className="w-full block text-center py-3 rounded-xl font-bold text-xs bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-lg transition-colors"
               >
                 Claim This Scholarship via Admission Desk &rarr;
-              </a>
+              </Link>
             </div>
           </div>
         </div>

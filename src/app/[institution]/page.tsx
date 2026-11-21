@@ -94,10 +94,18 @@ export default async function InstitutionSitePage({
       >
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
           <div className="max-w-3xl">
-            <div className="mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-amber-300 sm:text-sm">
+            {/* Breadcrumb */}
+            <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-2 text-xs font-semibold text-slate-300">
+              <Link href="/" className="hover:text-amber-300 transition-colors">Home</Link>
+              <span>/</span>
+              <Link href="/institutions" className="hover:text-amber-300 transition-colors">Institutions</Link>
+              <span>/</span>
+              <span className="text-amber-300">{institution.shortName}</span>
+            </nav>
+
+            <div className="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-amber-300 sm:text-sm">
               <span className="h-px w-8 bg-amber-300" />
-              {INSTITUTION_CATEGORIES[institution.category]} · Nathdwara Group
-              of Institutions
+              {INSTITUTION_CATEGORIES[institution.category]} · Nathdwara Group of Institutions
             </div>
             <h1 className="max-w-3xl text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
               {institution.shortName}

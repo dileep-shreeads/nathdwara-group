@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   BookOpen,
   Search,
@@ -167,13 +168,13 @@ export default function CourseFinder() {
 
                 {/* Footer action */}
                 <div className="mt-6 pt-4 border-t border-slate-700/80 flex items-center justify-between">
-                  <a
-                    href="#apply-section"
+                  <Link
+                    href={`/admissions?course=${encodeURIComponent(c.name)}`}
                     className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-amber-400 text-slate-950 hover:bg-amber-300 transition-colors shadow"
                   >
                     <span>Apply for 2026-27</span>
                     <ChevronRight className="w-3.5 h-3.5" />
-                  </a>
+                  </Link>
                   <a
                     href="#scholarships"
                     className="text-xs text-slate-400 hover:text-white transition-colors underline"
