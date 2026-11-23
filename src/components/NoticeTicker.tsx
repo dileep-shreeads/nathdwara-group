@@ -2,17 +2,17 @@
 
 import React from "react";
 import Link from "next/link";
-import { Bell, Flame, ChevronRight } from "lucide-react";
+import { Bell, Flame, ChevronRight, ArrowUpRight } from "lucide-react";
 import { LATEST_NEWS } from "@/data/ngiData";
 
 export default function NoticeTicker() {
   return (
-    <div className="bg-blue-950 text-white border-y border-blue-900/60 overflow-hidden py-2.5">
-      <div className="max-w-7xl mx-auto px-4 flex items-center gap-3">
+    <div className="bg-[#0B1B3D] text-white border-y border-[#182e5c] overflow-hidden py-2.5 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-3">
         {/* Badge */}
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-amber-500 text-slate-950 font-extrabold text-xs whitespace-nowrap shadow-sm">
-          <Flame className="w-4 h-4 text-slate-950 fill-current animate-bounce" />
-          <span>LATEST UPDATES</span>
+        <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-amber-400 text-[#071328] font-black text-xs whitespace-nowrap shadow-sm shrink-0">
+          <Flame className="w-3.5 h-3.5 text-[#071328] fill-current animate-bounce" />
+          <span className="tracking-wide">LATEST NOTICES &amp; HAPPENINGS</span>
         </div>
 
         {/* Marquee Ticker */}
@@ -21,13 +21,13 @@ export default function NoticeTicker() {
             {LATEST_NEWS.concat(LATEST_NEWS).map((item, idx) => (
               <Link
                 key={idx}
-                href="/programs"
-                className="inline-flex items-center gap-2 hover:text-amber-400 transition-colors"
+                href="/admissions"
+                className="inline-flex items-center gap-2 text-slate-200 hover:text-amber-300 transition-colors"
               >
                 <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-amber-300 border border-white/10">
                   {item.category}
                 </span>
-                <span className="text-slate-200">{item.title}</span>
+                <span>{item.title}</span>
                 <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
               </Link>
             ))}
@@ -37,10 +37,11 @@ export default function NoticeTicker() {
         {/* Circulars Link */}
         <Link
           href="/admissions"
-          className="hidden md:flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 font-semibold whitespace-nowrap underline"
+          className="hidden md:inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 font-bold whitespace-nowrap shrink-0 transition"
         >
           <Bell className="w-3.5 h-3.5" />
-          <span>All Circulars</span>
+          <span>Notice Board</span>
+          <ArrowUpRight className="w-3 h-3" />
         </Link>
       </div>
     </div>
