@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   Monitor,
   BookOpen,
@@ -121,19 +122,19 @@ export default function InfrastructureSection() {
                   {activeFacility.description}
                 </p>
                 <div className="pt-2 flex items-center gap-3">
-                  <a
-                    href="#apply-section"
+                  <Link
+                    href="/contact"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-md transition-colors"
                   >
                     <span>Visit Our Campus</span>
                     <ArrowRight className="w-4 h-4" />
-                  </a>
-                  <a
-                    href="#institutions"
+                  </Link>
+                  <Link
+                    href="/institutions"
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/90 hover:text-white underline"
                   >
                     <span>Explore Constituent Institutes</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

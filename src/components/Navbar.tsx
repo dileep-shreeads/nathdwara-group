@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, PhoneCall, X } from "lucide-react";
 
 interface NavbarProps {
@@ -9,7 +10,8 @@ interface NavbarProps {
 }
 
 const links = [
-  { href: "/about", label: "About us" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
   { href: "/institutions", label: "Institutions" },
   { href: "/programs", label: "Programs" },
   { href: "/admissions", label: "Admissions" },
@@ -18,8 +20,14 @@ const links = [
 
 export default function Navbar({ onOpenEnquiry }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const closeMenu = () => setMenuOpen(false);
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-md">
@@ -33,7 +41,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
           <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-amber-200 bg-[#fbf8dc] shadow-sm transition-transform group-hover:-rotate-3">
             <img
               src="/ngi-logo.png"
-              alt=""
+              alt="NGI Logo"
               className="h-full w-full object-contain"
             />
           </span>
@@ -41,33 +49,42 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
             <span className="block truncate text-[15px] font-extrabold leading-tight tracking-tight text-[#102c52] sm:text-lg">
               NATHDWARA <span className="text-amber-600">GROUP</span>
             </span>
-            <span className="mt-1 block truncate text-[9px] font-semibold uppercase tracking-[0.12em] text-slate-500 sm:text-[10px]">
+            <span className="mt-0.5 block truncate text-[9px] font-semibold uppercase tracking-[0.12em] text-slate-500 sm:text-[10px]">
               Group of Institutions · Rajasthan
             </span>
           </span>
         </Link>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-full px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-100 hover:text-[#102c52] xl:px-4"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`rounded-full px-3.5 py-2 text-sm font-semibold transition-all xl:px-4 ${
+                  active
+                    ? "bg-[#102c52] text-amber-300 shadow-sm"
+                    : "text-slate-700 hover:bg-slate-100 hover:text-[#102c52]"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          <button
-            type="button"
-            onClick={onOpenEnquiry}
-            className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-[#102c52] transition-colors hover:bg-slate-100 xl:inline-flex"
-          >
-            <PhoneCall className="h-4 w-4" />
-            Talk to us
-          </button>
+          {onOpenEnquiry && (
+            <button
+              type="button"
+              onClick={onOpenEnquiry}
+              className="hidden items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold text-[#102c52] transition-colors hover:bg-slate-100 xl:inline-flex"
+            >
+              <PhoneCall className="h-4 w-4 text-amber-600" />
+              Talk to us
+            </button>
+          )}
           <Link
             href="/admissions"
             className="hidden items-center gap-2 rounded-full bg-amber-400 px-4 py-2.5 text-sm font-bold text-slate-950 shadow-sm transition hover:bg-amber-300 sm:inline-flex"
@@ -94,16 +111,23 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
           className="border-t border-slate-100 bg-white px-4 pb-5 pt-3 shadow-lg lg:hidden"
         >
           <div className="mx-auto grid max-w-7xl gap-1">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                className="rounded-xl px-4 py-3 text-base font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-[#102c52]"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMenu}
+                  className={`rounded-xl px-4 py-3 text-base font-semibold transition ${
+                    active
+                      ? "bg-[#102c52] text-amber-300 font-bold"
+                      : "text-slate-700 hover:bg-slate-50 hover:text-[#102c52]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Link
               href="/admissions"
               onClick={closeMenu}
@@ -120,7 +144,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
                 }}
                 className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-3 font-semibold text-[#102c52]"
               >
-                <PhoneCall className="h-4 w-4" /> Request a call
+                <PhoneCall className="h-4 w-4 text-amber-600" /> Request a call
               </button>
             )}
           </div>

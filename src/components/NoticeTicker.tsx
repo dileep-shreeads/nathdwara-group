@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Bell, Flame, ChevronRight } from "lucide-react";
 import { LATEST_NEWS } from "@/data/ngiData";
 
@@ -18,9 +19,9 @@ export default function NoticeTicker() {
         <div className="relative flex-1 overflow-hidden whitespace-nowrap text-xs sm:text-sm">
           <div className="inline-flex items-center gap-8 animate-marquee">
             {LATEST_NEWS.concat(LATEST_NEWS).map((item, idx) => (
-              <a
+              <Link
                 key={idx}
-                href="#courses"
+                href="/programs"
                 className="inline-flex items-center gap-2 hover:text-amber-400 transition-colors"
               >
                 <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-amber-300 border border-white/10">
@@ -28,19 +29,19 @@ export default function NoticeTicker() {
                 </span>
                 <span className="text-slate-200">{item.title}</span>
                 <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
-              </a>
+              </Link>
             ))}
           </div>
         </div>
 
         {/* Circulars Link */}
-        <a
-          href="#admissions"
+        <Link
+          href="/admissions"
           className="hidden md:flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 font-semibold whitespace-nowrap underline"
         >
           <Bell className="w-3.5 h-3.5" />
           <span>All Circulars</span>
-        </a>
+        </Link>
       </div>
     </div>
   );
