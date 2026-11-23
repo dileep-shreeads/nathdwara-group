@@ -10,11 +10,8 @@ import {
   BookOpen,
   TrendingUp,
   ShieldCheck,
-  Building2,
   ArrowRight,
   CheckCircle2,
-  GraduationCap,
-  Users,
 } from "lucide-react";
 
 interface HeroSlide {

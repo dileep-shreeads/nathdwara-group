@@ -1,12 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
-  Award,
-  Building2,
-  GraduationCap,
   Mail,
   MapPin,
   Phone,
@@ -175,7 +170,7 @@ export default function Footer() {
       <div className="border-t border-white/10 bg-[#050e1d]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
           <p>
-            &copy; {new Date().getFullYear()} Nathdwara Group of Institutions. All rights reserved.
+            &copy; 2026 Nathdwara Group of Institutions. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-4 text-slate-400">
             <Link href="/about" className="hover:text-amber-400">Mandatory Disclosures</Link>

@@ -4,12 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import {
   Sparkles,
-  Trophy,
-  Music,
-  Users,
-  Compass,
   ArrowRight,
-  Flame,
   CheckCircle2,
 } from "lucide-react";
 

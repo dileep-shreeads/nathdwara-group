@@ -3,14 +3,9 @@
 import React from "react";
 import Link from "next/link";
 import {
-  Award,
-  BookOpen,
-  Building,
   CheckCircle2,
   Cpu,
-  GraduationCap,
   HeartHandshake,
-  Layers,
   ShieldCheck,
   Sparkles,
   TrendingUp,

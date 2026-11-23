@@ -4,11 +4,7 @@ import Link from "next/link";
 import {
   ArrowRight,
   Award,
-  Building,
-  CheckCircle2,
   Compass,
-  GraduationCap,
-  Quote,
   ShieldCheck,
   Sparkles,
   Target,
