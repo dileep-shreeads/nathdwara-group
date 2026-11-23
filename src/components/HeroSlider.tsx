@@ -1,21 +1,22 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   ChevronLeft,
   ChevronRight,
-  Cpu,
   Award,
+  Sparkles,
   BookOpen,
   TrendingUp,
   ShieldCheck,
-  Send,
+  ArrowRight,
   CheckCircle2,
 } from "lucide-react";
 
 interface HeroSlide {
   id: number;
-  badge: string;
+  eyebrow: string;
   badgeIcon: React.ReactNode;
   heading: string;
   highlightText: string;
@@ -26,68 +27,73 @@ interface HeroSlide {
   secondaryLink: string;
   bgGradient: string;
   image: string;
+  tag: string;
 }
 
 const SLIDES: HeroSlide[] = [
   {
     id: 1,
-    badge: "PREMIER EDUCATIONAL GROUP • NATHDWARA, RAJASTHAN",
+    eyebrow: "WHERE EDUCATION MEETS INNOVATION",
     badgeIcon: <Award className="w-4 h-4 text-amber-400" />,
-    heading: "Empowering Futures with Quality Technical &",
-    highlightText: "Professional Education",
+    heading: "Ancient Wisdom. Modern Technical Ingenuity.",
+    highlightText: "One Campus.",
     description:
-      "Nathdwara Group of Institutions (NGI) in Upali Oden, Nathdwara (near Udaipur) offers career-driven programs in Engineering, Computer Applications, Sciences, Pharmacy, and Education affiliated with RTU Kota and MLSU Udaipur.",
-    primaryCta: "Explore Admissions 2026",
-    secondaryCta: "Campus Tour & Amenities",
-    primaryLink: "/admissions",
-    secondaryLink: "/#campus-facilities",
-    bgGradient: "from-blue-950/95 via-blue-900/85 to-indigo-950/90",
-    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1600&q=80",
+      "A 30-acre academic destination in Upali Oden, Nathdwara near Udaipur. Home to 6 premier constituent colleges offering 45+ AICTE, BCI, NCTE approved programs affiliated with RTU Kota and MLSU Udaipur.",
+    primaryCta: "Explore Programmes",
+    secondaryCta: "Constituent Colleges",
+    primaryLink: "/programs",
+    secondaryLink: "#colleges",
+    bgGradient: "from-[#081329]/95 via-[#0b1b3d]/90 to-[#102a5c]/85",
+    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1800&q=80",
+    tag: "Estd. 2010 • 16+ Years Legacy",
   },
   {
     id: 2,
-    badge: "RTU KOTA & AICTE APPROVED ENGINEERING",
-    badgeIcon: <Cpu className="w-4 h-4 text-sky-400" />,
+    eyebrow: "RTU KOTA & AICTE APPROVED ENGINEERING",
+    badgeIcon: <Sparkles className="w-4 h-4 text-amber-400" />,
     heading: "Nathdwara Institute of Engineering & Technology",
     highlightText: "(NIET)",
     description:
-      "Modern technical education in B.Tech Computer Science, Civil, Mechanical, and Electrical Engineering with modern labs, robotics workstations, and practical engineering workshops.",
-    primaryCta: "Engineering Courses",
-    secondaryCta: "Workshops & Labs",
+      "Industry-focused B.Tech in Computer Science, Civil, Mechanical, and Electrical Engineering with modern computing labs, IoT and robotics workstations, and active corporate recruitment.",
+    primaryCta: "Engineering Degrees",
+    secondaryCta: "Advanced Labs",
     primaryLink: "/programs",
-    secondaryLink: "/#campus-facilities",
-    bgGradient: "from-slate-950/95 via-blue-950/85 to-cyan-950/90",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80",
+    secondaryLink: "/niet",
+    bgGradient: "from-[#061024]/95 via-[#0b1f44]/90 to-[#0e2a5e]/85",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1800&q=80",
+    tag: "High Corporate Employability",
   },
   {
     id: 3,
-    badge: "MLSU UDAIPUR AFFILIATED • NIBM",
-    badgeIcon: <BookOpen className="w-4 h-4 text-rose-400" />,
+    eyebrow: "MLSU UDAIPUR AFFILIATED • NIBM",
+    badgeIcon: <BookOpen className="w-4 h-4 text-amber-400" />,
     heading: "Biotechnology, Computer Applications &",
     highlightText: "Science Programs",
     description:
-      "Offering BCA, B.Sc. (Biotechnology, PCM, CBZ), BBA, and M.Sc. degrees at NIBM with dedicated molecular biology laboratories and 500+ computer workstation labs.",
-    primaryCta: "BCA & Science Courses",
-    secondaryCta: "Constituent Institutes",
+      "Offering BCA, B.Sc. (Biotechnology, PCM, CBZ), BBA, and M.Sc. degrees at NIBM with 11+ dedicated molecular biology laboratories, CBCS curriculum, and 500+ computer workstations.",
+    primaryCta: "BCA & Science Programmes",
+    secondaryCta: "NIBM Profile",
     primaryLink: "/programs",
-    secondaryLink: "/institutions",
-    bgGradient: "from-blue-950/95 via-teal-950/85 to-slate-950/90",
+    secondaryLink: "/nibm",
+    bgGradient: "from-[#07152b]/95 via-[#0b2447]/90 to-[#0d3468]/85",
     image: "/institutions/nibm-card.jpg",
+    tag: "11+ Dedicated Labs & Smart Classes",
   },
   {
     id: 4,
-    badge: "CAMPUS PLACEMENT EXCELLENCE",
-    badgeIcon: <TrendingUp className="w-4 h-4 text-emerald-400" />,
-    heading: "Active Corporate Linkages & High",
-    highlightText: "Industrial Employability",
+    eyebrow: "CAREER PLACEMENTS & CORPORATE LINKAGES",
+    badgeIcon: <TrendingUp className="w-4 h-4 text-amber-400" />,
+    heading: "88.4% Placement Rate with Leading",
+    highlightText: "National Recruiters",
     description:
-      "T&P cell regularly hosts recruitment drives with Wonder Cement, Secure Meters, Pyrotech, TCS, Infosys, Ambuja, and leading core industries across Rajasthan and NCR.",
-    primaryCta: "Apply for Placement Assistance",
-    secondaryCta: "Contact Us",
+      "Highest package ₹14.5 LPA. Regular on-campus drives with Wonder Cement, Secure Meters, TCS, Ambuja, Pyrotech, and top MNCs across Rajasthan and NCR.",
+    primaryCta: "Admissions Open 2026",
+    secondaryCta: "Placement Highlights",
     primaryLink: "/admissions",
-    secondaryLink: "/contact",
-    bgGradient: "from-slate-950/95 via-indigo-950/85 to-blue-950/90",
-    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80",
+    secondaryLink: "#placements",
+    bgGradient: "from-[#081329]/95 via-[#0f2347]/90 to-[#0b1b3d]/85",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1800&q=80",
+    tag: "₹14.5 LPA Highest Package",
   },
 ];
 
@@ -100,14 +106,13 @@ export default function HeroSlider() {
     phone: "",
     email: "",
     course: "B.Tech Computer Science & Engg",
-    category: "General",
   });
 
   // Auto advance slides
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
-    }, 6500);
+    }, 7000);
     return () => clearInterval(timer);
   }, []);
 
@@ -125,95 +130,112 @@ export default function HeroSlider() {
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 900);
+    }, 800);
   };
 
   const slide = SLIDES[currentSlide];
 
   return (
-    <div className="relative bg-slate-950 text-white overflow-hidden min-h-[620px] lg:min-h-[680px] flex items-center">
+    <div className="relative bg-[#071328] text-white overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
       {/* Background Image Layer */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 transform scale-105"
         style={{ backgroundImage: `url(${slide.image})` }}
       />
 
-      {/* Dark Gradient Overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${slide.bgGradient} backdrop-blur-[2px]`} />
+      {/* Dark Navy / Indigo Gradient Overlay */}
+      <div className={`absolute inset-0 bg-gradient-to-r ${slide.bgGradient} backdrop-blur-[1px]`} />
+
+      {/* Subtle Pattern Grid Overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+          backgroundSize: "28px 28px",
+        }}
+      />
 
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left Text Column */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left Text Column (KNU Style) */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs sm:text-sm font-semibold tracking-wide text-amber-300">
+            {/* Eyebrow Badge */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 border border-amber-400/30 backdrop-blur-md shadow-sm">
               {slide.badgeIcon}
-              <span>{slide.badge}</span>
+              <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-amber-300">
+                {slide.eyebrow}
+              </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-white leading-tight tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black text-white leading-[1.15] tracking-tight">
               {slide.heading}{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400">
                 {slide.highlightText}
               </span>
             </h1>
 
-            {/* Subtitle */}
+            {/* Subtitle Description */}
             <p className="text-base sm:text-lg text-slate-200/95 max-w-2xl leading-relaxed">
               {slide.description}
             </p>
 
-            {/* CTA Buttons */}
+            {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a
+              <Link
                 href={slide.primaryLink}
-                className="px-6 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 shadow-xl shadow-amber-500/20 hover:shadow-amber-500/30 transform hover:-translate-y-0.5 transition-all"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-[#071328] shadow-lg shadow-amber-500/25 transform hover:-translate-y-0.5 transition-all"
               >
-                {slide.primaryCta} &rarr;
-              </a>
-              <a
+                <span>{slide.primaryCta}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
                 href={slide.secondaryLink}
-                className="px-6 py-3.5 rounded-xl font-semibold text-sm bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md transition-all"
               >
-                {slide.secondaryCta}
-              </a>
+                <span>{slide.secondaryCta}</span>
+              </Link>
             </div>
 
-            {/* Fast Stats Row */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/15 max-w-lg">
+            {/* Quick Stats Strip (KNU Key Facts) */}
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 pt-6 border-t border-white/15 max-w-xl">
               <div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-amber-400">16+</div>
-                <div className="text-xs text-slate-300">Years of Growth</div>
+                <div className="text-2xl sm:text-3xl font-black text-amber-400">16+</div>
+                <div className="text-[11px] sm:text-xs text-slate-300 font-medium">Years Academic Legacy</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-amber-400">6+</div>
-                <div className="text-xs text-slate-300">Colleges &amp; Wings</div>
+                <div className="text-2xl sm:text-3xl font-black text-amber-400">6</div>
+                <div className="text-[11px] sm:text-xs text-slate-300 font-medium">Constituent Colleges</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-amber-400">8,500+</div>
-                <div className="text-xs text-slate-300">Students &amp; Alumni</div>
+                <div className="text-2xl sm:text-3xl font-black text-amber-400">45+</div>
+                <div className="text-[11px] sm:text-xs text-slate-300 font-medium">Approved Programmes</div>
+              </div>
+              <div className="hidden sm:block">
+                <div className="text-2xl sm:text-3xl font-black text-amber-400">30+</div>
+                <div className="text-[11px] sm:text-xs text-slate-300 font-medium">Acres Green Campus</div>
               </div>
             </div>
           </div>
 
-          {/* Right Lead Capture Box */}
-          <div className="lg:col-span-5" id="apply-section">
-            <div className="bg-white/95 text-slate-900 rounded-2xl p-6 sm:p-7 shadow-2xl border border-white/40 backdrop-blur-lg">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          {/* Right Lead Capture Box (KNU University Application Style) */}
+          <div className="lg:col-span-5" id="admissions-card">
+            <div className="bg-white/95 text-slate-900 rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/50 backdrop-blur-xl">
+              <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
                 <div>
-                  <span className="text-[11px] font-bold tracking-wider uppercase text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                  <span className="inline-block text-[11px] font-extrabold tracking-wider uppercase text-amber-700 bg-amber-50 border border-amber-200/60 px-2.5 py-0.5 rounded-md">
                     Admissions Open 2026-27
                   </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-blue-950 mt-1">
-                    Direct Admission Enquiry
+                  <h3 className="text-lg sm:text-xl font-black text-[#0B1B3D] mt-1.5">
+                    Fast-Track Admission Enquiry
                   </h3>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    RTU / MLSU Approved
+                  <span className="text-[11px] text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 px-2 py-1 rounded-md border border-emerald-200">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    Govt. Approved
                   </span>
                 </div>
               </div>
@@ -223,13 +245,13 @@ export default function HeroSlider() {
                   <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
                     <CheckCircle2 className="w-7 h-7" />
                   </div>
-                  <h4 className="text-lg font-bold text-slate-900">Enquiry Submitted!</h4>
-                  <p className="text-xs text-slate-600 max-w-xs mx-auto">
-                    Thank you, <span className="font-semibold">{formData.name}</span>! Our Nathdwara admission office will call you at <span className="font-semibold">{formData.phone}</span> shortly with seat availability, fees &amp; scholarship schemes.
+                  <h4 className="text-lg font-bold text-slate-900">Enquiry Received!</h4>
+                  <p className="text-xs text-slate-600 max-w-xs mx-auto leading-relaxed">
+                    Thank you, <span className="font-semibold text-slate-900">{formData.name}</span>. Our central admissions counselor will call you at <span className="font-semibold text-slate-900">{formData.phone}</span> shortly with seat status, fee concession and document requirements.
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}
-                    className="text-xs font-semibold text-blue-700 underline mt-2"
+                    className="text-xs font-semibold text-[#0B1B3D] hover:text-amber-600 underline mt-2"
                   >
                     Submit another enquiry
                   </button>
@@ -246,7 +268,7 @@ export default function HeroSlider() {
                       placeholder="e.g. Rahul Sharma"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3.5 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-slate-900 placeholder-slate-400"
+                      className="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0B1B3D] focus:border-transparent text-slate-900 placeholder-slate-400 bg-white"
                     />
                   </div>
 
@@ -261,7 +283,7 @@ export default function HeroSlider() {
                         placeholder="10-digit number"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-3.5 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-slate-900 placeholder-slate-400"
+                        className="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0B1B3D] focus:border-transparent text-slate-900 placeholder-slate-400 bg-white"
                       />
                     </div>
                     <div>
@@ -274,69 +296,75 @@ export default function HeroSlider() {
                         placeholder="student@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-slate-900 placeholder-slate-400"
+                        className="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0B1B3D] focus:border-transparent text-slate-900 placeholder-slate-400 bg-white"
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Program Interested In *
+                      Programme of Interest *
                     </label>
                     <select
                       value={formData.course}
                       onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                      className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 text-slate-900 bg-white"
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0B1B3D] text-slate-900 bg-white"
                     >
-                      <option>B.Tech Computer Science &amp; Engg</option>
-                      <option>B.Tech Civil Engineering</option>
-                      <option>B.Tech Mechanical / Electrical</option>
-                      <option>BCA (Computer Applications)</option>
-                      <option>B.Sc (Biotechnology / Science)</option>
-                      <option>B.Pharm (Bachelor of Pharmacy)</option>
-                      <option>D.Pharm (Diploma in Pharmacy)</option>
-                      <option>B.Sc.-B.Ed. (4-Year Integrated)</option>
-                      <option>BA-B.Ed. (4-Year Integrated)</option>
-                      <option>Diploma in Engineering (Polytechnic)</option>
-                      <option>MBA (Dual Specialization)</option>
-                      <option>ITI Electrician / Fitter</option>
+                      <option>B.Tech Computer Science &amp; Engg (NIET)</option>
+                      <option>B.Tech Civil Engineering (NIET)</option>
+                      <option>B.Tech Mechanical / Electrical (NIET)</option>
+                      <option>BCA - Computer Applications (NIBM)</option>
+                      <option>B.Sc. Biotechnology (NIBM)</option>
+                      <option>B.Sc. PCM / CBZ (NIBM)</option>
+                      <option>M.Sc. Chemistry / Botany / Zoology (NIBM)</option>
+                      <option>LL.B 3-Year Professional (NLC)</option>
+                      <option>B.A. LL.B 5-Year Integrated (NLC)</option>
+                      <option>D.Pharm Diploma in Pharmacy (VDSMS)</option>
+                      <option>B.Sc. Nursing / GNM (NCAN)</option>
+                      <option>B.Sc.-B.Ed. 4-Year Integrated (NIBM)</option>
+                      <option>ITI Trades (Electrician / Fitter - NPITI)</option>
                     </select>
                   </div>
-
-                  <p className="text-[10px] text-slate-500">
-                    By submitting, you agree to receive official admission counseling, fee structure, and scholarship eligibility from NGI Nathdwara.
-                  </p>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-blue-900 to-indigo-950 text-white hover:from-blue-800 hover:to-indigo-900 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                    className="w-full mt-2 py-3 px-4 rounded-xl font-bold text-sm bg-[#0B1B3D] hover:bg-[#122858] text-white shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 group cursor-pointer"
                   >
-                    {isSubmitting ? (
-                      <span>Connecting with Counselor...</span>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 text-amber-400" />
-                        <span>Request Admission Call</span>
-                      </>
-                    )}
+                    <span>{isSubmitting ? "Submitting..." : "Submit Admission Enquiry"}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-amber-400" />
                   </button>
+
+                  <div className="flex items-center justify-between pt-2 text-[11px] text-slate-500">
+                    <span className="flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                      100% Confidential
+                    </span>
+                    <Link
+                      href="/admissions"
+                      className="text-amber-600 hover:text-amber-700 font-semibold"
+                    >
+                      View Eligibility &rarr;
+                    </Link>
+                  </div>
                 </form>
               )}
             </div>
           </div>
         </div>
 
-        {/* Carousel Slider Navigation Buttons */}
-        <div className="flex items-center justify-between pt-8">
+        {/* Slide Indicators and Navigation Controls */}
+        <div className="flex items-center justify-between pt-10 border-t border-white/10 mt-8">
           <div className="flex items-center gap-2">
-            {SLIDES.map((_, index) => (
+            {SLIDES.map((s, idx) => (
               <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                aria-label={`Slide ${index + 1}`}
-                className={`h-2 transition-all rounded-full ${
-                  currentSlide === index ? "w-8 bg-amber-400" : "w-2 bg-white/40 hover:bg-white/60"
+                key={s.id}
+                onClick={() => setCurrentSlide(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                className={`transition-all duration-300 rounded-full ${
+                  currentSlide === idx
+                    ? "w-8 h-2.5 bg-amber-400"
+                    : "w-2.5 h-2.5 bg-white/30 hover:bg-white/60"
                 }`}
               />
             ))}
@@ -345,22 +373,21 @@ export default function HeroSlider() {
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrev}
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors"
-              aria-label="Previous slide"
+              aria-label="Previous Slide"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all backdrop-blur-md"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNext}
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors"
-              aria-label="Next slide"
+              aria-label="Next Slide"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all backdrop-blur-md"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
       </div>
-
     </div>
   );
 }
