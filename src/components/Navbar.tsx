@@ -31,7 +31,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 80);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -52,198 +52,120 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
   };
 
   return (
-    <header className="w-full relative z-40 bg-white">
-      {/* Tier 2: University Identity Bar (White Background - matching KNU) */}
-      <div className="border-b border-slate-200/80 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:px-8">
-          {/* University Emblem & Official Title */}
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/95 backdrop-blur-xl shadow-md border-b border-slate-200/90 py-2.5"
+          : "bg-white/95 backdrop-blur-md border-b border-slate-200/80 py-3 sm:py-3.5"
+      }`}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        {/* Brand / Logo (Modern University Emblem & Typography) */}
+        <Link
+          href="/"
+          className="group flex min-w-0 items-center gap-3"
+          onClick={closeMenu}
+          aria-label="Nathdwara Group of Institutions home"
+        >
+          <span className="flex h-12 w-12 sm:h-13 sm:w-13 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-amber-400/90 bg-white shadow-sm p-1 transition-transform duration-300 group-hover:scale-105">
+            <img
+              src="/ngi-logo.png"
+              alt="NGI Logo"
+              className="h-full w-full object-contain"
+            />
+          </span>
+          <span className="min-w-0">
+            <span className="block text-[9.5px] sm:text-[10px] font-black uppercase tracking-[0.18em] text-amber-600">
+              ESTD. 2010 • 16+ YEARS OF EXCELLENCE
+            </span>
+            <span className="block truncate text-base sm:text-xl font-black leading-tight tracking-tight text-[#0B1B3D]">
+              NATHDWARA <span className="text-amber-600">GROUP</span>
+            </span>
+            <span className="block truncate text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500">
+              Group of Institutions · Rajasthan
+            </span>
+          </span>
+        </Link>
+
+        {/* Main Modern Navigation Links (Desktop) */}
+        <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex">
+          {/* Home */}
           <Link
             href="/"
-            className="group flex min-w-0 items-center gap-3.5 sm:gap-4"
-            onClick={closeMenu}
-            aria-label="Nathdwara Group of Institutions home"
+            className={`rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+              isActive("/") && pathname === "/"
+                ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
+                : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
+            }`}
           >
-            <span className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-amber-400 bg-white shadow-md p-1 transition-transform duration-300 group-hover:scale-105">
-              <img
-                src="/ngi-logo.png"
-                alt="NGI University Emblem"
-                className="h-full w-full object-contain"
-              />
-            </span>
-            <div className="min-w-0">
-              <span className="inline-block text-[10px] sm:text-[11px] font-black uppercase tracking-[0.16em] text-amber-600">
-                ESTD. 2010 • 16+ YEARS OF EXCELLENCE
-              </span>
-              <h1 className="truncate text-lg sm:text-2xl lg:text-[1.65rem] font-black leading-tight tracking-tight text-[#0B1B3D]">
-                NATHDWARA <span className="text-amber-600">GROUP</span> OF INSTITUTIONS
-              </h1>
-              <p className="hidden sm:block truncate text-xs font-semibold text-slate-500 mt-0.5">
-                Upali Oden, Nathdwara, Dist. Rajsamand, Rajasthan &ndash; 313301 (Near Udaipur)
-              </p>
-              <div className="hidden lg:flex items-center gap-2 text-[10px] font-bold text-emerald-700 mt-0.5">
-                <span>Affiliated to RTU Kota &amp; MLSU Udaipur</span>
-                <span>&bull;</span>
-                <span>Approved by AICTE, BCI, NCTE &amp; PCI</span>
-              </div>
-            </div>
+            Home
           </Link>
 
-          {/* Right: Admission Contact & Enquiry CTAs */}
-          <div className="hidden md:flex items-center gap-4 shrink-0">
-            {/* Helpline Card */}
-            <div className="text-right border-r border-slate-200 pr-4">
-              <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">
-                Admissions Helpline
-              </span>
-              <a
-                href="tel:+919571345444"
-                className="text-sm font-black text-[#0B1B3D] hover:text-amber-600 transition flex items-center justify-end gap-1.5"
-              >
-                <Phone className="w-3.5 h-3.5 text-amber-500" />
-                <span>+91 95713 45444</span>
-              </a>
-              <span className="text-[10px] text-slate-500 block">
-                admissions@ngi.edu.in
-              </span>
-            </div>
-
-            {/* Quick Enquire Button */}
-            {onOpenEnquiry && (
-              <button
-                type="button"
-                onClick={onOpenEnquiry}
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 hover:border-[#0B1B3D] px-4 py-2.5 text-xs font-bold text-[#0B1B3D] transition hover:bg-slate-50 shadow-sm cursor-pointer"
-              >
-                <PhoneCall className="h-3.5 w-3.5 text-amber-600" />
-                <span>Enquire Now</span>
-              </button>
-            )}
-
-            {/* Apply Button */}
+          {/* About Us Dropdown */}
+          <div className="relative group">
             <Link
-              href="/admissions"
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 px-5 py-2.5 text-xs font-black text-[#061024] shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
-            >
-              <Sparkles className="h-3.5 w-3.5 fill-current" />
-              <span>Apply Online 2026</span>
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-
-          {/* Mobile Apply & Toggle */}
-          <div className="flex md:hidden items-center gap-2">
-            <Link
-              href="/admissions"
-              className="inline-flex items-center gap-1 rounded-xl bg-amber-400 px-3 py-1.5 text-xs font-black text-[#0B1B3D] shadow"
-            >
-              <Sparkles className="h-3 w-3" />
-              <span>Apply</span>
-            </Link>
-            <button
-              type="button"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-300 text-[#0B1B3D] transition hover:bg-slate-100 cursor-pointer"
-              onClick={() => setMenuOpen((open) => !open)}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-            >
-              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Tier 3: Sticky Navy Navigation Bar (Solid #0B1B3D - matching KNU) */}
-      <nav
-        aria-label="Main university navigation"
-        className="sticky top-0 z-50 bg-[#0B1B3D] text-white shadow-lg border-b border-[#182e5c]"
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-12 lg:h-[50px]">
-          {/* Left Navigation Links */}
-          <div className="hidden lg:flex items-center gap-1">
-            {/* Scrolled Compact Logo */}
-            {isScrolled && (
-              <Link
-                href="/"
-                className="flex items-center gap-2 pr-3 mr-2 border-r border-white/20 text-white font-black text-sm"
-              >
-                <img src="/ngi-logo.png" alt="NGI" className="w-7 h-7 object-contain bg-white rounded-md p-0.5" />
-                <span className="text-amber-400">NGI</span>
-              </Link>
-            )}
-
-            {/* Home */}
-            <Link
-              href="/"
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide transition-all ${
-                isActive("/") && pathname === "/"
-                  ? "bg-amber-400 text-[#0B1B3D] shadow font-black"
-                  : "text-slate-200 hover:bg-white/10 hover:text-white"
+              href="/about"
+              className={`flex items-center gap-1 rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+                isActive("/about")
+                  ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
+                  : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
               }`}
             >
-              Home
+              <span>About Us</span>
+              <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform group-hover:rotate-180" />
             </Link>
 
-            {/* About Us Dropdown */}
-            <div className="relative group">
-              <Link
-                href="/about"
-                className={`flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide transition-all ${
-                  isActive("/about")
-                    ? "bg-amber-400 text-[#0B1B3D] shadow font-black"
-                    : "text-slate-200 hover:bg-white/10 hover:text-white"
-                }`}
-              >
-                <span>About Us</span>
-                <ChevronDown className="h-3 w-3 opacity-70 group-hover:rotate-180 transition-transform" />
-              </Link>
-
-              <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 absolute left-0 top-full w-64 rounded-2xl bg-white p-2.5 shadow-2xl border border-slate-200 text-slate-800 text-xs">
+            <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 absolute left-0 top-full pt-2 w-64 text-xs">
+              <div className="rounded-2xl bg-white p-2.5 shadow-2xl border border-slate-200/90 backdrop-blur-xl">
                 <Link
                   href="/about"
-                  className="flex items-center gap-2.5 rounded-xl px-3 py-2 hover:bg-slate-50 font-semibold text-[#0B1B3D] transition"
+                  className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-50 hover:text-[#0B1B3D] font-semibold transition"
                 >
                   <Building2 className="w-4 h-4 text-amber-600" />
                   <span>Overview &amp; Heritage</span>
                 </Link>
                 <Link
                   href="/about#leadership"
-                  className="flex items-center gap-2.5 rounded-xl px-3 py-2 hover:bg-slate-50 font-semibold text-[#0B1B3D] transition"
+                  className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-50 hover:text-[#0B1B3D] font-semibold transition"
                 >
                   <Users className="w-4 h-4 text-blue-600" />
                   <span>Leadership Messages</span>
                 </Link>
                 <Link
                   href="/about#approvals"
-                  className="flex items-center gap-2.5 rounded-xl px-3 py-2 hover:bg-slate-50 font-semibold text-[#0B1B3D] transition"
+                  className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-50 hover:text-[#0B1B3D] font-semibold transition"
                 >
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
                   <span>Approvals &amp; Affiliations</span>
                 </Link>
                 <Link
                   href="/about#governance"
-                  className="flex items-center gap-2.5 rounded-xl px-3 py-2 hover:bg-slate-50 font-semibold text-[#0B1B3D] transition"
+                  className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-50 hover:text-[#0B1B3D] font-semibold transition"
                 >
                   <FileText className="w-4 h-4 text-rose-600" />
                   <span>Mandatory Disclosures</span>
                 </Link>
               </div>
             </div>
+          </div>
 
-            {/* Constituent Colleges Mega Menu */}
-            <div className="relative group">
-              <Link
-                href="/institutions"
-                className={`flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide transition-all ${
-                  isActive("/institutions") || pathname.startsWith("/niet") || pathname.startsWith("/nibm") || pathname.startsWith("/nlc")
-                    ? "bg-amber-400 text-[#0B1B3D] shadow font-black"
-                    : "text-slate-200 hover:bg-white/10 hover:text-white"
-                }`}
-              >
-                <span>Colleges</span>
-                <ChevronDown className="h-3 w-3 opacity-70 group-hover:rotate-180 transition-transform" />
-              </Link>
+          {/* Constituent Colleges Mega Menu */}
+          <div className="relative group">
+            <Link
+              href="/institutions"
+              className={`flex items-center gap-1 rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+                isActive("/institutions") || pathname.startsWith("/niet") || pathname.startsWith("/nibm") || pathname.startsWith("/nlc")
+                  ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
+                  : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
+              }`}
+            >
+              <span>Colleges</span>
+              <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform group-hover:rotate-180" />
+            </Link>
 
-              <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 absolute -left-12 top-full w-[490px] rounded-3xl bg-white p-4 shadow-2xl border border-slate-200 text-slate-800 text-xs">
-                <div className="px-3 py-1.5 font-black uppercase text-[10px] tracking-wider text-slate-400 border-b border-slate-100 mb-2 flex items-center justify-between">
+            <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 absolute -left-20 top-full pt-2 w-[500px] text-xs">
+              <div className="rounded-3xl bg-white p-4 shadow-2xl border border-slate-200/90 backdrop-blur-xl">
+                <div className="px-3 py-1.5 font-black uppercase text-[10px] tracking-wider text-slate-400 border-b border-slate-100 mb-2.5 flex items-center justify-between">
                   <span>Six Constituent Colleges • Nathdwara Campus</span>
                   <span className="text-amber-600 font-bold">RTU &bull; MLSU &bull; BCI &bull; NCTE</span>
                 </div>
@@ -253,7 +175,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
                     href="/niet"
                     className="flex items-start gap-2.5 rounded-2xl p-2.5 hover:bg-amber-50/70 border border-transparent hover:border-amber-200 transition"
                   >
-                    <div className="w-8 h-8 rounded-xl bg-blue-100 text-[#0B1B3D] flex items-center justify-center shrink-0 font-black text-xs">
+                    <div className="w-8 h-8 rounded-xl bg-blue-100 text-[#0B1B3D] flex items-center justify-center shrink-0 font-black text-xs shadow-sm">
                       ET
                     </div>
                     <div>
@@ -266,7 +188,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
                     href="/nibm"
                     className="flex items-start gap-2.5 rounded-2xl p-2.5 hover:bg-blue-50/70 border border-transparent hover:border-blue-200 transition"
                   >
-                    <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 font-black text-xs">
+                    <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 font-black text-xs shadow-sm">
                       BM
                     </div>
                     <div>
@@ -279,7 +201,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
                     href="/nlc"
                     className="flex items-start gap-2.5 rounded-2xl p-2.5 hover:bg-purple-50/70 border border-transparent hover:border-purple-200 transition"
                   >
-                    <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center shrink-0 font-black text-xs">
+                    <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center shrink-0 font-black text-xs shadow-sm">
                       LC
                     </div>
                     <div>
@@ -292,7 +214,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
                     href="/ayurved-nursing"
                     className="flex items-start gap-2.5 rounded-2xl p-2.5 hover:bg-rose-50/70 border border-transparent hover:border-rose-200 transition"
                   >
-                    <div className="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center shrink-0 font-black text-xs">
+                    <div className="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center shrink-0 font-black text-xs shadow-sm">
                       AN
                     </div>
                     <div>
@@ -305,7 +227,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
                     href="/vdsms"
                     className="flex items-start gap-2.5 rounded-2xl p-2.5 hover:bg-amber-50/70 border border-transparent hover:border-amber-200 transition"
                   >
-                    <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 font-black text-xs">
+                    <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 font-black text-xs shadow-sm">
                       MS
                     </div>
                     <div>
@@ -318,7 +240,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
                     href="/npiti"
                     className="flex items-start gap-2.5 rounded-2xl p-2.5 hover:bg-cyan-50/70 border border-transparent hover:border-cyan-200 transition"
                   >
-                    <div className="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 flex items-center justify-center shrink-0 font-black text-xs">
+                    <div className="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 flex items-center justify-center shrink-0 font-black text-xs shadow-sm">
                       ITI
                     </div>
                     <div>
@@ -338,256 +260,267 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
                 </div>
               </div>
             </div>
-
-            {/* Programmes */}
-            <Link
-              href="/programs"
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide transition-all ${
-                isActive("/programs")
-                  ? "bg-amber-400 text-[#0B1B3D] shadow font-black"
-                  : "text-slate-200 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              Programmes
-            </Link>
-
-            {/* Admissions 2026 */}
-            <Link
-              href="/admissions"
-              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide transition-all ${
-                isActive("/admissions")
-                  ? "bg-amber-400 text-[#0B1B3D] shadow font-black"
-                  : "text-slate-200 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              <span>Admissions</span>
-              <span className="px-1.5 py-0.2 rounded-full bg-amber-400 text-[#0B1B3D] text-[9px] font-black uppercase">
-                2026
-              </span>
-            </Link>
-
-            {/* Campus Life */}
-            <Link
-              href="/#campus-life"
-              className="px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide text-slate-200 hover:bg-white/10 hover:text-white transition-all"
-            >
-              Campus Life
-            </Link>
-
-            {/* Placements */}
-            <Link
-              href="/#placements"
-              className="px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide text-slate-200 hover:bg-white/10 hover:text-white transition-all"
-            >
-              Placements
-            </Link>
-
-            {/* Contact */}
-            <Link
-              href="/contact"
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide transition-all ${
-                isActive("/contact")
-                  ? "bg-amber-400 text-[#0B1B3D] shadow font-black"
-                  : "text-slate-200 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              Contact
-            </Link>
           </div>
 
-          {/* Right Action / Scrolled Fast Apply */}
-          <div className="flex items-center gap-3">
-            <Link
-              href="/admissions"
-              className="inline-flex items-center gap-1.5 text-xs font-black text-[#0B1B3D] bg-amber-400 hover:bg-amber-300 px-3.5 py-1.5 rounded-lg shadow-sm transition"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Apply Online 2026</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
+          {/* Programmes */}
+          <Link
+            href="/programs"
+            className={`rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+              isActive("/programs")
+                ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
+                : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
+            }`}
+          >
+            Programmes
+          </Link>
 
-            {/* Mobile Hamburger in Navigation Bar */}
+          {/* Admissions 2026 */}
+          <Link
+            href="/admissions"
+            className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+              isActive("/admissions")
+                ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
+                : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
+            }`}
+          >
+            <span>Admissions</span>
+            <span className="px-1.5 py-0.5 rounded-full bg-amber-400 text-[#0B1B3D] text-[9.5px] font-black uppercase shadow-sm">
+              2026
+            </span>
+          </Link>
+
+          {/* Campus Life */}
+          <Link
+            href="/#campus-life"
+            className="rounded-xl px-3 py-2 text-[13px] font-bold text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D] transition-all"
+          >
+            Campus Life
+          </Link>
+
+          {/* Placements */}
+          <Link
+            href="/#placements"
+            className="rounded-xl px-3 py-2 text-[13px] font-bold text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D] transition-all"
+          >
+            Placements
+          </Link>
+
+          {/* Contact */}
+          <Link
+            href="/contact"
+            className={`rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+              isActive("/contact")
+                ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
+                : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
+            }`}
+          >
+            Contact
+          </Link>
+        </nav>
+
+        {/* Action Buttons on Right */}
+        <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+          {onOpenEnquiry && (
             <button
               type="button"
-              className="lg:hidden inline-flex items-center justify-center p-1.5 text-white hover:text-amber-300"
-              onClick={() => setMenuOpen((open) => !open)}
-              aria-label="Toggle navigation"
+              onClick={onOpenEnquiry}
+              className="hidden xl:inline-flex items-center gap-1.5 rounded-xl border border-slate-300 hover:border-[#0B1B3D] px-3.5 py-2 text-xs font-bold text-[#0B1B3D] transition hover:bg-slate-50 cursor-pointer shadow-sm"
             >
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              <PhoneCall className="h-3.5 w-3.5 text-amber-600" />
+              <span>Enquire</span>
             </button>
-          </div>
+          )}
+
+          <Link
+            href="/admissions"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-black text-[#061024] shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/30 transition-all transform hover:-translate-y-0.5"
+          >
+            <Sparkles className="h-3.5 w-3.5 fill-current" />
+            <span>Apply Online 2026</span>
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            type="button"
+            className="inline-flex h-9.5 w-9.5 items-center justify-center rounded-xl border border-slate-300 text-[#0B1B3D] transition hover:bg-slate-100 lg:hidden cursor-pointer"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation Drawer */}
-        {menuOpen && (
-          <div className="lg:hidden border-t border-[#182e5c] bg-[#071328] text-white shadow-2xl max-h-[80vh] overflow-y-auto">
-            <div className="p-4 space-y-3">
-              {/* Quick Mobile Action Bar */}
-              <div className="grid grid-cols-2 gap-2 pb-3 border-b border-white/10">
-                <Link
-                  href="/admissions"
-                  onClick={closeMenu}
-                  className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-amber-400 text-[#0B1B3D] font-black text-xs shadow-sm"
+      {/* Mobile Navigation Drawer */}
+      {menuOpen && (
+        <div className="lg:hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl shadow-2xl max-h-[85vh] overflow-y-auto">
+          <div className="p-4 space-y-3">
+            {/* Quick Mobile Action Bar */}
+            <div className="grid grid-cols-2 gap-2 pb-3 border-b border-slate-200">
+              <Link
+                href="/admissions"
+                onClick={closeMenu}
+                className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-[#0B1B3D] font-black text-xs shadow-sm"
+              >
+                <Sparkles className="w-3.5 h-3.5 fill-current" />
+                <span>Apply 2026</span>
+              </Link>
+              <a
+                href="tel:+919571345444"
+                className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#0B1B3D] text-white font-bold text-xs"
+              >
+                <Phone className="w-3.5 h-3.5 text-amber-400" />
+                <span>Call Helpline</span>
+              </a>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="space-y-1 text-sm font-bold text-slate-800">
+              <Link
+                href="/"
+                onClick={closeMenu}
+                className={`block px-3 py-2.5 rounded-xl ${
+                  isActive("/") && pathname === "/" ? "bg-[#0B1B3D] text-amber-300" : "hover:bg-slate-100"
+                }`}
+              >
+                Home
+              </Link>
+
+              <Link
+                href="/about"
+                onClick={closeMenu}
+                className={`block px-3 py-2.5 rounded-xl ${
+                  isActive("/about") ? "bg-[#0B1B3D] text-amber-300" : "hover:bg-slate-100"
+                }`}
+              >
+                About Us &amp; Leadership
+              </Link>
+
+              {/* Colleges Accordion */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => toggleDropdown("colleges")}
+                  className="flex items-center justify-between w-full px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left font-bold"
                 >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Apply 2026</span>
-                </Link>
-                <a
-                  href="tel:+919571345444"
-                  className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-white/10 text-white font-bold text-xs border border-white/15"
-                >
-                  <Phone className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Call Helpline</span>
-                </a>
+                  <span>Constituent Colleges (6)</span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      activeDropdown === "colleges" ? "rotate-180 text-amber-600" : ""
+                    }`}
+                  />
+                </button>
+
+                {activeDropdown === "colleges" && (
+                  <div className="pl-4 pr-2 py-2 space-y-1.5 text-xs bg-slate-50 rounded-2xl mt-1 border border-slate-100">
+                    <Link
+                      href="/niet"
+                      onClick={closeMenu}
+                      className="block p-2 rounded-lg hover:bg-white font-semibold text-[#0B1B3D]"
+                    >
+                      NIET — Engineering &amp; Technology (RTU Kota)
+                    </Link>
+                    <Link
+                      href="/nibm"
+                      onClick={closeMenu}
+                      className="block p-2 rounded-lg hover:bg-white font-semibold text-[#0B1B3D]"
+                    >
+                      NIBM — Biotechnology &amp; Management (MLSU)
+                    </Link>
+                    <Link
+                      href="/nlc"
+                      onClick={closeMenu}
+                      className="block p-2 rounded-lg hover:bg-white font-semibold text-[#0B1B3D]"
+                    >
+                      NLC — Nathdwara Law College (BCI)
+                    </Link>
+                    <Link
+                      href="/ayurved-nursing"
+                      onClick={closeMenu}
+                      className="block p-2 rounded-lg hover:bg-white font-semibold text-[#0B1B3D]"
+                    >
+                      NCAN — Ayurveda Nursing College
+                    </Link>
+                    <Link
+                      href="/vdsms"
+                      onClick={closeMenu}
+                      className="block p-2 rounded-lg hover:bg-white font-semibold text-[#0B1B3D]"
+                    >
+                      VDSMS — Medical Science &amp; Paramedical
+                    </Link>
+                    <Link
+                      href="/npiti"
+                      onClick={closeMenu}
+                      className="block p-2 rounded-lg hover:bg-white font-semibold text-[#0B1B3D]"
+                    >
+                      NPITI — Industrial Training (NCVT)
+                    </Link>
+                  </div>
+                )}
               </div>
 
-              {/* Navigation Links */}
-              <div className="space-y-1 text-sm font-bold text-slate-200">
-                <Link
-                  href="/"
-                  onClick={closeMenu}
-                  className={`block px-3 py-2 rounded-xl ${
-                    isActive("/") && pathname === "/" ? "bg-amber-400 text-[#0B1B3D]" : "hover:bg-white/10"
-                  }`}
-                >
-                  Home
-                </Link>
+              <Link
+                href="/programs"
+                onClick={closeMenu}
+                className={`block px-3 py-2.5 rounded-xl ${
+                  isActive("/programs") ? "bg-[#0B1B3D] text-amber-300" : "hover:bg-slate-100"
+                }`}
+              >
+                Academic Programmes (45+)
+              </Link>
 
-                <Link
-                  href="/about"
-                  onClick={closeMenu}
-                  className={`block px-3 py-2 rounded-xl ${
-                    isActive("/about") ? "bg-amber-400 text-[#0B1B3D]" : "hover:bg-white/10"
-                  }`}
-                >
-                  About Us &amp; Leadership
-                </Link>
+              <Link
+                href="/admissions"
+                onClick={closeMenu}
+                className={`block px-3 py-2.5 rounded-xl ${
+                  isActive("/admissions") ? "bg-[#0B1B3D] text-amber-300" : "hover:bg-slate-100"
+                }`}
+              >
+                Admissions 2026–27
+              </Link>
 
-                {/* Colleges Accordion */}
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => toggleDropdown("colleges")}
-                    className="flex items-center justify-between w-full px-3 py-2 rounded-xl hover:bg-white/10 text-left font-bold"
-                  >
-                    <span>Constituent Colleges (6)</span>
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform ${
-                        activeDropdown === "colleges" ? "rotate-180 text-amber-400" : ""
-                      }`}
-                    />
-                  </button>
+              <Link
+                href="/#campus-life"
+                onClick={closeMenu}
+                className="block px-3 py-2.5 rounded-xl hover:bg-slate-100"
+              >
+                Campus Life &amp; Amenities
+              </Link>
 
-                  {activeDropdown === "colleges" && (
-                    <div className="pl-4 pr-2 py-2 space-y-1.5 text-xs bg-white/5 rounded-2xl mt-1 border border-white/10">
-                      <Link
-                        href="/niet"
-                        onClick={closeMenu}
-                        className="block p-2 rounded-lg hover:bg-white/10 font-semibold text-amber-300"
-                      >
-                        NIET — Engineering &amp; Technology (RTU)
-                      </Link>
-                      <Link
-                        href="/nibm"
-                        onClick={closeMenu}
-                        className="block p-2 rounded-lg hover:bg-white/10 font-semibold text-amber-300"
-                      >
-                        NIBM — Biotechnology &amp; Management (MLSU)
-                      </Link>
-                      <Link
-                        href="/nlc"
-                        onClick={closeMenu}
-                        className="block p-2 rounded-lg hover:bg-white/10 font-semibold text-amber-300"
-                      >
-                        NLC — Nathdwara Law College (BCI)
-                      </Link>
-                      <Link
-                        href="/ayurved-nursing"
-                        onClick={closeMenu}
-                        className="block p-2 rounded-lg hover:bg-white/10 font-semibold text-amber-300"
-                      >
-                        NCAN — Ayurveda Nursing College
-                      </Link>
-                      <Link
-                        href="/vdsms"
-                        onClick={closeMenu}
-                        className="block p-2 rounded-lg hover:bg-white/10 font-semibold text-amber-300"
-                      >
-                        VDSMS — Medical Science &amp; Paramedical
-                      </Link>
-                      <Link
-                        href="/npiti"
-                        onClick={closeMenu}
-                        className="block p-2 rounded-lg hover:bg-white/10 font-semibold text-amber-300"
-                      >
-                        NPITI — Industrial Training (NCVT)
-                      </Link>
-                    </div>
-                  )}
-                </div>
+              <Link
+                href="/#placements"
+                onClick={closeMenu}
+                className="block px-3 py-2.5 rounded-xl hover:bg-slate-100"
+              >
+                Placements &amp; Recruiters
+              </Link>
 
-                <Link
-                  href="/programs"
-                  onClick={closeMenu}
-                  className={`block px-3 py-2 rounded-xl ${
-                    isActive("/programs") ? "bg-amber-400 text-[#0B1B3D]" : "hover:bg-white/10"
-                  }`}
-                >
-                  Academic Programmes (45+)
-                </Link>
+              <Link
+                href="/contact"
+                onClick={closeMenu}
+                className={`block px-3 py-2.5 rounded-xl ${
+                  isActive("/contact") ? "bg-[#0B1B3D] text-amber-300" : "hover:bg-slate-100"
+                }`}
+              >
+                Contact &amp; Campus Route
+              </Link>
+            </div>
 
-                <Link
-                  href="/admissions"
-                  onClick={closeMenu}
-                  className={`block px-3 py-2 rounded-xl ${
-                    isActive("/admissions") ? "bg-amber-400 text-[#0B1B3D]" : "hover:bg-white/10"
-                  }`}
-                >
-                  Admissions 2026–27
-                </Link>
-
-                <Link
-                  href="/#campus-life"
-                  onClick={closeMenu}
-                  className="block px-3 py-2 rounded-xl hover:bg-white/10"
-                >
-                  Campus Life &amp; Amenities
-                </Link>
-
-                <Link
-                  href="/#placements"
-                  onClick={closeMenu}
-                  className="block px-3 py-2 rounded-xl hover:bg-white/10"
-                >
-                  Placements &amp; Recruiters
-                </Link>
-
-                <Link
-                  href="/contact"
-                  onClick={closeMenu}
-                  className={`block px-3 py-2 rounded-xl ${
-                    isActive("/contact") ? "bg-amber-400 text-[#0B1B3D]" : "hover:bg-white/10"
-                  }`}
-                >
-                  Contact &amp; Campus Route
-                </Link>
+            {/* Bottom info in mobile drawer */}
+            <div className="pt-3 border-t border-slate-200 text-xs text-slate-500 space-y-1.5">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                <span>Upali Oden, Nathdwara, Raj. &ndash; 313301</span>
               </div>
-
-              {/* Bottom info in mobile drawer */}
-              <div className="pt-3 border-t border-white/10 text-xs text-slate-400 space-y-1.5">
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                  <span>Upali Oden, Nathdwara, Raj. &ndash; 313301</span>
-                </div>
-                <div className="flex items-center gap-2 text-rose-300 font-semibold">
-                  <ShieldAlert className="w-3.5 h-3.5 shrink-0 text-rose-400" />
-                  <span>Anti-Ragging Helpline: 1800-180-5522</span>
-                </div>
+              <div className="flex items-center gap-2 text-rose-600 font-semibold">
+                <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
+                <span>Anti-Ragging Helpline: 1800-180-5522</span>
               </div>
             </div>
           </div>
-        )}
-      </nav>
+        </div>
+      )}
     </header>
   );
 }

@@ -187,7 +187,7 @@ export default function AboutPage() {
       </section>
 
       {/* Leadership Messages */}
-      <section className="bg-slate-900 text-white py-16 sm:py-20">
+      <section id="leadership" className="bg-slate-900 text-white py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 inline-block mb-2">
@@ -250,7 +250,7 @@ export default function AboutPage() {
       </section>
 
       {/* Accreditations & Approvals Showcase */}
-      <section className="bg-white py-16 sm:py-20 border-b border-slate-200">
+      <section id="approvals" className="bg-white py-16 sm:py-20 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-blue-900 bg-blue-100 px-3 py-1 rounded-full inline-block mb-2">
@@ -314,8 +314,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Core Institutional Pillars */}
-      <section className="bg-white py-16 sm:py-20">
+      {/* Core Institutional Pillars & Governance */}
+      <section id="governance" className="bg-white py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-blue-900 bg-blue-100 px-3 py-1 rounded-full inline-block mb-2">
