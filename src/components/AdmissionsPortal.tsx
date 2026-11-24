@@ -461,7 +461,7 @@ export default function AdmissionsPortal() {
       </section>
 
       {/* Interactive Eligibility Checker */}
-      <section className="bg-white py-16 border-y border-slate-200">
+      <section id="eligibility" className="bg-white py-16 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-900 text-xs font-bold uppercase tracking-wider mb-2">
