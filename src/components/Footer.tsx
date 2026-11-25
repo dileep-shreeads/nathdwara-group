@@ -110,6 +110,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/campus-life" className="hover:text-amber-300 transition-colors">
+                  Campus Life &amp; Amenities
+                </Link>
+              </li>
+              <li>
+                <Link href="/placements" className="hover:text-amber-300 transition-colors">
+                  Placements &amp; T&amp;P Cell
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="hover:text-amber-300 transition-colors">
                   About &amp; Leadership
                 </Link>

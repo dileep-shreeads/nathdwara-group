@@ -291,16 +291,24 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
 
           {/* Campus Life */}
           <Link
-            href="/#campus-life"
-            className="whitespace-nowrap rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D] transition-all"
+            href="/campus-life"
+            className={`whitespace-nowrap rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold transition-all ${
+              isActive("/campus-life")
+                ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
+                : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
+            }`}
           >
             Campus Life
           </Link>
 
           {/* Placements */}
           <Link
-            href="/#placements"
-            className="whitespace-nowrap rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D] transition-all"
+            href="/placements"
+            className={`whitespace-nowrap rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold transition-all ${
+              isActive("/placements")
+                ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
+                : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
+            }`}
           >
             Placements
           </Link>
@@ -481,17 +489,21 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
               </Link>
 
               <Link
-                href="/#campus-life"
+                href="/campus-life"
                 onClick={closeMenu}
-                className="block px-3 py-2.5 rounded-xl hover:bg-slate-100"
+                className={`block px-3 py-2.5 rounded-xl ${
+                  isActive("/campus-life") ? "bg-[#0B1B3D] text-amber-300" : "hover:bg-slate-100"
+                }`}
               >
                 Campus Life &amp; Amenities
               </Link>
 
               <Link
-                href="/#placements"
+                href="/placements"
                 onClick={closeMenu}
-                className="block px-3 py-2.5 rounded-xl hover:bg-slate-100"
+                className={`block px-3 py-2.5 rounded-xl ${
+                  isActive("/placements") ? "bg-[#0B1B3D] text-amber-300" : "hover:bg-slate-100"
+                }`}
               >
                 Placements &amp; Recruiters
               </Link>
