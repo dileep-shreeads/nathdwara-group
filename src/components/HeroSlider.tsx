@@ -157,20 +157,20 @@ export default function HeroSlider() {
       />
 
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-20 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Text Column (KNU Style) */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6 text-left">
             {/* Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 border border-amber-400/30 backdrop-blur-md shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white/10 border border-amber-400/30 backdrop-blur-md shadow-sm">
               {slide.badgeIcon}
-              <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-amber-300">
+              <span className="text-[11px] sm:text-sm font-bold tracking-wider uppercase text-amber-300">
                 {slide.eyebrow}
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black text-white leading-[1.15] tracking-tight">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black text-white leading-[1.18] tracking-tight">
               {slide.heading}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400">
                 {slide.highlightText}
@@ -178,51 +178,51 @@ export default function HeroSlider() {
             </h1>
 
             {/* Subtitle Description */}
-            <p className="text-base sm:text-lg text-slate-200/95 max-w-2xl leading-relaxed">
+            <p className="text-sm sm:text-lg text-slate-200/95 max-w-2xl leading-relaxed">
               {slide.description}
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <Link
                 href={slide.primaryLink}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-[#071328] shadow-lg shadow-amber-500/25 transform hover:-translate-y-0.5 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-[#071328] shadow-lg shadow-amber-500/25 transform hover:-translate-y-0.5 transition-all text-center"
               >
                 <span>{slide.primaryCta}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href={slide.secondaryLink}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md transition-all text-center"
               >
                 <span>{slide.secondaryCta}</span>
               </Link>
             </div>
 
             {/* Quick Stats Strip (KNU Key Facts) */}
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 pt-6 border-t border-white/15 max-w-xl">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-white/15 max-w-xl">
               <div>
-                <div className="text-2xl sm:text-3xl font-black text-amber-400">16+</div>
-                <div className="text-[11px] sm:text-xs text-slate-300 font-medium">Years Academic Legacy</div>
+                <div className="text-xl sm:text-3xl font-black text-amber-400">16+</div>
+                <div className="text-[10px] sm:text-xs text-slate-300 font-medium">Years Academic Legacy</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-black text-amber-400">6</div>
-                <div className="text-[11px] sm:text-xs text-slate-300 font-medium">Constituent Colleges</div>
+                <div className="text-xl sm:text-3xl font-black text-amber-400">6</div>
+                <div className="text-[10px] sm:text-xs text-slate-300 font-medium">Constituent Colleges</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-black text-amber-400">45+</div>
-                <div className="text-[11px] sm:text-xs text-slate-300 font-medium">Approved Programmes</div>
+                <div className="text-xl sm:text-3xl font-black text-amber-400">45+</div>
+                <div className="text-[10px] sm:text-xs text-slate-300 font-medium">Approved Programmes</div>
               </div>
               <div className="hidden sm:block">
-                <div className="text-2xl sm:text-3xl font-black text-amber-400">30+</div>
-                <div className="text-[11px] sm:text-xs text-slate-300 font-medium">Acres Green Campus</div>
+                <div className="text-xl sm:text-3xl font-black text-amber-400">30+</div>
+                <div className="text-[10px] sm:text-xs text-slate-300 font-medium">Acres Green Campus</div>
               </div>
             </div>
           </div>
 
           {/* Right Lead Capture Box (KNU University Application Style) */}
           <div className="lg:col-span-5" id="admissions-card">
-            <div className="bg-white/95 text-slate-900 rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/50 backdrop-blur-xl">
+            <div className="bg-white/95 text-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl border border-white/50 backdrop-blur-xl">
               <div className="flex items-center justify-between pb-3.5 border-b border-slate-100">
                 <div>
                   <span className="inline-block text-[11px] font-extrabold tracking-wider uppercase text-amber-700 bg-amber-50 border border-amber-200/60 px-2.5 py-0.5 rounded-md">

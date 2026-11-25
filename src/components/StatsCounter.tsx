@@ -34,13 +34,11 @@ export default function StatsCounter() {
   return (
     <section className="relative z-20 mx-auto max-w-7xl px-4 -mt-8 sm:-mt-10 mb-8 sm:px-6 lg:px-8">
       <div className="bg-white rounded-3xl shadow-xl border border-slate-200/90 p-6 lg:p-8">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-6 lg:divide-x lg:divide-slate-100">
           {NGI_STATS.map((stat, idx) => (
             <div
               key={idx}
-              className={`flex flex-col items-center text-center p-3 group transition-all duration-200 hover:-translate-y-1 ${
-                idx > 0 ? "pt-5 lg:pt-0" : ""
-              }`}
+              className="flex flex-col items-center text-center p-3 sm:p-3 rounded-2xl bg-slate-50/70 sm:bg-transparent border border-slate-100 sm:border-0 group transition-all duration-200 hover:-translate-y-1"
             >
               <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-3 shadow-sm group-hover:scale-110 group-hover:bg-amber-50 transition-all">
                 {getIcon(stat.iconName)}

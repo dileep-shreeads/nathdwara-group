@@ -10,9 +10,10 @@ export default function NoticeTicker() {
     <div className="bg-[#0B1B3D] text-white border-y border-[#182e5c] overflow-hidden py-2.5 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-3">
         {/* Badge */}
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-amber-400 text-[#071328] font-black text-xs whitespace-nowrap shadow-sm shrink-0">
+        <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-md bg-amber-400 text-[#071328] font-black text-[11px] sm:text-xs whitespace-nowrap shadow-sm shrink-0">
           <Flame className="w-3.5 h-3.5 text-[#071328] fill-current animate-bounce" />
-          <span className="tracking-wide">LATEST NOTICES &amp; HAPPENINGS</span>
+          <span className="tracking-wide hidden sm:inline">LATEST NOTICES &amp; HAPPENINGS</span>
+          <span className="tracking-wide sm:hidden">UPDATES</span>
         </div>
 
         {/* Marquee Ticker */}
