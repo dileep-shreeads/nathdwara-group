@@ -63,7 +63,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
         {/* Brand / Logo (Modern University Emblem & Typography) */}
         <Link
           href="/"
-          className="group flex min-w-0 items-center gap-3"
+          className="group flex shrink-0 items-center gap-3 sm:gap-3.5"
           onClick={closeMenu}
           aria-label="Nathdwara Group of Institutions home"
         >
@@ -75,24 +75,24 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
             />
           </span>
           <span className="min-w-0">
-            <span className="block text-[9.5px] sm:text-[10px] font-black uppercase tracking-[0.18em] text-amber-600">
+            <span className="block text-[9.5px] sm:text-[10px] font-black uppercase tracking-[0.16em] text-amber-600">
               ESTD. 2010 • 16+ YEARS OF EXCELLENCE
             </span>
-            <span className="block truncate text-base sm:text-xl font-black leading-tight tracking-tight text-[#0B1B3D]">
-              NATHDWARA <span className="text-amber-600">GROUP</span>
+            <span className="block truncate text-base sm:text-lg lg:text-xl font-black leading-tight tracking-tight text-[#0B1B3D]">
+              NATHDWARA <span className="text-amber-600">GROUP</span> OF INSTITUTIONS
             </span>
-            <span className="block truncate text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500">
-              Group of Institutions · Rajasthan
+            <span className="hidden sm:block truncate text-[10px] sm:text-[10.5px] font-bold text-slate-500">
+              Affiliated to RTU Kota &amp; MLSU Udaipur • Approved by AICTE &amp; BCI
             </span>
           </span>
         </Link>
 
         {/* Main Modern Navigation Links (Desktop) */}
-        <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Main navigation" className="hidden items-center gap-0.5 xl:gap-1.5 lg:flex">
           {/* Home */}
           <Link
             href="/"
-            className={`rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+            className={`whitespace-nowrap rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold transition-all ${
               isActive("/") && pathname === "/"
                 ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
                 : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
@@ -105,7 +105,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
           <div className="relative group">
             <Link
               href="/about"
-              className={`flex items-center gap-1 rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+              className={`whitespace-nowrap flex items-center gap-1 rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold transition-all ${
                 isActive("/about")
                   ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
                   : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
@@ -153,7 +153,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
           <div className="relative group">
             <Link
               href="/institutions"
-              className={`flex items-center gap-1 rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+              className={`whitespace-nowrap flex items-center gap-1 rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold transition-all ${
                 isActive("/institutions") || pathname.startsWith("/niet") || pathname.startsWith("/nibm") || pathname.startsWith("/nlc")
                   ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
                   : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
@@ -265,7 +265,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
           {/* Programmes */}
           <Link
             href="/programs"
-            className={`rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+            className={`whitespace-nowrap rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold transition-all ${
               isActive("/programs")
                 ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
                 : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
@@ -277,30 +277,38 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
           {/* Admissions 2026 */}
           <Link
             href="/admissions"
-            className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+            className={`whitespace-nowrap inline-flex items-center gap-1.5 rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold transition-all ${
               isActive("/admissions")
                 ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
                 : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
             }`}
           >
             <span>Admissions</span>
-            <span className="px-1.5 py-0.5 rounded-full bg-amber-400 text-[#0B1B3D] text-[9.5px] font-black uppercase shadow-sm">
+            <span className="px-1.5 py-0.5 rounded-full bg-amber-400 text-[#0B1B3D] text-[9px] xl:text-[9.5px] font-black uppercase shadow-sm">
               2026
             </span>
           </Link>
 
           {/* Campus Life */}
           <Link
-            href="/#campus-life"
-            className="rounded-xl px-3 py-2 text-[13px] font-bold text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D] transition-all"
+            href="/campus-life"
+            className={`whitespace-nowrap rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold transition-all ${
+              isActive("/campus-life")
+                ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
+                : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
+            }`}
           >
             Campus Life
           </Link>
 
           {/* Placements */}
           <Link
-            href="/#placements"
-            className="rounded-xl px-3 py-2 text-[13px] font-bold text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D] transition-all"
+            href="/placements"
+            className={`whitespace-nowrap rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold transition-all ${
+              isActive("/placements")
+                ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
+                : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
+            }`}
           >
             Placements
           </Link>
@@ -308,7 +316,7 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
           {/* Contact */}
           <Link
             href="/contact"
-            className={`rounded-xl px-3 py-2 text-[13px] font-bold transition-all ${
+            className={`whitespace-nowrap rounded-xl px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-bold transition-all ${
               isActive("/contact")
                 ? "bg-[#0B1B3D] text-amber-300 shadow-sm"
                 : "text-slate-700 hover:bg-slate-100 hover:text-[#0B1B3D]"
@@ -481,17 +489,21 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
               </Link>
 
               <Link
-                href="/#campus-life"
+                href="/campus-life"
                 onClick={closeMenu}
-                className="block px-3 py-2.5 rounded-xl hover:bg-slate-100"
+                className={`block px-3 py-2.5 rounded-xl ${
+                  isActive("/campus-life") ? "bg-[#0B1B3D] text-amber-300" : "hover:bg-slate-100"
+                }`}
               >
                 Campus Life &amp; Amenities
               </Link>
 
               <Link
-                href="/#placements"
+                href="/placements"
                 onClick={closeMenu}
-                className="block px-3 py-2.5 rounded-xl hover:bg-slate-100"
+                className={`block px-3 py-2.5 rounded-xl ${
+                  isActive("/placements") ? "bg-[#0B1B3D] text-amber-300" : "hover:bg-slate-100"
+                }`}
               >
                 Placements &amp; Recruiters
               </Link>
