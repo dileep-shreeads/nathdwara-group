@@ -37,8 +37,8 @@ export default function Footer() {
           {/* Col 1: Identity & Bio (4 cols) */}
           <div className="lg:col-span-4 space-y-5">
             <Link href="/" className="inline-flex items-center gap-3.5">
-              <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-white p-1 shadow-md">
-                <img src="/ngi-logo.png" alt="NGI Logo" className="h-full w-full object-contain" />
+              <span className="flex items-center justify-center rounded-xl bg-white p-1.5 shadow-md">
+                <img src="/ngi-logo.png" alt="NGI Logo" className="h-11 w-auto object-contain" />
               </span>
               <span>
                 <span className="block font-black text-xl tracking-tight text-white">
@@ -95,8 +95,19 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 pt-2 text-xs text-slate-400">
               <li>
+                <Link href="/login" className="text-amber-400 font-bold hover:text-amber-300 transition-colors flex items-center gap-1">
+                  <span>Student Portal / Login</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/register" className="hover:text-amber-300 transition-colors">
+                  Applicant Registration 2026
+                </Link>
+              </li>
+              <li>
                 <Link href="/admissions" className="hover:text-amber-300 transition-colors">
-                  Admissions Portal 2026
+                  Admissions Overview 2026
                 </Link>
               </li>
               <li>
