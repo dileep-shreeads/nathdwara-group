@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Footer from "@/components/Footer";
+import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
@@ -32,7 +32,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-white text-slate-800 antialiased selection:bg-amber-300 selection:text-[#102c52]">
         <SiteHeader />
         <main id="main-content">{children}</main>
-        <Footer />
+        <SiteFooter />
       </body>
     </html>
   );
