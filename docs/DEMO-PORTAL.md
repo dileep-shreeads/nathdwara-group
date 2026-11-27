@@ -12,8 +12,7 @@ can't be broken by another person's clicks and works on any static host.
 | College Admin (NIBM) | nibm.admin@ngi.demo | Demo@123 | NIBM records only |
 | Admission Counsellor | counsellor@ngi.demo | Demo@123 | Enquiries, applications, notices |
 | Accounts Officer | accounts@ngi.demo | Demo@123 | Students, fees, receipts |
-| Student (enrolled) | student@ngi.demo | Student@123 | Own progress, fees, receipts |
-| Student (applicant) | applicant@ngi.demo | Student@123 | Application in progress |
+| Student | student@ngi.demo | Student@123 | Own application, fees, receipts |
 
 The login page has one-click buttons for each.
 
