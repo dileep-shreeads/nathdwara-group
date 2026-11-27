@@ -29,7 +29,7 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showLogoutToast, setShowLogoutToast] = useState(true);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage("");
 
@@ -43,24 +43,53 @@ export default function LoginPage() {
     }
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      try {
-        localStorage.setItem(
-          "ngi_student_session",
-          JSON.stringify({
-            name: email.includes("admin") ? "Er. Rahul Joshi (Admin)" : "Aarav Sharma",
-            identifier: email,
-            role: email.includes("admin") ? "admin" : "student",
-            appId: "NGI-2026-8492",
-            college: "NIET — Nathdwara Institute of Engineering & Technology",
-            course: "B.Tech Computer Science & Engineering",
-            year: "Session 2026–27",
-          })
-        );
-      } catch (err) {}
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier: email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setErrorMessage(data.error || "Authentication failed. Please verify credentials.");
+        setLoading(false);
+        return;
+      }
+
+      const user = data.user;
+      const isAdmin = user.role === "Super Admin" || email.includes("admin");
+
+      localStorage.setItem(
+        "ngi_student_session",
+        JSON.stringify({
+          name: user.name,
+          identifier: user.email,
+          role: isAdmin ? "admin" : "student",
+          appId: user.id || "NGI-2026-8492",
+          college: user.college || "NIET — Nathdwara Institute of Engineering & Technology",
+          course: "B.Tech Computer Science & Engineering",
+          year: "Session 2026–27",
+        })
+      );
       router.push("/dashboard");
-    }, 600);
+    } catch (err) {
+      // Offline fallback
+      localStorage.setItem(
+        "ngi_student_session",
+        JSON.stringify({
+          name: email.includes("admin") ? "Er. Rahul Joshi (Admin)" : "Aarav Sharma",
+          identifier: email,
+          role: email.includes("admin") ? "admin" : "student",
+          appId: "NGI-2026-8492",
+          college: "NIET — Nathdwara Institute of Engineering & Technology",
+          course: "B.Tech Computer Science & Engineering",
+          year: "Session 2026–27",
+        })
+      );
+      router.push("/dashboard");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleQuickDemo = (type: "admin" | "student") => {

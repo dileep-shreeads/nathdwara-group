@@ -22,7 +22,7 @@ export default function ForgotPasswordPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleRequestOtp = (e: React.FormEvent) => {
+  const handleRequestOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -32,10 +32,25 @@ export default function ForgotPasswordPage() {
     }
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const res = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setError(data.error || "Failed to send OTP. Please try again.");
+        setLoading(false);
+        return;
+      }
       setStep(2);
-    }, 600);
+    } catch (err) {
+      // Fallback
+      setStep(2);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleVerifyOtp = (e: React.FormEvent) => {

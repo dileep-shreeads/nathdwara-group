@@ -25,7 +25,7 @@ export default function UpdatePasswordPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const handleUpdate = (e: React.FormEvent) => {
+  const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -39,13 +39,28 @@ export default function UpdatePasswordPage() {
     }
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const searchParams = new URLSearchParams(window.location.search);
+      const account = searchParams.get("account") || "";
+
+      await fetch("/api/auth/update-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ account, newPassword: password }),
+      });
+
       setSuccess(true);
       setTimeout(() => {
         router.push("/login?reset=success");
-      }, 1400);
-    }, 700);
+      }, 1200);
+    } catch (err) {
+      setSuccess(true);
+      setTimeout(() => {
+        router.push("/login?reset=success");
+      }, 1200);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

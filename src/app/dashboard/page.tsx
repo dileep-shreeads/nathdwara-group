@@ -397,28 +397,79 @@ export default function DashboardPage() {
   const [selectedEnquiry, setSelectedEnquiry] = useState<EnquiryRecord | null>(null);
   const [enquiryModalOpen, setEnquiryModalOpen] = useState(false);
 
-  // Read saved storage on client mount
+  // Read saved storage & remote database on client mount
   useEffect(() => {
+    // 1. Fetch enquiries from API
+    fetch("/api/enquiries")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+          setEnquiries(data.data);
+          try {
+            localStorage.setItem("ngi_enquiries_list", JSON.stringify(data.data));
+          } catch (e) {}
+        }
+      })
+      .catch((e) => {
+        console.warn("Could not fetch remote enquiries, using offline storage:", e);
+      });
+
+    // 2. Fetch colleges from API
+    fetch("/api/colleges")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+          setColleges(data.data);
+          try {
+            localStorage.setItem("ngi_colleges_list", JSON.stringify(data.data));
+          } catch (e) {}
+        }
+      })
+      .catch((e) => {
+        console.warn("Could not fetch remote colleges, using offline storage:", e);
+      });
+
+    // 3. Fetch users from API
+    fetch("/api/users")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+          const formatted = data.data.map((u: any) => ({
+            ...u,
+            createdAt:
+              typeof u.createdAt === "string"
+                ? u.createdAt.includes("T")
+                  ? new Date(u.createdAt).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })
+                  : u.createdAt
+                : new Date(u.createdAt).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  }),
+          }));
+          setUsers(formatted);
+          try {
+            localStorage.setItem("ngi_users_list", JSON.stringify(formatted));
+          } catch (e) {}
+        }
+      })
+      .catch((e) => {
+        console.warn("Could not fetch remote users, using offline storage:", e);
+      });
+
+    // Fallback load from local storage
     try {
-      // Load enquiries (incorporating any live frontend submissions!)
       const savedEnq = localStorage.getItem("ngi_enquiries_list");
       if (savedEnq) {
         const parsed = JSON.parse(savedEnq);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Merge unique entries
-          const merged = [...parsed];
-          defaultEnquiries.forEach((item) => {
-            if (!merged.find((m) => m.id === item.id)) {
-              merged.push(item);
-            }
-          });
-          setEnquiries(merged);
+          setEnquiries(parsed);
         }
-      } else {
-        localStorage.setItem("ngi_enquiries_list", JSON.stringify(defaultEnquiries));
       }
-
-      // Load colleges
       const savedColleges = localStorage.getItem("ngi_colleges_list");
       if (savedColleges) {
         const parsed = JSON.parse(savedColleges);
@@ -426,8 +477,6 @@ export default function DashboardPage() {
           setColleges(parsed);
         }
       }
-
-      // Load users
       const savedUsers = localStorage.getItem("ngi_users_list");
       if (savedUsers) {
         const parsed = JSON.parse(savedUsers);
@@ -466,9 +515,9 @@ export default function DashboardPage() {
   };
 
   // =========================================================================
-  // USER CRUD HANDLERS
+  // USER CRUD HANDLERS (Connected to /api/users)
   // =========================================================================
-  const handleSaveUser = (e: React.FormEvent) => {
+  const handleSaveUser = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!userFormData.name || !userFormData.email) return;
 
@@ -480,17 +529,31 @@ export default function DashboardPage() {
         name: userFormData.name || "New User",
         email: userFormData.email || "",
         phone: userFormData.phone || "+91 95713 45444",
-        role: userFormData.role as UserRecord["role"] || "Student",
+        role: (userFormData.role as UserRecord["role"]) || "Student",
         college: userFormData.college || "NIET — Engineering & Technology",
         createdAt: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-        status: userFormData.status as UserRecord["status"] || "Active",
+        status: (userFormData.status as UserRecord["status"]) || "Active",
         avatarBg: "bg-brand-navy",
       };
       updatedUsers = [newUser, ...updatedUsers];
+
+      // Async DB write
+      fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newUser),
+      }).catch((err) => console.warn("API write fallback:", err));
     } else if (userModalMode === "edit" && selectedUser) {
       updatedUsers = updatedUsers.map((u) =>
-        u.id === selectedUser.id ? { ...u, ...userFormData } as UserRecord : u
+        u.id === selectedUser.id ? ({ ...u, ...userFormData } as UserRecord) : u
       );
+
+      // Async DB update
+      fetch("/api/users", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: selectedUser.id, ...userFormData }),
+      }).catch((err) => console.warn("API update fallback:", err));
     }
 
     setUsers(updatedUsers);
@@ -502,20 +565,25 @@ export default function DashboardPage() {
     setSelectedUser(null);
   };
 
-  const handleDeleteUser = (id: string) => {
+  const handleDeleteUser = async (id: string) => {
     if (confirm("Are you sure you want to remove this user from NGI ERP?")) {
       const updated = users.filter((u) => u.id !== id);
       setUsers(updated);
       try {
         localStorage.setItem("ngi_users_list", JSON.stringify(updated));
       } catch (e) {}
+
+      // Async DB delete
+      fetch(`/api/users?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      }).catch((err) => console.warn("API delete fallback:", err));
     }
   };
 
   // =========================================================================
-  // COLLEGE CRUD HANDLERS
+  // COLLEGE CRUD HANDLERS (Connected to /api/colleges)
   // =========================================================================
-  const handleSaveCollege = (e: React.FormEvent) => {
+  const handleSaveCollege = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!collegeFormData.name || !collegeFormData.shortName) return;
 
@@ -536,10 +604,24 @@ export default function DashboardPage() {
         status: (collegeFormData.status as CollegeRecord["status"]) || "Active",
       };
       updatedColleges = [...updatedColleges, newCollege];
+
+      // Async DB write
+      fetch("/api/colleges", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newCollege),
+      }).catch((err) => console.warn("API college write fallback:", err));
     } else if (collegeModalMode === "edit" && selectedCollege) {
       updatedColleges = updatedColleges.map((c) =>
-        c.id === selectedCollege.id ? { ...c, ...collegeFormData } as CollegeRecord : c
+        c.id === selectedCollege.id ? ({ ...c, ...collegeFormData } as CollegeRecord) : c
       );
+
+      // Async DB update
+      fetch("/api/colleges", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: selectedCollege.id, ...collegeFormData }),
+      }).catch((err) => console.warn("API college update fallback:", err));
     }
 
     setColleges(updatedColleges);
@@ -551,20 +633,25 @@ export default function DashboardPage() {
     setSelectedCollege(null);
   };
 
-  const handleDeleteCollege = (id: string) => {
+  const handleDeleteCollege = async (id: string) => {
     if (confirm("Are you sure you want to remove this college from the institutional registry?")) {
       const updated = colleges.filter((c) => c.id !== id);
       setColleges(updated);
       try {
         localStorage.setItem("ngi_colleges_list", JSON.stringify(updated));
       } catch (e) {}
+
+      // Async DB delete
+      fetch(`/api/colleges?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      }).catch((err) => console.warn("API delete fallback:", err));
     }
   };
 
   // =========================================================================
-  // ENQUIRIES STATUS & ACTIONS
+  // ENQUIRIES STATUS & ACTIONS (Connected to /api/enquiries)
   // =========================================================================
-  const handleUpdateEnquiryStatus = (id: string, newStatus: EnquiryRecord["status"]) => {
+  const handleUpdateEnquiryStatus = async (id: string, newStatus: EnquiryRecord["status"]) => {
     const updated = enquiries.map((item) =>
       item.id === id ? { ...item, status: newStatus } : item
     );
@@ -572,15 +659,27 @@ export default function DashboardPage() {
     try {
       localStorage.setItem("ngi_enquiries_list", JSON.stringify(updated));
     } catch (e) {}
+
+    // Async DB update
+    fetch("/api/enquiries", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status: newStatus }),
+    }).catch((err) => console.warn("API enquiry status fallback:", err));
   };
 
-  const handleDeleteEnquiry = (id: string) => {
+  const handleDeleteEnquiry = async (id: string) => {
     if (confirm("Delete this admission enquiry record?")) {
       const updated = enquiries.filter((e) => e.id !== id);
       setEnquiries(updated);
       try {
         localStorage.setItem("ngi_enquiries_list", JSON.stringify(updated));
       } catch (e) {}
+
+      // Async DB delete
+      fetch(`/api/enquiries?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      }).catch((err) => console.warn("API enquiry delete fallback:", err));
     }
   };
 

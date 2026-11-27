@@ -1,0 +1,90 @@
+// Prisma Schema for Nathdwara Group of Institutions (NGI)
+// Provider: PostgreSQL (Neon / Supabase / AWS RDS / Local Postgres)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User Model: Super Admins, Faculty, Counselors, Students & Applicants
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  role      String   @default("Student") // "Student" | "Applicant" | "Faculty" | "Counselor" | "Super Admin"
+  college   String?  @default("NIET — Engineering & Technology")
+  password  String?
+  status    String   @default("Active") // "Active" | "Inactive" | "Pending"
+  avatarBg  String?  @default("bg-brand-navy")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([role])
+  @@index([status])
+}
+
+// College Model: Constituent Institutes of NGI
+model College {
+  id              String   @id // e.g. "niet", "nibm", "nlc", "ncan", "vdsms", "npiti"
+  name            String
+  shortName       String
+  code            String   @unique
+  affiliation     String
+  category        String   // "Engineering & Technology", "Law", "Ayurveda Nursing", etc.
+  establishedYear Int      @default(2010)
+  coursesCount    Int      @default(4)
+  intakeSeats     Int      @default(120)
+  principal       String?
+  status          String   @default("Active") // "Active" | "Under Review"
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([category])
+  @@index([status])
+}
+
+// Enquiry Model: Real-time candidate inquiries from frontend modal & forms
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  email     String?
+  college   String
+  course    String
+  state     String?  @default("Rajasthan")
+  status    String   @default("New") // "New" | "Contacted" | "Follow Up" | "Admitted" | "Closed"
+  date      String?
+  time      String?
+  source    String?  @default("Website Header Enquiry Modal")
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([college])
+}
+
+// Application Model: Detailed Student Admission Dossier
+model Application {
+  id            String   @id @default(cuid())
+  appNo         String   @unique
+  candidateName String
+  mobile        String
+  email         String
+  college       String
+  course        String
+  category      String?  @default("General")
+  gender        String?  @default("Male")
+  status        String   @default("Provisional Allotment")
+  feesPaid      Float    @default(0)
+  feesDue       Float    @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([status])
+}

@@ -86,7 +86,7 @@ export default function RegisterPage() {
     }));
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -112,63 +112,87 @@ export default function RegisterPage() {
     }
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
-      const appId = `NGI-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+    let appId = `NGI-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
-      // Save user session
-      try {
-        localStorage.setItem(
-          "ngi_student_session",
-          JSON.stringify({
-            name: formData.fullName,
-            identifier: formData.email,
-            role: "applicant",
-            appId,
-            college:
-              formData.college === "NIET"
-                ? "NIET — Engineering & Technology"
-                : formData.college === "NIBM"
-                ? "NIBM — Biotechnology & Management"
-                : formData.college === "NLC"
-                ? "NLC — Nathdwara Law College"
-                : formData.college === "NCAN"
-                ? "NCAN — Ayurveda Nursing"
-                : formData.college === "VDSMS"
-                ? "VDSMS — Medical Science"
-                : "NPITI — Industrial Training",
-            course: formData.course,
-            year: "Session 2026–27",
-            mobile: formData.mobile,
-            email: formData.email,
-          })
-        );
-
-        // Also add to inquiry list so it appears in dashboard inquiries
-        const existingEnq = localStorage.getItem("ngi_enquiries_list");
-        const list = existingEnq ? JSON.parse(existingEnq) : [];
-        const newEnquiry = {
-          id: `ENQ-${Math.floor(1000 + Math.random() * 9000)}`,
-          name: formData.fullName,
-          phone: formData.mobile,
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          mobile: formData.mobile,
           email: formData.email,
-          course: formData.course,
+          password: formData.password,
           college: formData.college,
-          state: "Rajasthan",
-          status: "New",
-          date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-          time: new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true }),
-          source: "Student Portal Online Registration",
-          notes: `App ID: ${appId} generated upon registration`,
-        };
-        localStorage.setItem("ngi_enquiries_list", JSON.stringify([newEnquiry, ...list]));
-      } catch (err) {}
+          course: formData.course,
+        }),
+      });
 
-      setTimeout(() => {
-        router.push("/dashboard?registered=true");
-      }, 1200);
-    }, 800);
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setError(data.error || "Registration failed. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      if (data.appId) appId = data.appId;
+    } catch (err) {
+      console.warn("API registration fallback:", err);
+    }
+
+    setSuccess(true);
+    setLoading(false);
+
+    try {
+      localStorage.setItem(
+        "ngi_student_session",
+        JSON.stringify({
+          name: formData.fullName,
+          identifier: formData.email,
+          role: "applicant",
+          appId,
+          college:
+            formData.college === "NIET"
+              ? "NIET — Engineering & Technology"
+              : formData.college === "NIBM"
+              ? "NIBM — Biotechnology & Management"
+              : formData.college === "NLC"
+              ? "NLC — Nathdwara Law College"
+              : formData.college === "NCAN"
+              ? "NCAN — Ayurveda Nursing"
+              : formData.college === "VDSMS"
+              ? "VDSMS — Medical Science"
+              : "NPITI — Industrial Training",
+          course: formData.course,
+          year: "Session 2026–27",
+          mobile: formData.mobile,
+          email: formData.email,
+        })
+      );
+
+      // Also add to inquiry list so it appears in dashboard inquiries
+      const existingEnq = localStorage.getItem("ngi_enquiries_list");
+      const list = existingEnq ? JSON.parse(existingEnq) : [];
+      const newEnquiry = {
+        id: `ENQ-${Math.floor(1000 + Math.random() * 9000)}`,
+        name: formData.fullName,
+        phone: formData.mobile,
+        email: formData.email,
+        course: formData.course,
+        college: formData.college,
+        state: "Rajasthan",
+        status: "New",
+        date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+        time: new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true }),
+        source: "Student Portal Online Registration",
+        notes: `App ID: ${appId} generated upon registration`,
+      };
+      localStorage.setItem("ngi_enquiries_list", JSON.stringify([newEnquiry, ...list]));
+    } catch (err) {}
+
+    setTimeout(() => {
+      router.push("/dashboard?registered=true");
+    }, 1200);
   };
 
   return (
