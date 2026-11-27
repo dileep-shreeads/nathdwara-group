@@ -148,3 +148,20 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Print only the receipt when one is open */
+@media print {
+  body:has(.print-area) * {
+    visibility: hidden;
+  }
+  body:has(.print-area) .print-area,
+  body:has(.print-area) .print-area * {
+    visibility: visible;
+  }
+  body:has(.print-area) .print-area {
+    position: fixed;
+    inset: 0;
+    border: 0;
+    padding: 24px;
+  }
+}

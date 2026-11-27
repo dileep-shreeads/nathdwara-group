@@ -1,280 +1,71 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle2,
-  KeyRound,
-  Lock,
-  Mail,
-  Shield,
-} from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Info } from "lucide-react";
+import AuthLayout from "@/components/dashboard/AuthLayout";
+import { Button, Field, FormError, Input } from "@/components/dashboard/ui";
+import { requestPasswordReset } from "@/lib/services";
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
-
-  const [step, setStep] = useState<1 | 2>(1);
-  const [identifier, setIdentifier] = useState("superadmin@ngi.edu.in");
-  const [otp, setOtp] = useState(["5", "8", "2", "9", "4", "1"]);
+  const [identifier, setIdentifier] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [sent, setSent] = useState<{ otp: string; email: string } | null>(null);
 
-  const handleRequestOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setError(null);
     if (!identifier.trim()) {
-      setError("Please enter your registered email address or mobile number.");
+      setError("Enter the email or mobile number on your account.");
       return;
     }
-
     setLoading(true);
-    try {
-      const res = await fetch("/api/auth/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ identifier }),
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        setError(data.error || "Failed to send OTP. Please try again.");
-        setLoading(false);
-        return;
-      }
-      setStep(2);
-    } catch (err) {
-      // Fallback
-      setStep(2);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleVerifyOtp = (e: React.FormEvent) => {
-    e.preventDefault();
-    const fullOtp = otp.join("");
-    if (fullOtp.length !== 6) {
-      setError("Please enter the 6-digit OTP code.");
+    const result = await requestPasswordReset(identifier);
+    setLoading(false);
+    if (!result.ok) {
+      setError(result.error);
       return;
     }
-
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      router.push(`/update-password?verified=true&account=${encodeURIComponent(identifier)}`);
-    }, 600);
-  };
-
-  const handleOtpChange = (index: number, val: string) => {
-    const newOtp = [...otp];
-    newOtp[index] = val.slice(-1);
-    setOtp(newOtp);
-
-    if (val && index < 5) {
-      document.getElementById(`otp-${index + 1}`)?.focus();
-    }
+    setSent(result.data);
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between relative overflow-hidden">
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-screen">
-        {/* Left Side: Frontend Navy Theme (7 Cols) */}
-        <div className="lg:col-span-7 p-6 sm:p-12 lg:p-16 flex flex-col justify-between relative z-10 bg-brand-navy-dark border-r border-slate-800">
-          <div>
-            <div className="flex items-center justify-between mb-8">
-              <Link href="/" className="inline-flex items-center gap-3 group">
-                <div className="flex items-center justify-center rounded-xl bg-white p-1 shadow-sm transition group-hover:scale-105">
-                  <img
-                    src="/ngi-logo.png"
-                    alt="NGI Logo"
-                    className="h-10 sm:h-12 w-auto object-contain"
-                  />
-                </div>
-                <div>
-                  <span className="block font-black text-lg sm:text-xl text-white tracking-tight">
-                    NATHDWARA <span className="text-amber-400">GROUP</span>
-                  </span>
-                  <span className="block text-[9px] font-bold uppercase tracking-widest text-slate-400">
-                    ACCOUNT RECOVERY &bull; SECURITY
-                  </span>
-                </div>
-              </Link>
-
-              <Link
-                href="/login"
-                className="text-xs font-bold text-amber-300 hover:text-amber-200 transition flex items-center gap-1"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Back to Login</span>
-              </Link>
-            </div>
-
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-400 text-[11px] font-black uppercase tracking-wider mb-6">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-              <span>CONFIDENTIAL CREDENTIAL RECOVERY</span>
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.15] mb-4">
-              Recover Access to Your <br />
-              <span className="text-amber-400">Portal Account</span>
-            </h1>
-
-            <p className="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed mb-8">
-              We protect institutional access with encrypted verification. Enter your registered email or phone to receive a single-use passcode and set a new password.
+    <AuthLayout title="Reset your password" subtitle="We'll send a 6-digit code to the email and mobile number on your account.">
+      {sent ? (
+        <div className="space-y-5">
+          <p className="text-sm text-slate-600">
+            A verification code was sent to <strong className="text-primary">{sent.email}</strong>. It is valid for 10 minutes.
+          </p>
+          <div className="flex gap-3 rounded-xl border border-dashed border-accent-dark/40 bg-accent/5 p-4 text-sm text-slate-700">
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent-dark" />
+            <p>
+              Demo mode — no SMS or email is sent. Your code is <strong className="font-mono text-base tracking-widest text-primary">{sent.otp}</strong>
             </p>
-
-            <div className="space-y-3 max-w-xl">
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#0e2147]/90 border border-blue-900/60">
-                <div className="w-9 h-9 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
-                  <KeyRound className="w-4 h-4" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-white">Instant OTP Verification</h3>
-                  <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
-                    A secure 6-digit verification code is dispatched to your verified communication channel.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#0e2147]/90 border border-blue-900/60">
-                <div className="w-9 h-9 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
-                  <Shield className="w-4 h-4" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-white">Session Protection</h3>
-                  <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
-                    All previous active sessions are invalidated upon password reset to ensure account safety.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
-
-          <div className="pt-8 text-xs text-slate-400">
-            Helpline: +91 95713 45444 &bull; IT Support: support@ngi.edu.in
-          </div>
+          <Button className="w-full" onClick={() => router.push("/update-password")}>
+            Enter code <ArrowRight className="h-4 w-4" />
+          </Button>
         </div>
-
-        {/* Right Side: Clean White Floating Form Card (5 Cols) */}
-        <div className="lg:col-span-5 p-6 sm:p-10 lg:p-14 flex items-center justify-center bg-slate-900/90 relative">
-          <div className="w-full max-w-md bg-white rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10 text-slate-800 border border-slate-100">
-            <div className="mb-6">
-              <h2 className="text-2xl sm:text-3xl font-black text-[#0B1B3D] tracking-tight">
-                Forgot password?
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                {step === 1
-                  ? "Enter your registered email or mobile to receive a reset code"
-                  : "Enter the 6-digit OTP code sent to your account"}
-              </p>
-            </div>
-
-            {error && (
-              <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-rose-500 shrink-0" />
-                <span>{error}</span>
-              </div>
-            )}
-
-            {step === 1 ? (
-              <form onSubmit={handleRequestOtp} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                    Email Address or Registered Mobile
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                      <Mail className="h-4 w-4" />
-                    </div>
-                    <input
-                      type="text"
-                      required
-                      value={identifier}
-                      onChange={(e) => setIdentifier(e.target.value)}
-                      placeholder="superadmin@ngi.edu.in"
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-[#0B1B3D] focus:ring-2 focus:ring-[#0B1B3D]/10 text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none transition"
-                    />
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full mt-3 py-3.5 px-4 rounded-xl bg-[#0B1B3D] hover:bg-[#142e66] text-white font-bold text-sm shadow-lg shadow-blue-950/20 hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
-                >
-                  {loading ? (
-                    <span className="inline-flex items-center gap-2">
-                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending OTP...
-                    </span>
-                  ) : (
-                    <>
-                      <span>Send OTP Code</span>
-                      <ArrowRight className="w-4 h-4 text-amber-400" />
-                    </>
-                  )}
-                </button>
-              </form>
-            ) : (
-              <form onSubmit={handleVerifyOtp} className="space-y-5">
-                <div className="text-center">
-                  <span className="text-xs text-slate-500">
-                    OTP sent to <strong className="text-slate-800">{identifier}</strong>
-                  </span>
-                  <div className="mt-1 text-[11px] text-amber-600 font-bold">
-                    (Auto-filled test code: 582941)
-                  </div>
-                </div>
-
-                <div className="flex justify-center items-center gap-2">
-                  {otp.map((d, i) => (
-                    <input
-                      key={i}
-                      id={`otp-${i}`}
-                      type="text"
-                      maxLength={1}
-                      value={d}
-                      onChange={(e) => handleOtpChange(i, e.target.value)}
-                      className="w-10 h-12 text-center text-lg font-black text-slate-900 border-2 border-slate-200 focus:border-[#0B1B3D] rounded-xl outline-none transition bg-slate-50 focus:bg-white"
-                    />
-                  ))}
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full py-3.5 px-4 rounded-xl bg-[#0B1B3D] hover:bg-[#142e66] text-white font-bold text-sm shadow-lg shadow-blue-950/20 hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
-                >
-                  {loading ? (
-                    <span className="inline-flex items-center gap-2">
-                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Verifying...
-                    </span>
-                  ) : (
-                    <>
-                      <span>Verify OTP &amp; Set New Password</span>
-                      <ArrowRight className="w-4 h-4 text-amber-400" />
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
-
-            <div className="mt-6 text-center text-xs text-slate-500">
-              Remember your password?{" "}
-              <Link
-                href="/login"
-                className="font-bold text-amber-600 hover:text-amber-700 hover:underline"
-              >
-                Sign In &rarr;
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      ) : (
+        <form noValidate onSubmit={submit} className="space-y-4">
+          <Field label="Email or mobile number" required>
+            {(id) => <Input id={id} autoComplete="username" value={identifier} onChange={(e) => setIdentifier(e.target.value)} />}
+          </Field>
+          <FormError message={error} />
+          <Button type="submit" className="w-full" loading={loading}>
+            Send code
+          </Button>
+        </form>
+      )}
+      <p className="mt-6 text-center text-sm text-slate-500">
+        Remembered it?{" "}
+        <Link href="/login" className="font-semibold text-primary hover:text-accent-dark">
+          Back to sign in
+        </Link>
+      </p>
+    </AuthLayout>
   );
 }

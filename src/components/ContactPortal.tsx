@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { submitWebsiteEnquiry } from "@/lib/services";
 import {
   MapPin,
   Phone,
@@ -89,41 +90,15 @@ export default function ContactPortal() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const newEnquiry = {
-      id: `ENQ-${Math.floor(1000 + Math.random() * 9000)}`,
+    await submitWebsiteEnquiry({
       name: formData.name,
       phone: formData.phone,
       email: formData.email,
-      course: formData.department,
-      college: "Central Campus",
-      state: "Rajasthan",
-      status: "New",
-      date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-      time: new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true }),
-      source: `Contact Portal (${formData.subject || "General"})`,
-      notes: formData.message || "Message submitted via Contact Page",
-    };
-
-    try {
-      await fetch("/api/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newEnquiry),
-      });
-    } catch (err) {
-      console.warn("API enquiry POST fallback to local storage", err);
-    }
-
-    try {
-      const existing = localStorage.getItem("ngi_enquiries_list");
-      const list = existing ? JSON.parse(existing) : [];
-      localStorage.setItem("ngi_enquiries_list", JSON.stringify([newEnquiry, ...list]));
-    } catch (err) {}
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-    }, 500);
+      courseLabel: `${formData.subject} ${formData.message}`,
+      note: [`Contact page · ${formData.department}`, formData.subject, formData.message].filter(Boolean).join(" — "),
+    });
+    setIsSubmitting(false);
+    setSubmitted(true);
   };
 
   return (
