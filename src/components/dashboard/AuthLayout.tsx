@@ -21,8 +21,8 @@ export default function AuthLayout({ title, subtitle, children, wide }: { title:
           aria-hidden="true"
           className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
         />
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-primary-dark/95 via-primary/80 to-primary-dark/90" />
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grid opacity-[0.05]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-dark/95 via-primary-dark/75 to-primary-dark/30" />
+        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-primary-dark/80 to-transparent" />
         <div className="relative">
           <Link href="/" className="inline-flex items-center gap-3">
             <span className="rounded-lg bg-white p-1.5">
@@ -39,9 +39,7 @@ export default function AuthLayout({ title, subtitle, children, wide }: { title:
           <ul className="mt-10 max-w-md space-y-5">
             {POINTS.map(({ icon: Icon, title: t, text }) => (
               <li key={t} className="flex gap-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10">
-                  <Icon className="h-5 w-5 text-accent" />
-                </span>
+                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
                 <span>
                   <span className="block font-semibold">{t}</span>
                   <span className="block text-sm text-white/65">{text}</span>
