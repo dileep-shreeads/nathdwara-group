@@ -86,6 +86,25 @@ export default function ContactPortal() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    try {
+      const existing = localStorage.getItem("ngi_enquiries_list");
+      const list = existing ? JSON.parse(existing) : [];
+      const newEnquiry = {
+        id: `ENQ-${Math.floor(1000 + Math.random() * 9000)}`,
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        course: formData.department,
+        college: "Central Campus",
+        state: "Rajasthan",
+        status: "New",
+        date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+        time: new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true }),
+        source: `Contact Portal (${formData.subject || "General"})`,
+        notes: formData.message || "Message submitted via Contact Page",
+      };
+      localStorage.setItem("ngi_enquiries_list", JSON.stringify([newEnquiry, ...list]));
+    } catch (err) {}
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
