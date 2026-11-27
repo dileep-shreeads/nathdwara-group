@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Check, CircleAlert, IndianRupee, Megaphone } from "lucide-react";
 import { useDashboard } from "./DashboardShell";
 import { Badge, Card, EmptyState, KeyValue, PageHeader, StatTile } from "./ui";
-import { formatDate, inr, invoiceTotals, lookups } from "@/lib/demo/selectors";
+import { formatDate, greetingName, inr, invoiceTotals, lookups } from "@/lib/demo/selectors";
 import { STAGE_FLOW } from "@/lib/services";
 import type { Application } from "@/lib/demo/types";
 
@@ -74,7 +74,7 @@ export default function StudentHome() {
 
   return (
     <>
-      <PageHeader title={`Welcome, ${user.name.split(" ")[0]}`} description={student ? `${student.rollNo} · ${programme(student.programmeId)?.name}, ${college(student.collegeId)?.shortName}` : "Track your admission for session 2026-27."} />
+      <PageHeader title={`Welcome, ${greetingName(user.name)}`} description={student ? `${student.rollNo} · ${programme(student.programmeId)?.name}, ${college(student.collegeId)?.shortName}` : "Track your admission for session 2026-27."} />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatTile label="Application" value={application?.stage ?? "Not started"} hint={application?.id} icon={ArrowRight} />

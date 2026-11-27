@@ -15,8 +15,7 @@ const DEMO_ACCOUNTS = [
   { email: "nibm.admin@ngi.demo", password: "Demo@123", note: "NIBM only" },
   { email: "counsellor@ngi.demo", password: "Demo@123", note: "Enquiries & applications" },
   { email: "accounts@ngi.demo", password: "Demo@123", note: "Fees & receipts" },
-  { email: "student@ngi.demo", password: "Student@123", note: "Enrolled student" },
-  { email: "applicant@ngi.demo", password: "Student@123", note: "Application in progress" },
+  { email: "student@ngi.demo", password: "Student@123", note: "Application, fees & receipts" },
 ];
 
 function safeNext() {
@@ -131,7 +130,7 @@ export default function LoginPage() {
           {DEMO_ACCOUNTS.map((account) => {
             const user = state?.users.find((u) => u.email === account.email);
             return (
-              <li key={account.email}>
+              <li key={account.email} className="last:odd:sm:col-span-2">
                 <button
                   type="button"
                   disabled={loading !== null}
@@ -153,7 +152,7 @@ export default function LoginPage() {
           })}
         </ul>
         <p className="mt-3 text-xs text-slate-500">
-          Passwords: <code>Admin@123</code> for admin, <code>Demo@123</code> for staff, <code>Student@123</code> for students.
+          Passwords: <code>Admin@123</code> for admin, <code>Demo@123</code> for staff, <code>Student@123</code> for the student.
         </p>
       </div>
     </AuthLayout>

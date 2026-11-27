@@ -8,11 +8,21 @@ const POINTS = [
   { icon: ShieldCheck, title: "Role-based access", text: "Staff see only the modules and college they manage." },
 ];
 
+/** Graduation photo (Unsplash licence); replace public/auth/auth-bg.jpg with an NGI campus photo when available. */
+const BACKGROUND = "/auth/auth-bg.jpg";
+
 export default function AuthLayout({ title, subtitle, children, wide }: { title: string; subtitle: string; children: React.ReactNode; wide?: boolean }) {
   return (
     <div className="grid min-h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
-      <aside className="relative hidden overflow-hidden bg-brand-gradient p-12 text-white lg:flex lg:flex-col lg:justify-between">
-        <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-[0.06]" />
+      <aside className="relative isolate hidden overflow-hidden bg-primary-dark p-12 text-white lg:flex lg:flex-col lg:justify-between">
+        <img
+          src={BACKGROUND}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
+        />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-primary-dark/95 via-primary/80 to-primary-dark/90" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grid opacity-[0.05]" />
         <div className="relative">
           <Link href="/" className="inline-flex items-center gap-3">
             <span className="rounded-lg bg-white p-1.5">

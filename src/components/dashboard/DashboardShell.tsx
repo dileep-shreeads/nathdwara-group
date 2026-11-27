@@ -134,9 +134,9 @@ function Frame({ user, state, pathname, children }: { user: User; state: DemoSta
 
   const sidebar = (
     <nav aria-label="Dashboard" className="flex h-full flex-col">
-      <Link href="/dashboard" className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
+      <Link href="/dashboard" className="flex h-16 shrink-0 items-center gap-3 border-b border-white/10 px-5">
         <span className="rounded-lg bg-white p-1">
-          <img src="/ngi-logo.png" alt="" className="h-9 w-auto" />
+          <img src="/ngi-logo.png" alt="" className="h-8 w-auto" />
         </span>
         <span className="leading-tight">
           <span className="block font-display text-sm font-bold text-white">Nathdwara Group</span>
@@ -201,18 +201,21 @@ function Frame({ user, state, pathname, children }: { user: User; state: DemoSta
       <div className="lg:pl-64">
         <header className="sticky top-0 z-30 border-b border-line bg-white">
           <div className="flex h-16 items-center gap-3 px-4 sm:px-6">
-            <button type="button" onClick={() => setNavOpen(true)} aria-label="Open menu" className="rounded-lg border border-line p-2 text-primary lg:hidden">
+            <button type="button" onClick={() => setNavOpen(true)} aria-label="Open menu" className="shrink-0 rounded-lg border border-line p-2 text-primary lg:hidden">
               <Menu className="h-5 w-5" />
             </button>
-            {user.role !== "student" ? <GlobalSearch user={user} state={state} /> : <div className="flex-1" />}
-            <span className="hidden shrink-0 rounded-full bg-accent/20 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-accent-dark md:inline">
-              Demo data
-            </span>
-            <Notifications user={user} state={state} />
-            <UserMenu user={user} collegeName={college(user.collegeId)?.shortName} onSignOut={handleSignOut} />
+            {user.role !== "student" ? <GlobalSearch user={user} state={state} /> : null}
+            <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+              <span className="hidden rounded-full bg-accent/20 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-accent-dark md:inline">
+                Demo data
+              </span>
+              <Notifications user={user} state={state} />
+              <span className="hidden h-8 w-px bg-line sm:block" aria-hidden="true" />
+              <UserMenu user={user} collegeName={college(user.collegeId)?.shortName} onSignOut={handleSignOut} />
+            </div>
           </div>
         </header>
-        <div className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 lg:py-8">{children}</div>
+        <div className="px-4 py-6 sm:px-6 lg:px-8 lg:py-8">{children}</div>
       </div>
     </div>
   );
@@ -264,7 +267,7 @@ function GlobalSearch({ user, state }: { user: User; state: DemoState }) {
   };
 
   return (
-    <div ref={ref} className="relative min-w-0 flex-1 md:max-w-md">
+    <div ref={ref} className="relative min-w-0 flex-1 md:max-w-xl">
       <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
       <input
         type="search"

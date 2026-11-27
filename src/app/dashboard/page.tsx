@@ -8,7 +8,7 @@ import { BarList, ColumnChart, SplitBars } from "@/components/dashboard/charts";
 import { Badge, Card, EmptyState, PageHeader, StatTile } from "@/components/dashboard/ui";
 import StudentHome from "@/components/dashboard/StudentHome";
 import { canAccess } from "@/lib/demo/permissions";
-import { formatDateTime, inrCompact, invoiceTotals, lookups, scoped, timeAgo } from "@/lib/demo/selectors";
+import { formatDateTime, greetingName, inrCompact, invoiceTotals, lookups, scoped, timeAgo } from "@/lib/demo/selectors";
 
 export default function OverviewPage() {
   const { user } = useDashboard();
@@ -106,7 +106,7 @@ function StaffOverview() {
   return (
     <>
       <PageHeader
-        title={`Good ${new Date(now).getHours() < 12 ? "morning" : new Date(now).getHours() < 17 ? "afternoon" : "evening"}, ${user.name.split(" ")[0]}`}
+        title={`Good ${new Date(now).getHours() < 12 ? "morning" : new Date(now).getHours() < 17 ? "afternoon" : "evening"}, ${greetingName(user.name)}`}
         description={`Admissions and campus snapshot for ${scopeLabel} · session 2026-27.`}
       />
 

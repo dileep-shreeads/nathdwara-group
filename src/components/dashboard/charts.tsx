@@ -48,7 +48,7 @@ export function ColumnChart({ data, valueLabel, format = (v) => String(v), heigh
 }) {
   const [table, setTable] = useState(false);
   const [active, setActive] = useState<number | null>(null);
-  const max = niceMax(Math.max(...data.map((d) => d.value)));
+  const max = niceMax(Math.max(...data.map((d) => d.value)) * 1.15);
   const ticks = [0, 0.25, 0.5, 0.75, 1].map((t) => t * max);
   const peak = data.reduce((best, d, i) => (d.value > data[best].value ? i : best), 0);
 

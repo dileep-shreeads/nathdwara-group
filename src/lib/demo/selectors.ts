@@ -30,6 +30,13 @@ export function timeAgo(iso: string) {
   return formatDate(iso);
 }
 
+/** "Dr. Sudha Mehta" → "Dr. Mehta"; "Rahul Joshi" → "Rahul" */
+export function greetingName(name: string) {
+  const title = name.match(/^(Mr\.|Mrs\.|Ms\.|Dr\.|Er\.)\s*/);
+  const rest = name.replace(/^(Mr\.|Mrs\.|Ms\.|Dr\.|Er\.)\s*/, "").trim().split(" ");
+  return title ? `${title[1]} ${rest[rest.length - 1]}` : rest[0];
+}
+
 export function initials(name: string) {
   return name
     .replace(/^(Mr\.|Mrs\.|Ms\.|Dr\.|Er\.)\s*/, "")
