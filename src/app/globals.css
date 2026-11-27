@@ -1,23 +1,59 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #002147;
+  --color-primary-dark: #001630;
+  --color-primary-light: #1f417e;
+  --color-royal: #142f6a;
+  --color-accent: #f8c300;
+  --color-accent-dark: #d9a800;
+  --color-soft: #f5f7fb;
+  --color-line: #e3e8f0;
+  --color-ink: #0f1b2d;
+
+  --font-display: var(--font-sora), "Sora", system-ui, sans-serif;
+  --font-body: var(--font-work-sans), "Work Sans", system-ui, sans-serif;
+}
+
 :root {
-  --ngi-navy: #102c52;
-  --ngi-blue: #1d4b7f;
-  --ngi-gold: #f2b632;
+  --ngi-navy: #002147;
+  --ngi-blue: #1f417e;
+  --ngi-gold: #f8c300;
   color-scheme: light;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 8rem;
   }
 
   body {
     min-width: 0;
     overflow-x: clip;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-body);
   }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
+}
+
+@utility bg-brand-gradient {
+  background-image: linear-gradient(120deg, #001630 0%, #002147 45%, #142f6a 100%);
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.6) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.6) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@layer base {
 
   a,
   button {

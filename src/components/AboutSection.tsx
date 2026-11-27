@@ -36,7 +36,7 @@ const HIGHLIGHTS = [
     icon: Award,
     title: "Statutory Approvals",
     description:
-      "Approved and recognized by AICTE New Delhi, Bar Council of India (BCI), National Council for Teacher Education (NCTE), and Pharmacy Council of India (PCI).",
+      "Approved and recognised by AICTE New Delhi, the Bar Council of India (BCI), the National Council for Teacher Education (NCTE) and NCVT, with Government of Rajasthan approvals.",
     badge: "Govt. Accredited",
   },
 ];
@@ -59,7 +59,7 @@ export default function AboutSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B3D]/95 via-[#0B1B3D]/30 to-transparent" />
             
             {/* Top Badge */}
-            <div className="absolute top-5 left-5 rounded-xl bg-white/95 backdrop-blur-md px-3.5 py-2 shadow-lg border border-white/60">
+            <div className="absolute top-5 left-5 rounded-xl bg-white-md px-3.5 py-2 shadow-lg border border-white/60">
               <span className="text-2xl font-black text-[#0B1B3D] leading-none block">
                 16+
               </span>
@@ -98,7 +98,7 @@ export default function AboutSection() {
             </p>
 
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              With degrees awarded by RTU Kota and MLSU Udaipur, curriculum aligned with the National Education Policy (NEP 2020), and approvals from apex regulatory bodies (AICTE, BCI, NCTE, PCI), students gain nationally recognized qualifications coupled with extensive laboratory practice and corporate exposure.
+              With degrees awarded by RTU Kota and MLSU Udaipur, curriculum aligned with the National Education Policy (NEP 2020), and approvals from apex regulatory bodies (AICTE, BCI, NCTE, NCVT), students gain nationally recognized qualifications coupled with extensive laboratory practice and corporate exposure.
             </p>
 
             {/* Highlights Grid */}
