@@ -1,7 +1,20 @@
 import type { Metadata } from "next";
+import { Sora, Work_Sans } from "next/font/google";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
+
+const sora = Sora({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sora",
+});
+
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-work-sans",
+});
 
 export const metadata: Metadata = {
   title: "Nathdwara Group of Institutions (NGI) | Nathdwara, Rajasthan",
@@ -28,8 +41,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen bg-white text-slate-800 antialiased selection:bg-amber-300 selection:text-[#102c52]">
+    <html
+      lang="en"
+      className={`scroll-smooth ${sora.variable} ${workSans.variable}`}
+    >
+      <body className="min-h-screen bg-white text-slate-800 antialiased selection:bg-accent selection:text-primary">
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />

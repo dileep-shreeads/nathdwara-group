@@ -20,13 +20,20 @@ import {
   CreditCard,
 } from "lucide-react";
 
-const DEPARTMENTS = [
+const DEPARTMENTS: {
+  icon: typeof Headphones;
+  title: string;
+  contactPerson: string;
+  phone: string;
+  email?: string;
+  desc: string;
+}[] = [
   {
     icon: Headphones,
     title: "Central Admissions Desk",
     contactPerson: "Admissions Officer",
     phone: "+91 95713 45444",
-    email: "admissions@ngi.edu.in",
+    email: "md@nathdwarainstitute.com",
     desc: "For course enquiries, eligibility, online application, and counselling rounds.",
   },
   {
@@ -34,15 +41,13 @@ const DEPARTMENTS = [
     title: "Academic & Verification Cell",
     contactPerson: "Registrar Office",
     phone: "+91 98292 34138",
-    email: "registrar@ngi.edu.in",
     desc: "Degree verification, transcripts, migration, and RTU / MLSU university records.",
   },
   {
     icon: Briefcase,
     title: "Training & Placement Cell",
     contactPerson: "T&P Officer",
-    phone: "+91 96368 15142",
-    email: "placements@ngi.edu.in",
+    phone: "+91 95713 45444",
     desc: "Corporate campus drives, industrial internships, and employer partnerships.",
   },
   {
@@ -50,23 +55,20 @@ const DEPARTMENTS = [
     title: "Hostel Administration",
     contactPerson: "Chief Warden (Boys & Girls)",
     phone: "+91 95713 45444",
-    email: "hostel@ngi.edu.in",
     desc: "Hostel room allotment, mess menu, safety protocols, and visitor permits.",
   },
   {
     icon: Bus,
     title: "Transport & Bus Coordinator",
-    contactPerson: "Fleet In-charge",
-    phone: "+91 70148 10591",
-    email: "transport@ngi.edu.in",
-    desc: "Daily bus routes covering Udaipur, Rajsamand, Kankroli, Mavli & Fatehnagar.",
+    contactPerson: "Mr. S.D. Khan",
+    phone: "+91 98280 89249",
+    desc: "16 college buses on routes from Udaipur, Nathdwara, Rajnagar, Kankroli, Fatehnagar, Mavli & Relmagra.",
   },
   {
     icon: CreditCard,
     title: "Accounts & Fee Section",
     contactPerson: "Finance Officer",
     phone: "+91 98292 34138",
-    email: "accounts@ngi.edu.in",
     desc: "Fee payments, fee receipts, installment schedules, and SJE scholarship claims.",
   },
 ];
@@ -120,11 +122,11 @@ export default function ContactPortal() {
             <div>
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Email Enquiries</span>
               <h3 className="text-base font-bold text-[#102c52] mt-0.5">Official Inboxes</h3>
-              <a href="mailto:info@ngi.edu.in" className="block text-sm font-semibold text-slate-700 hover:text-blue-600 mt-1">
-                info@ngi.edu.in (General / Admissions)
+              <a href="mailto:md@nathdwarainstitute.com" className="block text-sm font-semibold text-slate-700 hover:text-blue-600 mt-1">
+                md@nathdwarainstitute.com
               </a>
-              <a href="mailto:registrar@ngi.edu.in" className="block text-xs text-slate-500 hover:text-blue-600 mt-0.5">
-                registrar@ngi.edu.in (Verification)
+              <a href="https://wa.me/917014810591" target="_blank" rel="noopener noreferrer" className="block text-xs text-slate-500 hover:text-blue-600 mt-0.5">
+                WhatsApp: +91 70148 10591
               </a>
             </div>
           </div>
@@ -382,13 +384,15 @@ export default function ContactPortal() {
                       <Phone className="w-3.5 h-3.5 text-amber-600" />
                       <span>{dept.phone}</span>
                     </a>
-                    <a
-                      href={`mailto:${dept.email}`}
-                      className="flex items-center gap-2 text-slate-500 hover:text-blue-900"
-                    >
-                      <Mail className="w-3.5 h-3.5 text-blue-600" />
-                      <span>{dept.email}</span>
-                    </a>
+                    {dept.email ? (
+                      <a
+                        href={`mailto:${dept.email}`}
+                        className="flex items-center gap-2 text-slate-500 hover:text-blue-900"
+                      >
+                        <Mail className="w-3.5 h-3.5 text-blue-600" />
+                        <span>{dept.email}</span>
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               );
