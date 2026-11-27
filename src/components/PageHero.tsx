@@ -1,48 +1,74 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+
+export interface Crumb {
+  label: string;
+  href?: string;
+}
 
 interface PageHeroProps {
   eyebrow: string;
   title: string;
   description: string;
-  image: string;
+  image?: string;
+  breadcrumbs?: Crumb[];
+  children?: React.ReactNode;
 }
 
-export default function PageHero({ eyebrow, title, description, image }: PageHeroProps) {
+export default function PageHero({
+  eyebrow,
+  title,
+  description,
+  image,
+  breadcrumbs,
+  children,
+}: PageHeroProps) {
+  const crumbs: Crumb[] = breadcrumbs ?? [{ label: "Home", href: "/" }, { label: title }];
+
   return (
-    <section
-      className="relative isolate overflow-hidden bg-[#102c52] bg-cover bg-center text-white"
-      style={{
-        backgroundImage: `linear-gradient(100deg, rgba(10, 30, 56, .94), rgba(16, 44, 82, .78) 58%, rgba(16, 44, 82, .48)), url("${image}")`,
-      }}
-    >
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#102c52]/40 to-transparent" />
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        <div className="max-w-3xl">
-          <div className="mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-amber-300 sm:text-sm">
-            <span className="h-px w-8 bg-amber-300" />
+    <section className="relative isolate overflow-hidden bg-brand-gradient text-white">
+      {image ? (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-cover bg-center opacity-[0.18] mix-blend-luminosity"
+          style={{ backgroundImage: `url("${image}")` }}
+        />
+      ) : null}
+      <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 -z-10 h-[32rem] w-[32rem] rounded-full bg-[#4f7bf0]/20 blur-3xl" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grid opacity-[0.06]" />
+
+      <div className="mx-auto max-w-[1320px] px-4 pb-12 pt-12 sm:px-6 md:pb-16 md:pt-16 lg:px-8">
+        <nav aria-label="Breadcrumb">
+          <ol className="flex flex-wrap items-center gap-1.5 text-xs text-white/70 md:text-sm">
+            {crumbs.map((crumb, index) => (
+              <li key={`${crumb.label}-${index}`} className="inline-flex items-center gap-1.5">
+                {index > 0 ? <ChevronRight className="h-3.5 w-3.5 text-white/40" /> : null}
+                {crumb.href ? (
+                  <Link href={crumb.href} className="underline-offset-4 hover:underline">
+                    {crumb.label}
+                  </Link>
+                ) : (
+                  <span className="font-medium text-white" aria-current="page">
+                    {crumb.label}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div className="mt-6">
+          <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
+            <span className="h-px w-8 bg-current" />
             {eyebrow}
-          </div>
-          <h1 className="max-w-3xl text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+          </span>
+          <h1 className="mt-3 max-w-4xl text-balance font-display text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
             {title}
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-slate-200 sm:text-lg sm:leading-8">
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base">
             {description}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/admissions"
-              className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-300"
-            >
-              Explore admissions <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center rounded-full border border-white/40 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              Talk to our team
-            </Link>
-          </div>
+          {children ? <div className="mt-7 flex flex-wrap gap-3">{children}</div> : null}
         </div>
       </div>
     </section>

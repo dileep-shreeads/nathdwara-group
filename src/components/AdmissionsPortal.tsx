@@ -94,7 +94,6 @@ export default function AdmissionsPortal() {
           (c) =>
             c.id === "c-bca" ||
             c.id === "c-ba-bed" ||
-            c.id === "c-ba-llb" ||
             c.stream === "Vocational" ||
             c.stream === "Management"
         );
@@ -416,11 +415,11 @@ export default function AdmissionsPortal() {
                   <span>+91 98292 34138 (Secretary Office)</span>
                 </a>
                 <a
-                  href="mailto:info@ngi.edu.in"
+                  href="mailto:md@nathdwarainstitute.com"
                   className="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/15 rounded-xl text-white transition-colors text-sm font-semibold"
                 >
                   <span className="w-4 h-4 text-amber-300">@</span>
-                  <span>info@ngi.edu.in</span>
+                  <span>md@nathdwarainstitute.com</span>
                 </a>
               </div>
 

@@ -314,14 +314,13 @@ export default function HeroSlider() {
                       <option>B.Tech Civil Engineering (NIET)</option>
                       <option>B.Tech Mechanical / Electrical (NIET)</option>
                       <option>BCA - Computer Applications (NIBM)</option>
-                      <option>B.Sc. Biotechnology (NIBM)</option>
-                      <option>B.Sc. PCM / CBZ (NIBM)</option>
-                      <option>M.Sc. Chemistry / Botany / Zoology (NIBM)</option>
+                      <option>B.Sc. PCM / BZC (NIBM)</option>
+                      <option>M.Sc. Maths / Physics / Chemistry / Zoology (NIBM)</option>
+                      <option>ITEP B.Sc. B.Ed. — 4-Year (NIBM)</option>
+                      <option>B.Sc.-B.Ed. / B.A.-B.Ed. 4-Year Integrated (NIBM)</option>
                       <option>LL.B 3-Year Professional (NLC)</option>
-                      <option>B.A. LL.B 5-Year Integrated (NLC)</option>
-                      <option>D.Pharm Diploma in Pharmacy (VDSMS)</option>
-                      <option>B.Sc. Nursing / GNM (NCAN)</option>
-                      <option>B.Sc.-B.Ed. 4-Year Integrated (NIBM)</option>
+                      <option>B.Sc. Ayurveda Nursing (NCAN)</option>
+                      <option>Medical Science Programmes (VDSMS)</option>
                       <option>ITI Trades (Electrician / Fitter - NPITI)</option>
                     </select>
                   </div>

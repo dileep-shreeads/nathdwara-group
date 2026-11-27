@@ -51,14 +51,17 @@ export default function RegisterPage() {
     ],
     NIBM: [
       "BCA (Bachelor of Computer Applications)",
-      "B.Sc Biotechnology",
-      "B.Sc Mathematics / Biology",
-      "M.Sc Biotechnology",
-      "ITEP Integrated 4-Year B.Sc. B.Ed",
+      "B.Sc. (PCM / BZC)",
+      "ITEP B.Sc. B.Ed. (Secondary) — via NCET",
+      "B.Sc. B.Ed. 4-Year Integrated — via PTET",
+      "B.A. B.Ed. 4-Year Integrated — via PTET",
+      "M.Sc. Mathematics (CBCS)",
+      "M.Sc. Physics (CBCS)",
+      "M.Sc. Chemistry (CBCS)",
+      "M.Sc. Zoology (CBCS)",
     ],
     NLC: [
-      "LL.B 3-Year Degree (BCI Approved)",
-      "B.A. LL.B 5-Year Integrated Degree",
+      "LL.B. 3-Year Degree (BCI Approved)",
     ],
     NCAN: [
       "B.Sc Ayurveda Nursing (4-Year)",

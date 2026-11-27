@@ -347,13 +347,13 @@ export default function PlacementsPage() {
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-amber-400 shrink-0" />
                   <a href="tel:+919571345444" className="font-bold text-white hover:text-amber-300 transition">
-                    +91 95713 45444 / +91 94141 72123
+                    +91 95713 45444 / +91 98292 34138
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-amber-400 shrink-0" />
-                  <a href="mailto:placements@ngi.edu.in" className="font-bold text-white hover:text-amber-300 transition">
-                    placements@ngi.edu.in / info@ngi.edu.in
+                  <a href="mailto:md@nathdwarainstitute.com" className="font-bold text-white hover:text-amber-300 transition">
+                    md@nathdwarainstitute.com
                   </a>
                 </div>
               </div>
