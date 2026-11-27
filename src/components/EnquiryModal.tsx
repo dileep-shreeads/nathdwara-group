@@ -20,8 +20,49 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const newEnquiry = {
+      id: `ENQ-${Math.floor(1000 + Math.random() * 9000)}`,
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      course: formData.course,
+      college: formData.course.includes("B.Tech")
+        ? "NIET"
+        : formData.course.includes("Law") || formData.course.includes("LL.B")
+        ? "NLC"
+        : formData.course.includes("Ayurved")
+        ? "NCAN"
+        : formData.course.includes("DMLT")
+        ? "VDSMS"
+        : formData.course.includes("ITI")
+        ? "NPITI"
+        : "NIBM",
+      state: formData.state,
+      status: "New",
+      date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      time: new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true }),
+      source: "Website Header Enquiry Modal",
+      notes: "Direct enquiry submitted via header modal",
+    };
+
+    try {
+      await fetch("/api/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newEnquiry),
+      });
+    } catch (err) {
+      console.warn("API enquiry POST fallback to local storage", err);
+    }
+
+    try {
+      const existing = localStorage.getItem("ngi_enquiries_list");
+      const list = existing ? JSON.parse(existing) : [];
+      localStorage.setItem("ngi_enquiries_list", JSON.stringify([newEnquiry, ...list]));
+    } catch (err) {}
+
     setSubmitted(true);
   };
 

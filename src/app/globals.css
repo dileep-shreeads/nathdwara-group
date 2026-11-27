@@ -16,11 +16,47 @@
 }
 
 :root {
+  /* Brand Theme Variables - Central point of control for all colors */
+  --brand-navy: #0B1B3D;
+  --brand-navy-dark: #071328;
+  --brand-navy-light: #162c5c;
+  --brand-navy-subtle: #f0f4fa;
+
+  --brand-amber: #d97706;
+  --brand-amber-light: #f59e0b;
+  --brand-amber-dark: #b45309;
+  --brand-amber-subtle: #fef3c7;
+
+  --brand-gold: #f8c300;
+  --brand-surface: #ffffff;
+  --brand-surface-muted: #f8fafc;
+  --brand-border: #e2e8f0;
+  --brand-text: #0f172a;
+  --brand-text-muted: #64748b;
+
   --ngi-navy: #002147;
   --ngi-blue: #1f417e;
   --ngi-gold: #f8c300;
   color-scheme: light;
 }
+
+/* Global Reusable Theme Classes */
+.bg-brand-navy { background-color: var(--brand-navy); }
+.bg-brand-navy-dark { background-color: var(--brand-navy-dark); }
+.bg-brand-navy-light { background-color: var(--brand-navy-light); }
+.bg-brand-navy-subtle { background-color: var(--brand-navy-subtle); }
+.text-brand-navy { color: var(--brand-navy); }
+.border-brand-navy { border-color: var(--brand-navy); }
+
+.bg-brand-amber { background-color: var(--brand-amber); }
+.bg-brand-amber-light { background-color: var(--brand-amber-light); }
+.bg-brand-amber-subtle { background-color: var(--brand-amber-subtle); }
+.text-brand-amber { color: var(--brand-amber); }
+.border-brand-amber { border-color: var(--brand-amber); }
+
+.bg-brand-gold { background-color: var(--brand-gold); }
+.text-brand-gold { color: var(--brand-gold); }
+.border-brand-gold { border-color: var(--brand-gold); }
 
 @layer base {
   html {

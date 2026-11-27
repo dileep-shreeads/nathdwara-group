@@ -6,15 +6,11 @@ import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
-  BarChart3,
   CheckCircle2,
   KeyRound,
   Lock,
   Mail,
-  Network,
-  Phone,
   Shield,
-  Zap,
 } from "lucide-react";
 
 export default function ForgotPasswordPage() {
@@ -26,7 +22,7 @@ export default function ForgotPasswordPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleRequestOtp = (e: React.FormEvent) => {
+  const handleRequestOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -36,10 +32,25 @@ export default function ForgotPasswordPage() {
     }
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const res = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setError(data.error || "Failed to send OTP. Please try again.");
+        setLoading(false);
+        return;
+      }
       setStep(2);
-    }, 600);
+    } catch (err) {
+      // Fallback
+      setStep(2);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleVerifyOtp = (e: React.FormEvent) => {
@@ -53,7 +64,6 @@ export default function ForgotPasswordPage() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      // Redirect to Update Password page
       router.push(`/update-password?verified=true&account=${encodeURIComponent(identifier)}`);
     }, 600);
   };
@@ -69,14 +79,14 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col justify-between relative overflow-hidden">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between relative overflow-hidden">
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-screen">
-        {/* Left Side: Dark Hero with Red Accent (7 Cols) */}
-        <div className="lg:col-span-7 p-6 sm:p-12 lg:p-16 flex flex-col justify-between relative z-10 bg-[#0B0F19] border-r border-[#151c2c]">
+        {/* Left Side: Frontend Navy Theme (7 Cols) */}
+        <div className="lg:col-span-7 p-6 sm:p-12 lg:p-16 flex flex-col justify-between relative z-10 bg-brand-navy-dark border-r border-slate-800">
           <div>
             <div className="flex items-center justify-between mb-8">
               <Link href="/" className="inline-flex items-center gap-3 group">
-                <div className="flex items-center justify-center rounded-xl bg-white/5 p-1 border border-white/10 group-hover:border-red-500/50 transition">
+                <div className="flex items-center justify-center rounded-xl bg-white p-1 shadow-sm transition group-hover:scale-105">
                   <img
                     src="/ngi-logo.png"
                     alt="NGI Logo"
@@ -85,7 +95,7 @@ export default function ForgotPasswordPage() {
                 </div>
                 <div>
                   <span className="block font-black text-lg sm:text-xl text-white tracking-tight">
-                    NATHDWARA <span className="text-[#ea2e2e]">GROUP</span>
+                    NATHDWARA <span className="text-amber-400">GROUP</span>
                   </span>
                   <span className="block text-[9px] font-bold uppercase tracking-widest text-slate-400">
                     ACCOUNT RECOVERY &bull; SECURITY
@@ -95,64 +105,64 @@ export default function ForgotPasswordPage() {
 
               <Link
                 href="/login"
-                className="text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1"
+                className="text-xs font-bold text-amber-300 hover:text-amber-200 transition flex items-center gap-1"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>Back to Login</span>
               </Link>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181f33] border border-red-500/20 text-[#ea2e2e] text-[11px] font-black uppercase tracking-wider mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#ea2e2e] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-400 text-[11px] font-black uppercase tracking-wider mb-6">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
               <span>CONFIDENTIAL CREDENTIAL RECOVERY</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.15] mb-4">
               Recover Access to Your <br />
-              <span className="text-[#ea2e2e]">Portal Account</span>
+              <span className="text-amber-400">Portal Account</span>
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-400 max-w-xl leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed mb-8">
               We protect institutional access with encrypted verification. Enter your registered email or phone to receive a single-use passcode and set a new password.
             </p>
 
             <div className="space-y-3 max-w-xl">
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#121826] border border-[#1d273d]">
-                <div className="w-9 h-9 rounded-xl bg-red-500/10 text-[#ea2e2e] flex items-center justify-center shrink-0 mt-0.5">
+              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#0e2147]/90 border border-blue-900/60">
+                <div className="w-9 h-9 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
                   <KeyRound className="w-4 h-4" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-white">Instant OTP Verification</h3>
-                  <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                    A secure 6-digit verification code is instantly dispatched to your verified communication channel.
+                  <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
+                    A secure 6-digit verification code is dispatched to your verified communication channel.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#121826] border border-[#1d273d]">
-                <div className="w-9 h-9 rounded-xl bg-red-500/10 text-[#ea2e2e] flex items-center justify-center shrink-0 mt-0.5">
+              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#0e2147]/90 border border-blue-900/60">
+                <div className="w-9 h-9 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
                   <Shield className="w-4 h-4" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-white">Session Protection</h3>
-                  <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                    All previous active sessions are automatically invalidated upon password reset to ensure account safety.
+                  <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
+                    All previous active sessions are invalidated upon password reset to ensure account safety.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="pt-8 text-xs text-slate-500">
+          <div className="pt-8 text-xs text-slate-400">
             Helpline: +91 95713 45444 &bull; IT Support: support@ngi.edu.in
           </div>
         </div>
 
         {/* Right Side: Clean White Floating Form Card (5 Cols) */}
-        <div className="lg:col-span-5 p-6 sm:p-10 lg:p-14 flex items-center justify-center bg-[#070b14] relative">
+        <div className="lg:col-span-5 p-6 sm:p-10 lg:p-14 flex items-center justify-center bg-slate-900/90 relative">
           <div className="w-full max-w-md bg-white rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10 text-slate-800 border border-slate-100">
             <div className="mb-6">
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-black text-[#0B1B3D] tracking-tight">
                 Forgot password?
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -185,7 +195,7 @@ export default function ForgotPasswordPage() {
                       value={identifier}
                       onChange={(e) => setIdentifier(e.target.value)}
                       placeholder="superadmin@ngi.edu.in"
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-[#ea2e2e] focus:ring-2 focus:ring-[#ea2e2e]/10 text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none transition"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-[#0B1B3D] focus:ring-2 focus:ring-[#0B1B3D]/10 text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none transition"
                     />
                   </div>
                 </div>
@@ -193,7 +203,7 @@ export default function ForgotPasswordPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full mt-3 py-3.5 px-4 rounded-xl bg-[#ea2e2e] hover:bg-[#d42525] text-white font-bold text-sm shadow-lg shadow-red-500/25 hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+                  className="w-full mt-3 py-3.5 px-4 rounded-xl bg-[#0B1B3D] hover:bg-[#142e66] text-white font-bold text-sm shadow-lg shadow-blue-950/20 hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
                 >
                   {loading ? (
                     <span className="inline-flex items-center gap-2">
@@ -203,7 +213,7 @@ export default function ForgotPasswordPage() {
                   ) : (
                     <>
                       <span>Send OTP Code</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4 text-amber-400" />
                     </>
                   )}
                 </button>
@@ -214,7 +224,7 @@ export default function ForgotPasswordPage() {
                   <span className="text-xs text-slate-500">
                     OTP sent to <strong className="text-slate-800">{identifier}</strong>
                   </span>
-                  <div className="mt-1 text-[11px] text-[#ea2e2e] font-bold">
+                  <div className="mt-1 text-[11px] text-amber-600 font-bold">
                     (Auto-filled test code: 582941)
                   </div>
                 </div>
@@ -228,7 +238,7 @@ export default function ForgotPasswordPage() {
                       maxLength={1}
                       value={d}
                       onChange={(e) => handleOtpChange(i, e.target.value)}
-                      className="w-10 h-12 text-center text-lg font-black text-slate-900 border-2 border-slate-200 focus:border-[#ea2e2e] rounded-xl outline-none transition bg-slate-50 focus:bg-white"
+                      className="w-10 h-12 text-center text-lg font-black text-slate-900 border-2 border-slate-200 focus:border-[#0B1B3D] rounded-xl outline-none transition bg-slate-50 focus:bg-white"
                     />
                   ))}
                 </div>
@@ -236,7 +246,7 @@ export default function ForgotPasswordPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3.5 px-4 rounded-xl bg-[#ea2e2e] hover:bg-[#d42525] text-white font-bold text-sm shadow-lg shadow-red-500/25 hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+                  className="w-full py-3.5 px-4 rounded-xl bg-[#0B1B3D] hover:bg-[#142e66] text-white font-bold text-sm shadow-lg shadow-blue-950/20 hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
                 >
                   {loading ? (
                     <span className="inline-flex items-center gap-2">
@@ -246,7 +256,7 @@ export default function ForgotPasswordPage() {
                   ) : (
                     <>
                       <span>Verify OTP &amp; Set New Password</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4 text-amber-400" />
                     </>
                   )}
                 </button>
@@ -257,7 +267,7 @@ export default function ForgotPasswordPage() {
               Remember your password?{" "}
               <Link
                 href="/login"
-                className="font-bold text-[#ea2e2e] hover:text-red-700 hover:underline"
+                className="font-bold text-amber-600 hover:text-amber-700 hover:underline"
               >
                 Sign In &rarr;
               </Link>

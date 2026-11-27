@@ -85,13 +85,45 @@ export default function ContactPortal() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const newEnquiry = {
+      id: `ENQ-${Math.floor(1000 + Math.random() * 9000)}`,
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      course: formData.department,
+      college: "Central Campus",
+      state: "Rajasthan",
+      status: "New",
+      date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      time: new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true }),
+      source: `Contact Portal (${formData.subject || "General"})`,
+      notes: formData.message || "Message submitted via Contact Page",
+    };
+
+    try {
+      await fetch("/api/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newEnquiry),
+      });
+    } catch (err) {
+      console.warn("API enquiry POST fallback to local storage", err);
+    }
+
+    try {
+      const existing = localStorage.getItem("ngi_enquiries_list");
+      const list = existing ? JSON.parse(existing) : [];
+      localStorage.setItem("ngi_enquiries_list", JSON.stringify([newEnquiry, ...list]));
+    } catch (err) {}
+
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 700);
+    }, 500);
   };
 
   return (

@@ -86,7 +86,7 @@ export default function RegisterPage() {
     }));
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -112,54 +112,98 @@ export default function RegisterPage() {
     }
 
     setLoading(true);
+    let appId = `NGI-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          mobile: formData.mobile,
+          email: formData.email,
+          password: formData.password,
+          college: formData.college,
+          course: formData.course,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setError(data.error || "Registration failed. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      if (data.appId) appId = data.appId;
+    } catch (err) {
+      console.warn("API registration fallback:", err);
+    }
+
+    setSuccess(true);
+    setLoading(false);
+
+    try {
+      localStorage.setItem(
+        "ngi_student_session",
+        JSON.stringify({
+          name: formData.fullName,
+          identifier: formData.email,
+          role: "applicant",
+          appId,
+          college:
+            formData.college === "NIET"
+              ? "NIET — Engineering & Technology"
+              : formData.college === "NIBM"
+              ? "NIBM — Biotechnology & Management"
+              : formData.college === "NLC"
+              ? "NLC — Nathdwara Law College"
+              : formData.college === "NCAN"
+              ? "NCAN — Ayurveda Nursing"
+              : formData.college === "VDSMS"
+              ? "VDSMS — Medical Science"
+              : "NPITI — Industrial Training",
+          course: formData.course,
+          year: "Session 2026–27",
+          mobile: formData.mobile,
+          email: formData.email,
+        })
+      );
+
+      // Also add to inquiry list so it appears in dashboard inquiries
+      const existingEnq = localStorage.getItem("ngi_enquiries_list");
+      const list = existingEnq ? JSON.parse(existingEnq) : [];
+      const newEnquiry = {
+        id: `ENQ-${Math.floor(1000 + Math.random() * 9000)}`,
+        name: formData.fullName,
+        phone: formData.mobile,
+        email: formData.email,
+        course: formData.course,
+        college: formData.college,
+        state: "Rajasthan",
+        status: "New",
+        date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+        time: new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true }),
+        source: "Student Portal Online Registration",
+        notes: `App ID: ${appId} generated upon registration`,
+      };
+      localStorage.setItem("ngi_enquiries_list", JSON.stringify([newEnquiry, ...list]));
+    } catch (err) {}
+
     setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
-      const appId = `NGI-2026-${Math.floor(1000 + Math.random() * 9000)}`;
-
-      try {
-        localStorage.setItem(
-          "ngi_student_session",
-          JSON.stringify({
-            name: formData.fullName,
-            identifier: formData.email,
-            role: "applicant",
-            appId,
-            college:
-              formData.college === "NIET"
-                ? "NIET — Engineering & Technology"
-                : formData.college === "NIBM"
-                ? "NIBM — Biotechnology & Management"
-                : formData.college === "NLC"
-                ? "NLC — Nathdwara Law College"
-                : formData.college === "NCAN"
-                ? "NCAN — Ayurveda Nursing"
-                : formData.college === "VDSMS"
-                ? "VDSMS — Medical Science"
-                : "NPITI — Industrial Training",
-            course: formData.course,
-            year: "Session 2026–27",
-            mobile: formData.mobile,
-            email: formData.email,
-          })
-        );
-      } catch (err) {}
-
-      setTimeout(() => {
-        router.push("/dashboard?registered=true");
-      }, 1200);
-    }, 800);
+      router.push("/dashboard?registered=true");
+    }, 1200);
   };
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col justify-between relative overflow-hidden">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between relative overflow-hidden">
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-screen">
-        {/* Left Side: Dark Hero with Red Accent (7 Cols) */}
-        <div className="lg:col-span-7 p-6 sm:p-12 lg:p-16 flex flex-col justify-between relative z-10 bg-[#0B0F19] border-r border-[#151c2c]">
+        {/* Left Side: Frontend Navy Theme (7 Cols) */}
+        <div className="lg:col-span-7 p-6 sm:p-12 lg:p-16 flex flex-col justify-between relative z-10 bg-brand-navy-dark border-r border-slate-800">
           <div>
             <div className="flex items-center justify-between mb-8">
               <Link href="/" className="inline-flex items-center gap-3 group">
-                <div className="flex items-center justify-center rounded-xl bg-white/5 p-1 border border-white/10 group-hover:border-red-500/50 transition">
+                <div className="flex items-center justify-center rounded-xl bg-white p-1 shadow-sm transition group-hover:scale-105">
                   <img
                     src="/ngi-logo.png"
                     alt="NGI Logo"
@@ -168,7 +212,7 @@ export default function RegisterPage() {
                 </div>
                 <div>
                   <span className="block font-black text-lg sm:text-xl text-white tracking-tight">
-                    NATHDWARA <span className="text-[#ea2e2e]">GROUP</span>
+                    NATHDWARA <span className="text-amber-400">GROUP</span>
                   </span>
                   <span className="block text-[9px] font-bold uppercase tracking-widest text-slate-400">
                     ADMISSIONS 2026–27 REGISTRATION
@@ -178,59 +222,58 @@ export default function RegisterPage() {
 
               <Link
                 href="/"
-                className="text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1"
+                className="text-xs font-bold text-amber-300 hover:text-amber-200 transition flex items-center gap-1"
               >
                 <span>&larr; Campus Home</span>
               </Link>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181f33] border border-red-500/20 text-[#ea2e2e] text-[11px] font-black uppercase tracking-wider mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#ea2e2e] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-400 text-[11px] font-black uppercase tracking-wider mb-6">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
               <span>ONLINE APPLICANT ONBOARDING</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.15] mb-4">
               Begin Your Journey with <br />
-              <span className="text-[#ea2e2e]">6 Premier Colleges</span>
+              <span className="text-amber-400">6 Premier Colleges</span>
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-400 max-w-xl leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed mb-8">
               Join 45+ degree &amp; technical programmes across engineering, management, biotechnology, law, and healthcare. Fast-track scholarship allocations and direct seat allotment for Session 2026–27.
             </p>
 
-            {/* 4 Feature Stacked Cards */}
             <div className="space-y-3 max-w-xl">
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#121826] border border-[#1d273d]">
-                <div className="w-9 h-9 rounded-xl bg-red-500/10 text-[#ea2e2e] flex items-center justify-center shrink-0 mt-0.5">
+              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#0e2147]/90 border border-blue-900/60">
+                <div className="w-9 h-9 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
                   <Zap className="w-4 h-4 fill-current" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-white">Direct Quota &amp; REAP Allotment</h3>
-                  <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
+                  <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
                     Automated application generation with instant confirmation for merit seats.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#121826] border border-[#1d273d]">
-                <div className="w-9 h-9 rounded-xl bg-red-500/10 text-[#ea2e2e] flex items-center justify-center shrink-0 mt-0.5">
+              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#0e2147]/90 border border-blue-900/60">
+                <div className="w-9 h-9 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
                   <Network className="w-4 h-4" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-white">Centralized Student Dossier</h3>
-                  <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
+                  <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
                     Track marksheet verifications, mentor assignments, and campus hostel booking.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#121826] border border-[#1d273d]">
-                <div className="w-9 h-9 rounded-xl bg-red-500/10 text-[#ea2e2e] flex items-center justify-center shrink-0 mt-0.5">
+              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#0e2147]/90 border border-blue-900/60">
+                <div className="w-9 h-9 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
                   <Shield className="w-4 h-4" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-white">State &amp; National Scholarships</h3>
-                  <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
+                  <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
                     Full assistance for Rajasthan Govt. post-matric scholarships &amp; merit fee concessions.
                   </p>
                 </div>
@@ -238,16 +281,16 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          <div className="pt-8 text-xs text-slate-500">
+          <div className="pt-8 text-xs text-slate-400">
             &copy; 2026 Nathdwara Group of Institutions. Upali Oden, Nathdwara, Rajasthan.
           </div>
         </div>
 
         {/* Right Side: Clean White Floating Form Card (5 Cols) */}
-        <div className="lg:col-span-5 p-6 sm:p-10 lg:p-14 flex items-center justify-center bg-[#070b14] relative">
+        <div className="lg:col-span-5 p-6 sm:p-10 lg:p-14 flex items-center justify-center bg-slate-900/90 relative">
           <div className="w-full max-w-md bg-white rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10 text-slate-800 border border-slate-100">
             <div className="mb-6">
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-black text-[#0B1B3D] tracking-tight">
                 Create an account
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -284,7 +327,7 @@ export default function RegisterPage() {
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                     placeholder="e.g. Aarav Sharma"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#ea2e2e] focus:ring-2 focus:ring-[#ea2e2e]/10 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none transition"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#0B1B3D] focus:ring-2 focus:ring-[#0B1B3D]/10 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none transition"
                   />
                 </div>
               </div>
@@ -305,7 +348,7 @@ export default function RegisterPage() {
                       value={formData.mobile}
                       onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
                       placeholder="10-digit number"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#ea2e2e] focus:ring-2 focus:ring-[#ea2e2e]/10 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none transition"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#0B1B3D] focus:ring-2 focus:ring-[#0B1B3D]/10 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none transition"
                     />
                   </div>
                 </div>
@@ -324,7 +367,7 @@ export default function RegisterPage() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="student@gmail.com"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#ea2e2e] focus:ring-2 focus:ring-[#ea2e2e]/10 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none transition"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#0B1B3D] focus:ring-2 focus:ring-[#0B1B3D]/10 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none transition"
                     />
                   </div>
                 </div>
@@ -339,7 +382,7 @@ export default function RegisterPage() {
                   <select
                     value={formData.college}
                     onChange={handleCollegeChange}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#ea2e2e] focus:ring-2 focus:ring-[#ea2e2e]/10 text-xs font-bold text-slate-800 outline-none transition bg-white"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#0B1B3D] focus:ring-2 focus:ring-[#0B1B3D]/10 text-xs font-bold text-slate-800 outline-none transition bg-white"
                   >
                     <option value="NIET">NIET (Engineering)</option>
                     <option value="NIBM">NIBM (Biotech &amp; IT)</option>
@@ -357,7 +400,7 @@ export default function RegisterPage() {
                   <select
                     value={formData.course}
                     onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#ea2e2e] focus:ring-2 focus:ring-[#ea2e2e]/10 text-xs font-semibold text-slate-800 outline-none transition bg-white truncate"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#0B1B3D] focus:ring-2 focus:ring-[#0B1B3D]/10 text-xs font-semibold text-slate-800 outline-none transition bg-white truncate"
                   >
                     {coursesByCollege[formData.college]?.map((c) => (
                       <option key={c} value={c}>
@@ -384,7 +427,7 @@ export default function RegisterPage() {
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                       placeholder="Min 6 chars"
-                      className="w-full pl-10 pr-9 py-2.5 rounded-xl border border-slate-200 focus:border-[#ea2e2e] focus:ring-2 focus:ring-[#ea2e2e]/10 text-xs font-medium text-slate-900 outline-none transition"
+                      className="w-full pl-10 pr-9 py-2.5 rounded-xl border border-slate-200 focus:border-[#0B1B3D] focus:ring-2 focus:ring-[#0B1B3D]/10 text-xs font-medium text-slate-900 outline-none transition"
                     />
                     <button
                       type="button"
@@ -410,17 +453,17 @@ export default function RegisterPage() {
                       value={formData.confirmPassword}
                       onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                       placeholder="Re-enter password"
-                      className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#ea2e2e] focus:ring-2 focus:ring-[#ea2e2e]/10 text-xs font-medium text-slate-900 outline-none transition"
+                      className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#0B1B3D] focus:ring-2 focus:ring-[#0B1B3D]/10 text-xs font-medium text-slate-900 outline-none transition"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Red CTA Button */}
+              {/* Navy & Gold Button */}
               <button
                 type="submit"
                 disabled={loading || success}
-                className="w-full mt-2 py-3.5 px-4 rounded-xl bg-[#ea2e2e] hover:bg-[#d42525] text-white font-bold text-sm shadow-lg shadow-red-500/25 hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+                className="w-full mt-2 py-3.5 px-4 rounded-xl bg-[#0B1B3D] hover:bg-[#142e66] text-white font-bold text-sm shadow-lg shadow-blue-950/20 hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
               >
                 {loading ? (
                   <span className="inline-flex items-center gap-2">
@@ -429,8 +472,8 @@ export default function RegisterPage() {
                   </span>
                 ) : (
                   <>
-                    <span>Create Account</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>Create Student Account</span>
+                    <ArrowRight className="w-4 h-4 text-amber-400" />
                   </>
                 )}
               </button>
@@ -440,7 +483,7 @@ export default function RegisterPage() {
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="font-bold text-[#ea2e2e] hover:text-red-700 hover:underline"
+                className="font-bold text-amber-600 hover:text-amber-700 hover:underline"
               >
                 Sign In &rarr;
               </Link>
