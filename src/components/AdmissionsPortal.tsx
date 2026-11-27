@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { submitWebsiteEnquiry } from "@/lib/services";
 import {
   ClipboardCheck,
   CheckCircle2,
@@ -106,15 +107,20 @@ export default function AdmissionsPortal() {
     }
   }, [selectedQual]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const randomCode = "NGI-2026-" + Math.floor(100000 + Math.random() * 900000);
-    setAppRef(randomCode);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setFormSubmitted(true);
-    }, 800);
+    const result = await submitWebsiteEnquiry({
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      town: formData.state,
+      courseLabel: formData.course,
+      note: `Admissions page · ${formData.percentage ? `${formData.percentage}% in qualifying exam · ` : ""}hostel: ${formData.hostel}, transport: ${formData.transport}`,
+    });
+    if (result.ok) setAppRef(result.data.id);
+    setIsSubmitting(false);
+    setFormSubmitted(true);
   };
 
   return (

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { submitWebsiteEnquiry } from "@/lib/services";
 import Link from "next/link";
 import {
   ChevronLeft,
@@ -124,13 +125,18 @@ export default function HeroSlider() {
     setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
   };
 
-  const handleSubmitEnquiry = (e: React.FormEvent) => {
+  const handleSubmitEnquiry = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 800);
+    await submitWebsiteEnquiry({
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      courseLabel: formData.course,
+      note: "Submitted from the homepage admission form.",
+    });
+    setIsSubmitting(false);
+    setIsSubmitted(true);
   };
 
   const slide = SLIDES[currentSlide];
